@@ -1,2 +1,12 @@
 .DS_Store
 *.lock
+node_modules/
+projects/happy-website/.next/
+projects/happy-website/node_modules/
+website/.next/
+website/node_modules/
+review-screenshots/
+screenshots/
+exports/
+*.png
+*.pdf
