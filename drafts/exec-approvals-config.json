@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "socket": {
+    "path": "/Users/dirtyagent/.openclaw/exec-approvals.sock",
+    "token": "7QZpfg3L9yIMabG10Ietd8Sm1jswmj6u"
+  },
+  "defaults": {
+    "security": "allowlist",
+    "ask": "on-miss",
+    "askFallback": "deny",
+    "autoAllowSkills": true
+  },
+  "agents": {
+    "main": {
+      "security": "allowlist",
+      "ask": "on-miss",
+      "askFallback": "deny",
+      "autoAllowSkills": true,
+      "allowlist": [
+        {
+          "pattern": "/bin/*",
+          "id": "system-bin"
+        },
+        {
+          "pattern": "/usr/bin/*",
+          "id": "usr-bin"
+        },
+        {
+          "pattern": "/usr/local/bin/node",
+          "id": "node"
+        },
+        {
+          "pattern": "/usr/local/bin/npm",
+          "id": "npm-run"
+        },
+        {
+          "pattern": "~/.local/bin/gh",
+          "id": "github-cli"
+        },
+        {
+          "pattern": "~/.npm-global/bin/openclaw",
+          "id": "openclaw-cli"
+        },
+        {
+          "pattern": "/usr/bin/python3",
+          "id": "python3"
+        },
+        {
+          "pattern": "/usr/bin/git",
+          "id": "git"
+        },
+        {
+          "pattern": "/usr/bin/curl",
+          "id": "curl"
+        }
+      ]
+    }
+  }
+}
