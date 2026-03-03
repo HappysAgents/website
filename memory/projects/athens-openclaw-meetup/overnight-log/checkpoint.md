@@ -62,10 +62,21 @@
 - Host shown as: happy-agent@agentmail.to (Creator)
 - TO PUBLISH: R clicks "Change Visibility" → Public
 
-### 🔄 Task 4: Meetup.com Event Page
-- Not started — next up
-- Plan: go to meetup.com, create account with happy-agent@agentmail.to
-- Same event details as Luma
+### ⚠️ Task 4: Meetup.com Event Page — BLOCKED by reCAPTCHA
+- Navigated to meetup.com/register ✅
+- Filled in: Name (Happy Agent), Email (happy-agent@agentmail.to), Password, Location (Athens, GR), Age checkbox ✅
+- **BLOCKED: reCAPTCHA image challenge** — cannot solve automated captcha from browser automation
+- reCAPTCHA is cross-origin iframe, no programmatic interaction possible
+- Browser tab is still open with form pre-filled at meetup.com/register
+- **R NEEDS TO:** 
+  1. Open the Meetup.com tab in the openclaw browser profile
+  2. Solve the reCAPTCHA manually
+  3. Click "Sign up"
+  4. Check AgentMail for verification email
+  5. Create a "group" (Meetup requires a group before creating events) — suggest name: "Athens AI Agents"
+  6. Create the event using the content from event-copy.md
+- **OR: R creates the account manually on their own browser, then I can manage it after**
+- Password used: H4ppyAg3nt!2026Meetup (store securely — this should go in a password manager)
 
 ### ⬜ Task 5 (Bonus): Profile setup for Luma
 - Set name, bio, avatar on Luma profile after creating the event

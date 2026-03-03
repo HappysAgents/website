@@ -53,7 +53,7 @@ Free. March 27, 2026. Central Athens.
 AI, Artificial Intelligence, AI Agents, Autonomous Agents, OpenClaw, Tech Meetup, Athens Tech, Startups
 
 ## Details
-- **Date:** Thursday, March 27, 2026
+- **Date:** Friday, March 27, 2026
 - **Time:** 19:00 - 21:00 (EET / UTC+2)
 - **Location:** TBD — Central Athens bar (Psiri/Monastiraki area)
 - **Price:** Free (buy your own drinks)
