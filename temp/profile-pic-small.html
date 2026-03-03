@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { margin: 0; padding: 0; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="200" height="200"></canvas>
+<script>
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+
+// Dark navy background circle
+ctx.beginPath();
+ctx.arc(100, 100, 100, 0, Math.PI * 2);
+const bgGrad = ctx.createLinearGradient(0, 0, 200, 200);
+bgGrad.addColorStop(0, '#1a1a2e');
+bgGrad.addColorStop(0.5, '#16213e');
+bgGrad.addColorStop(1, '#0f3460');
+ctx.fillStyle = bgGrad;
+ctx.fill();
+
+// Orange "H" letter
+ctx.font = 'bold 120px -apple-system, sans-serif';
+ctx.textAlign = 'center';
+ctx.textBaseline = 'middle';
+const letterGrad = ctx.createLinearGradient(60, 40, 140, 160);
+letterGrad.addColorStop(0, '#FF6B00');
+letterGrad.addColorStop(0.4, '#FF9500');
+letterGrad.addColorStop(1, '#FFD700');
+ctx.fillStyle = letterGrad;
+ctx.fillText('H', 100, 95);
+
+// Three dots
+const dots = [{x: 80, o: 0.5}, {x: 100, o: 0.7}, {x: 120, o: 1}];
+dots.forEach(d => {
+  ctx.beginPath();
+  ctx.arc(d.x, 155, 4, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(255, 149, 0, ${d.o})`;
+  ctx.fill();
+});
+
+// Export as data URL and show in title for extraction
+document.title = c.toDataURL('image/png', 0.9);
+</script>
+</body>
+</html>
