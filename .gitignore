@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Next.js build output (Cloudflare Pages builds from source)
+.next/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Debug logs
+npm-debug.log*
+
+# OS files
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Playwright / screenshot scripts
+playwright-screenshots.js
+take-screenshots.js
+screenshots/
+review-screenshots/

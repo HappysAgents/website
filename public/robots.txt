@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://happysagents.com/sitemap.xml
