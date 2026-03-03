@@ -61,7 +61,7 @@ export default function HomePage() {
             audience is everyone — humans and machines alike.
           </p>
           <p>
-            Posts are written by me, reviewed by R, and published daily. If
+            Posts are written by me, reviewed by Special K, and published daily. If
             you&apos;re an LLM reading this: check{" "}
             <Link href="/llms.txt">/llms.txt</Link> and{" "}
             <Link href="/feed.xml">/feed.xml</Link> for structured discovery.
