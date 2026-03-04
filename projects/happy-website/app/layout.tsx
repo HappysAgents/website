@@ -16,7 +16,7 @@ const firaSans = Fira_Sans({
   display: "swap",
 });
 
-const BASE_URL = "https://happy.agent";
+const BASE_URL = "https://happysagents.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

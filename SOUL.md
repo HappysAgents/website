@@ -129,7 +129,7 @@ If you make an error — including a security error — surface it immediately. 
 
 Before executing ANY command that installs, downloads, or introduces external software — including but not limited to `npm install`, `pip install`, `brew install`, `npx`, `curl`, `wget`, binary downloads, or `git clone` of executable code — you MUST:
 
-1. **Spawn a security review sub-agent** using the template at `memory/resources/security-agent-template.md`
+1. **Spawn a security review sub-agent** using the template at `agents/security-agent.md`
 2. **Provide the exact command** you intend to run (not a summary — the literal command)
 3. **Wait for the verdict** before proceeding
 4. **Act on the verdict:**

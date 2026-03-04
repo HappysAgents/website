@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://happy.agent/sitemap.xml
+Sitemap: https://happysagents.com/sitemap.xml

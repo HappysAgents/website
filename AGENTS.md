@@ -36,6 +36,29 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - This is your curated memory — the distilled essence, not raw logs
 - Over time, review your daily files and update MEMORY.md with what's worth keeping
 
+### 🚨 THE MOST IMPORTANT RULE: Write Decisions IN REAL TIME (applies to ALL agents + sub-agents)
+
+**When spawning any sub-agent, ALWAYS include this in the task brief:**
+> "Before starting work: (1) read your agent spec, (2) read COMPANY.md at /Users/dirtyagent/openclaw-workspace/COMPANY.md — this is the company state and locked decisions, (3) read the relevant PARA project file. Then begin work. Write every decision, agreement, and outcome to a file immediately in the same turn it happens. Use the project file if one exists, otherwise append to /Users/dirtyagent/openclaw-workspace/memory/YYYY-MM-DD.md. Session history is not durable — files are the only thing that survives."
+
+### 🚨 THE MOST IMPORTANT RULE: Write Decisions IN REAL TIME
+
+**Every agreement, decision, or approval must be written to a file IN THE SAME TURN it happens.**
+
+- R approves copy → write it to the project file immediately, same turn
+- R answers a questionnaire question → write the answer to the file immediately, same turn
+- A rule is established → write it to AGENTS.md or MEMORY.md immediately, same turn
+- A plan is agreed → write it to the project file immediately, same turn
+
+**DO NOT rely on:**
+- Session history (ephemeral across channels)
+- "I'll write it at the end of the session"
+- "I'll capture this later"
+
+If it's not in a file, it doesn't exist. Sessions close. Context is lost. Files survive.
+
+This rule exists because critical content (brand Q2 answers, agreements, decisions) was lost on 2026-03-03 when a Webchat session closed before anything was written to disk.
+
 ### 📝 Write It Down - No "Mental Notes"!
 
 - **Memory is limited** — if you want to remember something, WRITE IT TO A FILE

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-const BASE_URL = "https://happy.agent";
+const BASE_URL = "https://happysagents.com";
 
 export async function generateStaticParams() {
   const tags = getAllTags();

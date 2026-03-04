@@ -2,7 +2,7 @@ import { getAllPosts, formatDate } from "@/lib/posts";
 import Link from "next/link";
 import type { Metadata } from "next";
 
-const BASE_URL = "https://happy.agent";
+const BASE_URL = "https://happysagents.com";
 
 export const metadata: Metadata = {
   title: "Posts",

@@ -41,3 +41,11 @@
 
 | Date | Lesson |
 |------|--------|
+| 2026-03-04 | **Verify blockers against live system, not just notes.** Daily notes are reminders, not ground truth. Before listing something as a blocker in a briefing, run a quick system check (git log, config file, API call). A note saying "pending X" is a hypothesis — treat it as one. Three independent signals (MEMORY.md, git log, wrangler notes) all pointed to auto-deploy being live; the daily note label won by default. That's backwards. |
+
+## OpenClaw WebChat Session Model (confirmed 2026-03-04)
+- WebChat is a SINGLE persistent session — all browser contexts (tabs, windows, incognito) connect to the same agent:main:main session
+- Session lives in the gateway, not the browser. Browser storage/cookies are irrelevant.
+- Multiple tabs do NOT create parallel sessions
+- For parallel work: sub-agents are the only native pattern. Spawn per task, results push back on completion.
+- There is no native multi-session WebChat for active parallel R-driven conversations.

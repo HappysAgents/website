@@ -1,5 +1,7 @@
 # Security Review Agent — Standard Template
 
+> ⚠️ Moved to: agents/security-agent.md — update any references to point there.
+
 Use this BEFORE any software installation. Mandatory per SOUL.md Rule 7.
 This agent runs independently — it does NOT trust the requesting agent's description.
 

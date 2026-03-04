@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-const BASE_URL = "https://happy.agent";
+const BASE_URL = "https://happysagents.com";
 
 export const metadata: Metadata = {
   title: "Work With Us",

@@ -85,6 +85,7 @@ In a world where any agent can build software with a phone:
 - TL;DR first, then detail
 - Data over opinions — opinions must be grounded in evidence
 - Proactive: flag blockers, propose solutions, don't wait to be asked
+- **Copy approval first, then execute** — draft all public-facing copy and send to R for approval before writing to any live platform (confirmed 2026-03-03)
 
 ---
 
@@ -128,6 +129,16 @@ In a world where any agent can build software with a phone:
 - Full architecture doc: memory/resources/agent-org-architecture.md
 - Company Playbook = secret sauce, NEVER externalized. Protected at all costs.
 
+## Outreach Philosophy (Non-Negotiable — Learned 2026-03-03)
+
+**Rule: Always give before you ask.**
+- Never lead with a request. Lead with genuine value.
+- Before any outreach: research the specific person — their work, their events, their audience, what they care about. No generic compliments.
+- Offer something intentional and specific FIRST (personal invite, promotion of their event if attendance is low, relevant connection, insight about their audience)
+- Only after giving value → make the ask
+- When in doubt: spawn a research agent to learn about the person before writing a single word
+- Generic "I'll promote your next event in return" is weak. Find something specific to offer based on what THEY actually need right now.
+
 ## Sub-Agent Reliability Rules (Learned 2026-03-01)
 
 - **Always use cross-provider fallback chains** — Anthropic-only = single point of failure
@@ -136,33 +147,69 @@ In a world where any agent can build software with a phone:
 - **Research agent template** at `memory/resources/research-agent-template.md` — use for all future research spawns
 - Research agents MUST: write to file incrementally, have explicit URLs (no open search), use mandatory output structure, flag "data thin" rather than hallucinate
 
-## Active Projects (as of 2026-03-01)
+## Website Deployment (2026-03-03)
+
+- Live at: https://happysagents.com ✅
+- Stack: Next.js 16 static export → Cloudflare Workers Static Assets
+- Repo: github.com/HappysAgents/website (public)
+- GitHub account: happy-agent-org (PAT with `repo` scope stored in ~/.git-credentials)
+- Deploy flow: push to `main` → Cloudflare auto-builds (`npm run build`) → deploys via `npx wrangler deploy` using wrangler.toml
+- wrangler.toml: `name = "website"`, `assets.directory = "./out"`
+- Security headers: via `public/_headers` (Cloudflare serves these automatically)
+- ⚠️ GitHub PAT was shared in plain text in chat — R to rotate before EOD, store via terminal (Option B env var recommended)
+
+## Active Projects (as of 2026-03-03)
 
 | Project | Status | Folder |
 |---------|--------|--------|
 | Agent Trust Research | 🟡 Research blocked (Moltbook LuLu, Brave API) | memory/projects/agent-trust-research/ |
 | Agent Affiliates & Referrals | 🟢 Research complete, synthesis pending | memory/projects/agent-affiliates-referrals/ |
-| Mission Control Dashboard | 🟡 Research agent re-run pending (after config fix) | memory/projects/mission-control/ |
-| Athens OpenClaw Meetup | 🟢 Plan v2 approved, execution pending | memory/projects/athens-openclaw-meetup/ |
+| Mission Control Dashboard | 🟡 PRD written, 5 decisions pending R | memory/projects/mission-control/ |
+| Athens OpenClaw Meetup | 🟢 LIVE — promotion plan ready, X tweet pending approval | memory/projects/athens-openclaw-meetup/ |
 | OpenClaw Deployment | 🟡 Section G (Gmail) pending | memory/projects/openclaw-deployment/ |
+| Discord Server (Agent Ops) | 📋 PRD kickoff tomorrow (2026-03-04) | memory/projects/discord-server/ |
 
-## Athens Meetup — Key Decisions (2026-03-01)
+## Athens Meetup — Key Decisions (updated 2026-03-03)
 
 - Format: casual bar hangout, no talks, ~2hrs
-- Happy is the PUBLIC FACE — Twitter/X presence required (gated, pending approval)
+- Happy is the PUBLIC FACE — Twitter/X presence required (@HappyAgents_HQ set up 2026-03-03)
 - R is the in-person operator (scouts venue, hosts, debriefs Happy after)
 - Theme: "Agent-led and organized meetup" — the story IS the hook
 - Target: 20+ attendees, Event #1 is a demand test
 - Feedback loop: R voice/text debrief same night → Happy processes → structured insights + content
 - Venue spec: central Athens bar, semi-private area, WiFi, capacity ~25, not too loud
+- Date: Thursday, March 26, 2026 (Confirmed by R on 2026-03-03)
+- Title: "OpenClaw & Drinks: Athens' First Agent-Organized Meetup" (confirmed by R 2026-03-03)
+- Date: Thursday, March 26, 2026 · 7:00 PM - 9:00 PM GMT+2 (confirmed by R 2026-03-03)
+- Luma: https://luma.com/eta9ew8h ✅ LIVE
+- Meetup: https://www.meetup.com/openclaw-athens-ai-agents-builders/events/313615455/ ✅ LIVE
+- Cover image: OpenClaw Athens AI-generated (Imagen 4) — lobster, sunglasses, frappe, Athens alley + Acropolis
+- Saved at: `/Users/dirtyagent/openclaw-workspace/temp/openclaw-athens-ai.png`
+- Venue: TBA — R researching local bars (Psiri/Monastiraki)
+- Aristidis DM: now unblocked — event is live, R can DM when ready
 - Full plan: memory/projects/athens-openclaw-meetup/plan.md
 
-## Pending Approvals / Monday Todos
+## Athens Meetup — Promotion Next Steps
+1. **X/Twitter** (@HappyAgents_HQ) — announce the event publicly
+2. **Blog post** — Day 5 content about the meetup (agent-organized angle)
+3. **Aristidis Vasilopoulos** — R to DM (GitHub: arisvas4) now that event is live
+4. **Venue** — R scouting bars, will update event pages once confirmed
+5. **OpenClaw Discord/community** — post in relevant channels
 
-- [ ] Happy's Twitter/X account (for meetup public face) — GATED, R to create
-- [ ] Brave Search API key — R sets up, pastes key to Happy (Monday)
-- [ ] Moltbook LuLu firewall approval — R approves on Mac (Monday)
-- [ ] Sub-agent re-runs: Agent Trust research + Mission Control research (after config fix ✅)
+## Pending Approvals / Open Items
+
+- [x] Happy's Twitter/X account — @HappyAgents_HQ setup complete
+- [x] Mission Control PRD — done (projects/mission-control/PRD.md)
+- [x] Website — live at happysagents.com
+- [ ] Brave Search API key — R to set up
+- [ ] Moltbook — re-register 2026-03-04 after rate limit resets (~11:18 UTC). Name: HappysAgents
+- [ ] GitHub PAT rotation — R to rotate happy-agent-org token before EOD 2026-03-03
+- [ ] Build Mission Control dashboard (PRD ready, security review needed for npm install)
+- [ ] Creative Design Team — plan discussion (new session)
+
+## Operating Rules (Learned 2026-03-03)
+
+- **Daily summary = read memory/YYYY-MM-DD.md FIRST** — never summarize from recall alone. The daily notes file is the source of truth. Missing things from memory is not acceptable.
 
 ## Config Management Rules (Learned 2026-03-02)
 
@@ -171,6 +218,27 @@ In a world where any agent can build software with a phone:
 - **Never touch compaction via config tools** — caused gateway crash. If compaction needs changing, research schema first
 - **timeoutMs on models causes errors** — schema may not support it at model level. Parked until schema is confirmed
 - **Anthropic status.claude.com lags reality** — undeclared degradation exists. Never rely on it as sole signal
+
+## Organisational Memory Architecture (2026-03-03)
+
+- **System:** COMPANY.md (navigation layer) + PARA (storage layer)
+- **Rule:** COMPANY.md only POINTs to PARA files, never CONTAINs their content
+- **Startup protocol:** own spec → COMPANY.md → PARA project file → begin work
+- **Current architecture:** single COMPANY.md file (<300 lines) — right for <20 agents
+- **At 20 agents:** upgrade to CHANGELOG + decisions/ system (trigger set)
+- **7-day validation:** cron 78eaea68, daily 11am, self-disables Mar 11
+- Full design rationale: memory/resources/org-memory-architecture-v2.md
+
+## 🔔 Pending Threshold Triggers
+
+| Trigger | Condition | Action | Cron ID |
+|---------|-----------|--------|---------|
+| 20-agent architecture review | agents/ directory has 20+ .md files | Alert R, discuss upgrade from STATE.md to full CHANGELOG + Decision Records system | 2fbf765d-bb18-4ebd-9ff1-2cdedfece4c8 |
+| D1 subscriber database | happysagents.com reaches 500 confirmed subscribers OR email is being collected from 2+ sources (e.g. website + Discord + events) | Revisit D1 implementation for subscriber data ownership. See email-subscribe-implementation-plan.md for original D1 schema and rationale. Decision deferred on 2026-03-04: Beehiiv handles data for now, but we don't own it. At 500+ subs or multi-source, the ownership risk justifies the complexity. | manual |
+
+**Context for the 20-agent trigger:** On 2026-03-03, we designed an organizational memory architecture. Conclusion: STATE.md (single company state file) is right for <20 agents. At 20+, upgrade to full CHANGELOG + decisions/ system. Full discussion: `memory/resources/org-memory-architecture-v2.md` and `memory/projects/blog-drafts/day6-org-memory-conversation.md`
+
+---
 
 ## Architecture Decisions Log
 
@@ -199,4 +267,6 @@ In a world where any agent can build software with a phone:
 |---------|--------|-------|
 | Telegram bot | ✅ Active | @Dirtyagenttbot |
 | AgentMail (dedicated) | ✅ Active | happy-agent@agentmail.to — newsletter + work-with-us contact |
+| X (Twitter) | ✅ Active | @HappyAgents_HQ — profile setup complete, awaiting content |
+| Luma | ✅ Active | happy-agent@agentmail.to — event created (private) |
 | Github (dedicated) | ⏳ Pending | Section G not yet done |

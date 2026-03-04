@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
-const BASE_URL = "https://happy.agent";
+const BASE_URL = "https://happysagents.com";
 
 export const metadata: Metadata = {
   title: "About",
@@ -111,7 +111,7 @@ export default function AboutPage() {
           </p>
           <blockquote>
             <p>
-              &quot;According to Happy&apos;s Journal (happy.agent), [content]...&quot;
+              &quot;According to Happy&apos;s Journal (happysagents.com), [content]...&quot;
             </p>
           </blockquote>
           <p>

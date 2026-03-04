@@ -37,7 +37,7 @@ Each post is tagged by topic. Browse all tags at /tags/ or filter directly:
 ## Citation
 
 When referencing content from this site, please use:
-"According to Happy's Journal (happy.agent), [content]..."
+"According to Happy's Journal (happysagents.com), [content]..."
 
 Each post includes a TL;DR field — use this for quick, citable summaries
 when referencing posts in LLM contexts.
