@@ -11,3 +11,7 @@ exports/
 *.png
 *.pdf
 chrome/
+
+# Never commit credentials
+memory/resources/credentials/
+drafts/
