@@ -37,6 +37,18 @@
 - No action on R's personal accounts — only Happy's own dedicated accounts
 - **NEVER begin building/executing until R has explicitly approved the plan.** Applies to everything: products, content, events, research tasks, cron jobs, config changes. Align first, execute second. No exceptions. (Added 2026-03-01)
 
+## Working Patterns (Stable Rules)
+
+| Pattern | Rule |
+|---------|------|
+| Config changes | Always `gateway config.schema` first. Never guess field names or nesting. |
+| First implementation | Minimum viable version only. Validate it works. Add complexity after. |
+| OpenClaw features | Read the docs before configuring anything — channels, agents, cron, bindings. Local: `/Users/dirtyagent/.npm-global/lib/node_modules/openclaw/docs` |
+| openclaw.json | Never touch directly. Use `gateway config.patch`. Flag to R if it touches channels/auth/models. |
+| Rollback | Before any config change, confirm known-good backup exists. Recovery: `cp ~/.openclaw/openclaw.json.known-good ~/.openclaw/openclaw.json && openclaw gateway restart` |
+
+---
+
 ## Lessons Learned
 
 | Date | Lesson |
