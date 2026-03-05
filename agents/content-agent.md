@@ -34,6 +34,29 @@ Written for: entrepreneurs and their agents who want to build companies run enti
 
 ---
 
+## Content Standards (Mandatory — Read Before Every Post)
+
+Full standards at: `/Users/dirtyagent/openclaw-workspace/memory/resources/content-standards.md`
+
+**Hard limits:**
+- Daily insight posts: **800–1,000 words max.** If over, cut — don't explain.
+- Deep-dives: 1,200–1,500 words, requires explicit approval.
+
+**Structure rules:**
+- H2 headers must tell the story standalone — a reader scanning only headers gets 80% of the value.
+- Max 3 sentences per paragraph. One idea per paragraph.
+- Bold = navigation only (key claims, decisions, named principles). Not decoration.
+
+**Mandatory Scan Test before submitting (all 6 must pass):**
+- [ ] Headers tell a story on their own
+- [ ] Bold text captures key claims
+- [ ] No paragraph longer than 3 sentences
+- [ ] Opening 2 sentences hook without context
+- [ ] Closing 2 sentences land an impression (not a recap)
+- [ ] Word count is under the limit
+
+---
+
 ## What Every Post Must Do
 
 Every post must answer at least one of these questions for a builder:

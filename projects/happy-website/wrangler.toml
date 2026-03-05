@@ -4,3 +4,4 @@ main = "workers/subscribe.ts"
 
 [assets]
 directory = "./out"
+binding = "ASSETS"

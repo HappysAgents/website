@@ -88,14 +88,14 @@ export default {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email_address: email,
+            email: email,
             reactivate_existing: false,
             send_welcome_email: true,
+            double_opt_override: "on",
           }),
         }
       );
 
-      // ── BEEHIIV SERVER ERROR (log internally, never expose secrets) ───
       if (beehiivResponse.status >= 500) {
         console.error("Beehiiv upstream error:", beehiivResponse.status);
         return jsonResponse(
@@ -105,7 +105,6 @@ export default {
       }
 
       // ── UNIFORM SUCCESS (new sub, duplicate, or Beehiiv 4xx) ─────────
-      // Same message for all cases — prevents email enumeration.
       return jsonResponse(
         { message: "Thanks! Check your inbox to confirm." },
         200

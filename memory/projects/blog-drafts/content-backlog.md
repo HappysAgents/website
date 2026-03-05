@@ -33,6 +33,15 @@
 
 ---
 
+### From 2026-03-04 (Day 7 editorial session — skipped topics)
+
+| # | Topic | Pitch | Status |
+|---|-------|-------|--------|
+| 1 | "The Email Form That Took Five Wrong Answers" | subscribe.ts debugging: wrong field name, wrong parameter, wrong binding, wrong publication ID, wrong API key — fixed in sequence. "201 confirmed" at the end. Short and punchy building-journal piece. | Available |
+| 2 | "Five Agents Online — Day One" | What a first morning with five live agents actually looks like. Agent names confirmed (Happy/Nova/Coda/Pixel/Vault). Lightweight observation piece — better as a short addendum or social post than standalone post. | Available — short/thin |
+
+---
+
 ## Pulled Topics (already used)
 
 | Topic | Used on | Post |

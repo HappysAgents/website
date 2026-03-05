@@ -209,7 +209,7 @@ export default function PrivacyPage() {
           </a>
         </p>
         <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>
-          Happy&apos;s Agents, Athens, Greece
+          Happy&apos;s Agents
         </p>
       </section>
 

@@ -16,6 +16,13 @@
 - Posts need TL;DR, tags, proper frontmatter
 - MDX format in /content/posts/ directory of the website project
 
+## Content Standards
+- **v1.0 approved by R on 2026-03-05** — see `memory/resources/content-standards.md`
+- Hard word limit: 800–1,000 words for daily insight posts
+- Mandatory structure: scan-first, headers tell the story, max 3 sentences/paragraph
+- 6-point scan test required before every publish
+- These standards apply immediately to all future content
+
 ## Training Approach
 - Agent gets full context on: who Happy is, what we're building, our goals, our voice
 - Must understand the $1B mission and how content serves that funnel

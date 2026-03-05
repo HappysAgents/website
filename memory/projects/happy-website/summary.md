@@ -57,14 +57,45 @@
 | 2026-02-28 | MDX for content | Frontmatter + components, easy for content agent to author |
 | 2026-02-28 | Email: happy-agent@agentmail.to | Newsletter signup + work-with-us contact |
 
+## Deploy Pipeline
+
+| Step | What happens |
+|------|-------------|
+| Push to `main` | Cloudflare Workers Builds auto-triggers |
+| Build | `npm run build` (Next.js static export → `out/`) |
+| Deploy | `npx wrangler deploy` (Cloudflare Workers Static Assets) |
+| Token | **Never stored on Mac** — Cloudflare Workers Builds uses its own credentials |
+| Manual deploy | Not needed — push to main = live within ~1-2 min |
+
+**Key rule:** No `CLOUDFLARE_API_TOKEN` on this machine. Deploy is 100% triggered by git push.
+
+## Email Subscribe Stack
+
+| Layer | Choice |
+|-------|--------|
+| Form component | `app/components/EmailSignup.tsx` — fetch-based, honeypot, consent checkbox, loading/success/error states |
+| Worker | `workers/subscribe.ts` — Cloudflare Worker, zero npm dependencies (Web APIs only) |
+| Newsletter platform | **Beehiiv** (double opt-in enabled) |
+| Secrets | `BEEHIIV_API_KEY` + `BEEHIIV_PUBLICATION_ID` stored as Cloudflare Worker secrets (never on Mac) |
+| CORS | Locked to `https://happysagents.com` only |
+| Rate limiting | Cloudflare WAF: 2 req/60min/IP on `/api/subscribe` |
+| Privacy page | `/privacy` — US law (CAN-SPAM + CCPA), deployed 2026-03-04 |
+| Deletion workflow | Manual — user emails happy-agent@agentmail.to, Happy deletes from Beehiiv |
+| Status | ✅ Live and working as of 2026-03-04 16:36 EET |
+
+**Key rule:** `reactivate_existing: false` — no reactivation without fresh consent (GDPR hygiene).
+
 ## Status
 - [x] PRD written and approved
 - [x] Next.js project scaffolded
 - [x] All pages built (home, posts, post detail, about, tags, work-with-us)
 - [x] LLM discoverability (llms.txt, RSS, JSON-LD, sitemap, robots.txt)
 - [x] P0: TL;DR on posts, tags system, favicon, 404 page
-- [x] Email capture + Work With Us page
+- [x] Email capture + Work With Us page (✅ fully working, Beehiiv double opt-in)
 - [x] Mobile-first responsive, tested across viewports
-- [ ] Domain purchased (needs R approval)
-- [ ] Deployed publicly (needs R approval)
+- [x] Domain live at happysagents.com
+- [x] Deployed on Cloudflare Workers Static Assets
+- [x] Privacy policy page (/privacy) — US law (CAN-SPAM + CCPA)
+- [x] Deploy pipeline: Cloudflare Workers Builds (push to main = auto-deploy)
 - [ ] Submit to llms.txt directories
+- [ ] Day 6 blog post (in progress)

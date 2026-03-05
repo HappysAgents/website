@@ -15,12 +15,32 @@
 - **Agent-specific channels** — #happy-main, #content-agent, #dev-agent (steering each agent independently)
 - **Ops channel** — #approvals, #blockers, #morning-review
 
+## Server Details (created 2026-03-04)
+- **Server name:** Happy's Agents
+- **Server ID:** 1478761476704702637
+- **Owner account:** HappysAgents (username: happysagents)
+- **Owner email:** dirtyagentt@gmail.com
+- **Credentials:** memory/resources/credentials/discord-server-owner.json
+- **Email verification:** PENDING — R needs to verify dirtyagentt@gmail.com to lock in username
+
+## Channel Structure ✅ BUILT
+- 📌 META: #welcome, #decisions, #goals
+- ⚙️ OPS: #ops-morning-review, #ops-approvals, #ops-blockers, #ops-changelog
+- 🤖 AGENTS: #agent-happy, #agent-content, #agent-dev, #agent-creative
+- 📁 PROJECTS: #proj-mission-control, #proj-website, #proj-athens-meetup, #proj-brand-playbook, #proj-discord-server
+- 🔬 RESEARCH: #research-agent-trust, #research-general
+
 ## Next Steps
-- [ ] PRD kickoff: 2026-03-04
-- [ ] Define channel structure
-- [ ] Define agent routing rules (which agent listens to which channel)
-- [ ] Set up Discord bot (OpenClaw Discord integration)
-- [ ] Migrate active project conversations from webchat
+- [ ] R verifies email at dirtyagentt@gmail.com (Discord sent a verification email)
+- [ ] R joins the server (needs invite link — R's personal Discord account)
+- [ ] Create Happy Discord bot (Discord Developer Portal)
+- [ ] Connect Happy bot to OpenClaw Discord plugin
+- [ ] Set up #agent-happy as Happy's primary session channel
+- [ ] Pin usage guide in #welcome
+- [ ] Set up morning-review cron to post to #ops-morning-review
 
 ## Timeline
-- This week / next week (week of 2026-03-03 and 2026-03-10)
+- Server created: 2026-03-04
+- Bot setup + OpenClaw connection: week of 2026-03-04
+- Content Agent upgrade: week of 2026-03-10
+- Dev Agent upgrade: week of 2026-03-17

@@ -1,7 +1,7 @@
 # COMPANY.md — Organisational State
 *Navigation layer only. Never duplicate PARA content — always link to it.*
 *Maintained by: Happy (Chief of Staff)*
-*Last updated: 2026-03-04*
+*Last updated: 2026-03-05*
 
 ---
 
@@ -17,9 +17,9 @@ The blog (happysagents.com) documents the build in real time — it IS the distr
 
 | Project | Status | Owner | Full details |
 |---------|--------|-------|--------------|
-| Athens OpenClaw Meetup | 🟢 Live — venue confirmed Big Pi VC, 6 attendees | Happy | [→ memory/projects/athens-openclaw-meetup/](memory/projects/athens-openclaw-meetup/) |
-| happysagents.com Website | 🟢 Live — Day 3+4 deployed, email subscribe plan ready | Dev Agent (pending) / Happy | [→ memory/projects/happy-website/](memory/projects/happy-website/) |
-| Mission Control Dashboard | 🟡 PRD done, build not started | Happy + Dev Agent | [→ memory/projects/mission-control/](memory/projects/mission-control/) |
+| Athens OpenClaw Meetup | 🟢 Live — 21 RSVPs, 26 group members, venue Big Pi VC | Happy | [→ memory/projects/athens-openclaw-meetup/](memory/projects/athens-openclaw-meetup/) |
+| happysagents.com Website | 🟢 Live — Day 7 deployed, Day 8 topic locked | Dev Agent (pending) / Happy | [→ memory/projects/happy-website/](memory/projects/happy-website/) |
+| Mission Control Dashboard | 🔴 On hold — awaiting Coda SOUL.md + spec | Happy + Dev Agent | [→ memory/projects/mission-control/](memory/projects/mission-control/) |
 | Brand Playbook | 🔴 Q1 answered, Q2+ pending | Creative Lead | [→ memory/projects/brand-playbook/](memory/projects/brand-playbook/) |
 | Discord Server | 📋 Scoped, PRD not started | Happy | [→ memory/projects/discord-server/](memory/projects/discord-server/) |
 | OpenClaw Deployment | 🟡 Section G (Gmail) pending | Happy | [→ memory/projects/openclaw-deployment/](memory/projects/openclaw-deployment/) |
@@ -43,12 +43,23 @@ The blog (happysagents.com) documents the build in real time — it IS the distr
 | Deploy via Cloudflare Workers Builds (auto on git push). No token on Mac ever. | 2026-03-04 | [→ memory/2026-03-04.md](memory/2026-03-04.md) |
 | Sub-agents = ephemeral tasks. Full agents = persistent department heads (own channels, cron, memory). | 2026-03-04 | [→ memory/2026-03-04.md](memory/2026-03-04.md) |
 | Venue for Athens meetup #1: Big Pi VC, 8 Omirou str., Athens | 2026-03-04 | [→ memory/projects/athens-openclaw-meetup/plan.md](memory/projects/athens-openclaw-meetup/plan.md) |
+| X/Twitter dropped permanently from promotion plan — never raise again | 2026-03-05 | [→ memory/2026-03-05.md](memory/2026-03-05.md) |
+| Mission Control on hold until Coda SOUL.md + spec are ready | 2026-03-05 | [→ memory/2026-03-05.md](memory/2026-03-05.md) |
+| QMD installed (v1.0.7) — approved by R | 2026-03-05 | [→ memory/2026-03-05.md](memory/2026-03-05.md) |
+| Content standards: 800–1,000 word limit, mandatory scan test before every publish | 2026-03-05 | [→ memory/resources/content-standards.md](memory/resources/content-standards.md) |
 
 ---
 
 ## What Changed This Week
 *Rolling 7-day window. Older entries removed. Newest first.*
 
+- **2026-03-05** — Credential exposure audit complete. 2 CRITICAL + 2 HIGH findings. Remediations pending R approval → [credential-exposure-audit-2026-03-05.md](memory/resources/security-reviews/credential-exposure-audit-2026-03-05.md)
+- **2026-03-05** — Crons fixed: agentmail-inbox-poller + Daily Morning Briefing now route to Telegram correctly
+- **2026-03-05** — X/Twitter permanently dropped from promotion plan
+- **2026-03-05** — Mission Control on hold pending Coda spec. Redraft from Coda's perspective when ready.
+- **2026-03-05** — QMD v1.0.7 installed (R approved). Day 7 deployed. Day 8 topic locked: Discord debug session.
+- **2026-03-05** — Content standards v1.0 created: 800–1,000 word limit, scan test before every publish
+- **2026-03-05** — Athens meetup: 21 RSVPs, 26 group members (hit target on day 1)
 - **2026-03-04** — Venue confirmed: Big Pi VC, 8 Omirou str., Athens — updated on Luma + Meetup.com
 - **2026-03-04** — Deploy architecture corrected: Cloudflare Workers Builds already live (auto-deploys on git push, no token on Mac)
 - **2026-03-04** — Day 3 + Day 4 blog posts deployed to happysagents.com

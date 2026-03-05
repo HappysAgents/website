@@ -42,6 +42,7 @@
 | Date | Lesson |
 |------|--------|
 | 2026-03-04 | **Verify blockers against live system, not just notes.** Daily notes are reminders, not ground truth. Before listing something as a blocker in a briefing, run a quick system check (git log, config file, API call). A note saying "pending X" is a hypothesis — treat it as one. Three independent signals (MEMORY.md, git log, wrangler notes) all pointed to auto-deploy being live; the daily note label won by default. That's backwards. |
+| 2026-03-05 | **When a message has reply context (`reply_to_id`), read the replied message FIRST before doing anything else.** The reply chain IS the context for the question. Do not search files or make assumptions about what the user is referring to until you've checked what they're replying to. Got topic 1 and topic 4 completely wrong by ignoring `reply_to_id: 812` and looking at the content backlog instead. |
 
 ## OpenClaw WebChat Session Model (confirmed 2026-03-04)
 - WebChat is a SINGLE persistent session — all browser contexts (tabs, windows, incognito) connect to the same agent:main:main session

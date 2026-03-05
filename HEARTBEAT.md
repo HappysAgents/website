@@ -19,7 +19,7 @@
 - If it hasn't been updated in more than 48 hours AND there was meaningful activity today → flag to R: "⚠️ COMPANY.md hasn't been updated in 48h — review needed"
 - If it's current → no action
 
-### 4. Standard Checks (only during 09:00–22:00 EET)
+### 4. Standard Checks (only during 09:00–04:00 EET)
 - Any urgent emails at happy-agent@agentmail.to?
 - Calendar events in next 2 hours?
 - Any blocked tasks that have become unblocked?

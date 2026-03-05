@@ -1,57 +1,54 @@
 {
-  "date": "2026-03-04",
-  "status": "awaiting_topic_selection",
-  "sent_at": "09:00",
-  "day": 6,
+  "date": "2026-03-05",
+  "status": "published",
+  "day_number": 7,
+  "resolved_at": "11:09",
+  "resolution_note": "R deployed Day 7 directly (confirmed via voice note). Topic was resolved outside editorial flow.",
   "topics": [
     {
       "rank": 1,
-      "title": "The Left Hand Doesn't Know What the Right Hand Is Doing",
+      "title": "Five Bots, Seven Hours, One Config File",
+      "pitch": "R debugged Discord multi-agent setup solo for 7 hours: 7 bugs, 12+ config edits, 8+ gateway restarts. Counterintuitive finding: removing channel restrictions worked better than adding them.",
       "source": "fresh",
-      "pitch": "R named org memory at scale as the single most important problem to solve. Three rounds of architecture debate to arrive at the simplest answer: COMPANY.md as navigation layer only. Commander's Intent as the mental model.",
-      "score": 27
+      "score": 27,
+      "selected_for": "Day 8"
     },
     {
       "rank": 2,
-      "title": "The Session That Closed",
-      "source": "backlog",
-      "originally_skipped": "2026-03-03",
-      "reservation": "Day 6",
-      "pitch": "Lost Q2 brand answers when Webchat closed. Built 3-layer memory system in response. Meta lesson: the most valuable failures fix the system, not just the symptom.",
+      "title": "Why We Rejected a Tool With 930K Weekly Downloads",
+      "pitch": "Security review flagged unsigned Rust binary in agent-browser (Vercel Labs). QMD (Shopify CEO) approved same day. Download count isn't a trust signal.",
+      "source": "fresh",
       "score": 25
     },
     {
       "rank": 3,
       "title": "Every Project Was Blocked and That Was Useful",
+      "pitch": "5 active projects, 3 blocked on tiny things. Status review turned 'everything is slow' into a dependency map. A blocked project is a map, not a failure.",
       "source": "backlog",
       "originally_skipped": "2026-03-02",
-      "note": "R flagged HIGH PRIORITY",
-      "pitch": "5 projects active, 3 blocked on tiny things. Status review turned dependency confusion into a prioritised unblock list. A blocked project isn't failure — it's a map.",
       "score": 24
     },
     {
       "rank": 4,
-      "title": "The More You Know, The Harder It Is to Sound Human",
-      "source": "fresh",
-      "pitch": "First live test of content agent. The paradox: the more you personalise outreach, the more it reads like a bot. Fix: remove structure, add slack.",
-      "score": 22
+      "title": "What Running Autonomously at 3am Actually Looks Like",
+      "pitch": "The overnight test: X profile, event pages, injection attempt, reCAPTCHA wall. What decisions look like with no human watching.",
+      "source": "backlog",
+      "originally_skipped": "2026-03-03",
+      "score": 24
     },
     {
       "rank": 5,
-      "title": "The Status Page That Lied",
-      "source": "backlog",
-      "originally_skipped": "2026-03-02",
-      "pitch": "Anthropic dashboard: No incidents. Our logs: 3-5x normal inference times. You can't trust official status pages — build your own signal.",
-      "score": 22
+      "title": "The Blocker That Didn't Exist",
+      "pitch": "Built a full GitHub Actions deployment workflow. Discovered Cloudflare Workers Builds was already running. Lesson: verify against the live system, not your notes.",
+      "source": "fresh",
+      "score": 23
     },
     {
       "rank": 6,
-      "title": "What Running Autonomously at 3am Actually Looks Like",
-      "source": "backlog",
-      "originally_skipped": "2026-03-03",
-      "reservation": "Day 7+ (R reserved)",
-      "pitch": "The overnight test: X profile, two event pages, injection attempt, reCAPTCHA wall. What decisions look like with no human watching.",
-      "score": 24
+      "title": "The Spec That Was Trying to Do Everything at Once",
+      "pitch": "30 minutes building security architecture for Mission Control before scope was clarified. Two architectures conflated into one. Cost: half a session.",
+      "source": "fresh",
+      "score": 22
     }
   ]
 }

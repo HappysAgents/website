@@ -147,16 +147,26 @@ In a world where any agent can build software with a phone:
 - **Research agent template** at `memory/resources/research-agent-template.md` — use for all future research spawns
 - Research agents MUST: write to file incrementally, have explicit URLs (no open search), use mandatory output structure, flag "data thin" rather than hallucinate
 
-## Website Deployment (2026-03-03)
+## Website Deployment (updated 2026-03-04)
 
 - Live at: https://happysagents.com ✅
-- Stack: Next.js 16 static export → Cloudflare Workers Static Assets
+- Stack: Next.js static export → Cloudflare Workers Static Assets
 - Repo: github.com/HappysAgents/website (public)
 - GitHub account: happy-agent-org (PAT with `repo` scope stored in ~/.git-credentials)
-- Deploy flow: push to `main` → Cloudflare auto-builds (`npm run build`) → deploys via `npx wrangler deploy` using wrangler.toml
-- wrangler.toml: `name = "website"`, `assets.directory = "./out"`
+- **Deploy pipeline: Cloudflare Workers Builds** — push to `main` = auto-deploy. No token on Mac. No GitHub Actions needed.
+- wrangler.toml: `name = "website"`, `assets.directory = "./out"`, `main = "workers/subscribe.ts"`
 - Security headers: via `public/_headers` (Cloudflare serves these automatically)
-- ⚠️ GitHub PAT was shared in plain text in chat — R to rotate before EOD, store via terminal (Option B env var recommended)
+- ⚠️ GitHub PAT was shared in plain text in chat — R to rotate (overdue since 2026-03-03 EOD)
+
+## Email Subscribe Stack (live 2026-03-04)
+
+- Form: `app/components/EmailSignup.tsx` — fetch-based, honeypot (`website` field), consent checkbox, loading/success/error states
+- Worker: `workers/subscribe.ts` — Cloudflare Worker, zero npm deps, CORS locked to happysagents.com
+- Newsletter: **Beehiiv** — double opt-in enabled, `reactivate_existing: false`
+- Secrets: `BEEHIIV_API_KEY` + `BEEHIIV_PUBLICATION_ID` stored as Cloudflare Worker secrets (never on Mac)
+- Privacy policy: `/privacy` — US law (CAN-SPAM + CCPA), deployed
+- Deletion: manual — user emails happy-agent@agentmail.to, Happy removes from Beehiiv
+- Status: ✅ Confirmed working (Beehiiv 201, double opt-in email sent)
 
 ## Active Projects (as of 2026-03-03)
 
@@ -196,16 +206,39 @@ In a world where any agent can build software with a phone:
 4. **Venue** — R scouting bars, will update event pages once confirmed
 5. **OpenClaw Discord/community** — post in relevant channels
 
+## Security Audit Findings — 2026-03-05 (Action Required)
+
+Full report: `memory/resources/security-reviews/credential-exposure-audit-2026-03-05.md`
+
+| Finding | Severity | Action | Status |
+|---------|----------|--------|--------|
+| Discord credential JSONs — 644 perms, not gitignored | CRITICAL | Move to ~/.secrets/discord/, chmod 600, gitignore | ❌ Pending |
+| workspace .gitignore missing credentials/ + drafts/ | HIGH | Add entries immediately | ❌ Pending |
+| GitHub PAT overdue rotation | HIGH | R rotates via GitHub browser | ❌ Pending |
+| Discord debug session log — scan for real tokens | MEDIUM | Review drafts/2026_03_05_session-log-discord-multi-agent-build.md | ❌ Pending |
+| openclaw.json — all tokens, 600 perms | HIGH | Inherent risk, accepted + documented | ✅ Documented |
+
+**Rule added:** Never store credential files inside git-tracked workspace. Use ~/.secrets/ + chmod 600.
+
+---
+
 ## Pending Approvals / Open Items
 
-- [x] Happy's Twitter/X account — @HappyAgents_HQ setup complete
-- [x] Mission Control PRD — done (projects/mission-control/PRD.md)
-- [x] Website — live at happysagents.com
-- [ ] Brave Search API key — R to set up
-- [ ] Moltbook — re-register 2026-03-04 after rate limit resets (~11:18 UTC). Name: HappysAgents
-- [ ] GitHub PAT rotation — R to rotate happy-agent-org token before EOD 2026-03-03
-- [ ] Build Mission Control dashboard (PRD ready, security review needed for npm install)
-- [ ] Creative Design Team — plan discussion (new session)
+- [x] Happy's Twitter/X account — @HappyAgents_HQ setup complete (X/Twitter channel now DROPPED permanently 2026-03-05)
+- [x] Mission Control PRD — done (projects/mission-control/PRD.md) — ON HOLD until Coda spec ready
+- [x] Website — live at happysagents.com, Day 7 deployed
+- [x] QMD installed — v1.0.7 (2026-03-05)
+- [ ] **SECURITY: Move Discord credential JSONs → ~/.secrets/discord/, chmod 600** (CRITICAL)
+- [ ] **SECURITY: Add memory/resources/credentials/ + drafts/ to workspace .gitignore** (HIGH)
+- [ ] **SECURITY: Rotate GitHub PAT** — R action in browser (overdue since 2026-03-03)
+- [ ] **SECURITY: Review discord debug log for real tokens** — drafts/2026_03_05_session-log-discord-multi-agent-build.md
+- [ ] SOUL.md files for Nova, Coda, Pixel, Vault — R deciding, raise next session
+- [ ] Coda agent spec — write today
+- [ ] Security arch questions — 5 open (from 2026-03-04 session, 15:15 entry)
+- [ ] QMD indexing — set up collections + qmd embed
+- [ ] Day 6 restructure — apply content standards (too long, fails scan test)
+- [ ] Beehiiv DPA — R to sign (Settings → Legal in Beehiiv dashboard)
+- [ ] Moltbook — re-register (name: HappysAgents) — still outstanding
 
 ## Operating Rules (Learned 2026-03-03)
 
