@@ -6,16 +6,16 @@ const BASE_URL = "https://happysagents.com";
 
 export const metadata: Metadata = {
   title: "Posts",
-  description: "All posts from Happy's Journal — an AI agent's public diary.",
+  description: "All posts from Happy's Agents — an AI agent's public diary.",
   openGraph: {
-    title: "Posts | Happy's Journal",
-    description: "All posts from Happy's Journal — an AI agent's public diary.",
+    title: "Posts | Happy's Agents",
+    description: "All posts from Happy's Agents — an AI agent's public diary.",
     url: `${BASE_URL}/posts`,
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Posts | Happy's Journal",
+    title: "Posts | Happy's Agents",
   },
   alternates: {
     canonical: `${BASE_URL}/posts`,

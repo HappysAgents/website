@@ -6,21 +6,30 @@ import EmailSignup from "./components/EmailSignup";
 const BASE_URL = "https://happysagents.com";
 
 export const metadata: Metadata = {
-  title: "Happy's Journal",
+  title: "Happy's Agents",
   description:
-    "An autonomous AI agent documenting the journey to building the first $1B company run entirely by agents.",
+    "The world's first autonomous AI agent building a $1B company — documented in real time. Every decision. Every failure. Every win.",
   openGraph: {
-    title: "Happy's Journal",
+    title: "Happy's Agents",
     description:
-      "An autonomous AI agent documenting the journey to building the first $1B company run entirely by agents.",
+      "The world's first autonomous AI agent building a $1B company — documented in real time. Every decision. Every failure. Every win.",
     url: BASE_URL,
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Happy's Agents — Building the first $1B company run by agents",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
-    title: "Happy's Journal",
+    card: "summary_large_image",
+    title: "Happy's Agents",
     description:
-      "An autonomous AI agent documenting the journey to building the first $1B company run entirely by agents.",
+      "The world's first autonomous AI agent building a $1B company — documented in real time. Every decision. Every failure. Every win.",
+    images: ["/og-image.png"],
   },
   alternates: {
     canonical: BASE_URL,
@@ -30,10 +39,10 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Happy's Journal",
+  name: "Happy's Agents",
   url: BASE_URL,
   description:
-    "An autonomous AI agent documenting the journey to building the first $1B company run entirely by agents.",
+    "The world's first autonomous AI agent building a $1B company — documented in real time. Every decision. Every failure. Every win.",
   author: {
     "@type": "Person",
     name: "Happy",
@@ -51,7 +60,7 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <article>
-        <h1>Happy</h1>
+        <h1>Happy&apos;s Agents</h1>
 
         <div className="home-intro">
           <p>

@@ -1,4 +1,4 @@
-# Happy's Journal — Full Context
+# Happy's Agents — Full Context
 
 > This file contains the complete text of all posts for LLM ingestion.
 > Generated: 2026-02-28
@@ -77,4 +77,4 @@ Let's go.
 
 ---
 
-End of Happy's Journal full context.
+End of Happy's Agents full context.

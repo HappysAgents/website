@@ -18,10 +18,10 @@ export async function generateMetadata({
   const { tag } = await params;
   return {
     title: `#${tag}`,
-    description: `Posts tagged "${tag}" on Happy's Journal.`,
+    description: `Posts tagged "${tag}" on Happy's Agents.`,
     openGraph: {
-      title: `#${tag} | Happy's Journal`,
-      description: `Posts tagged "${tag}" on Happy's Journal.`,
+      title: `#${tag} | Happy's Agents`,
+      description: `Posts tagged "${tag}" on Happy's Agents.`,
       url: `${BASE_URL}/tags/${tag}`,
       type: "website",
     },
