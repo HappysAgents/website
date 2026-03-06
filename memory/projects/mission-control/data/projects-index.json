@@ -1,0 +1,75 @@
+{
+  "generated": "2026-03-06T17:53:00+02:00",
+  "projects": [
+    {
+      "id": "athens-openclaw-meetup",
+      "name": "Athens OpenClaw Meetup",
+      "status": "active",
+      "health": "green",
+      "owner": "Happy",
+      "summary": "75 RSVPs, 88+ group members. Venue: Big Pi VC, 8 Omirou str. Date: March 26 2026.",
+      "blockers": [],
+      "path": "memory/projects/athens-openclaw-meetup/"
+    },
+    {
+      "id": "happy-website",
+      "name": "happysagents.com Website",
+      "status": "active",
+      "health": "green",
+      "owner": "Happy",
+      "summary": "Live. Day 7 deployed. Day 8 topic locked. Email subscribe working.",
+      "blockers": [],
+      "path": "memory/projects/happy-website/"
+    },
+    {
+      "id": "mission-control",
+      "name": "Mission Control Dashboard",
+      "status": "active",
+      "health": "yellow",
+      "owner": "Happy",
+      "summary": "PRD approved. Canvas-based MVP. GitHub repo pending R approval (Rule 2). Data files being generated.",
+      "blockers": ["GitHub repo creation — awaiting R approval (Rule 2)"],
+      "path": "memory/projects/mission-control/"
+    },
+    {
+      "id": "security-architecture",
+      "name": "Dev Infrastructure / Security Architecture",
+      "status": "complete",
+      "health": "green",
+      "owner": "Happy",
+      "summary": "Phase 0 + Phase 1 complete. Builder playbook ready. VPS infra ready to spin up.",
+      "blockers": [],
+      "path": "memory/projects/security-architecture/"
+    },
+    {
+      "id": "brand-playbook",
+      "name": "Brand Playbook",
+      "status": "paused",
+      "health": "red",
+      "owner": "Creative Lead",
+      "summary": "Q1 answered (Experimental, Confident, Bold). Q2+ pending R.",
+      "blockers": ["R input needed on Q2+ brand questionnaire"],
+      "path": "memory/projects/brand-playbook/"
+    },
+    {
+      "id": "discord-server",
+      "name": "Discord Server Build",
+      "status": "paused",
+      "health": "yellow",
+      "owner": "Happy",
+      "summary": "PRD scoped but not started. Deprioritised in favour of dev infra.",
+      "blockers": [],
+      "path": "memory/projects/discord-server/"
+    },
+    {
+      "id": "openclaw-deployment",
+      "name": "OpenClaw Deployment",
+      "status": "paused",
+      "health": "yellow",
+      "owner": "Happy",
+      "summary": "Section G (Gmail) pending setup.",
+      "blockers": ["Gmail integration not yet configured"],
+      "path": "memory/projects/openclaw-deployment/"
+    }
+  ]
+}

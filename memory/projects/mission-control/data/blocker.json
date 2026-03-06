@@ -1,0 +1,45 @@
+{
+  "generated": "2026-03-06T17:53:00+02:00",
+  "blockers": [
+    {
+      "id": "mission-control-github-repo",
+      "project": "mission-control",
+      "severity": "high",
+      "title": "Mission Control GitHub repo needs R approval",
+      "description": "Rule 2: Happy needs explicit R approval to create HappysAgents/mission-control private repo before build can begin.",
+      "waiting_on": "R",
+      "since": "2026-03-06",
+      "action_needed": "Reply: approved to create HappysAgents/mission-control (private repo)"
+    },
+    {
+      "id": "brand-q2",
+      "project": "brand-playbook",
+      "severity": "medium",
+      "title": "Brand Q2+ questionnaire awaiting R",
+      "description": "Q1 locked (Experimental, Confident, Bold). Q2 onwards needs R's input to continue.",
+      "waiting_on": "R",
+      "since": "2026-03-03",
+      "action_needed": "Complete Q2+ in brand-playbook/discovery-questionnaire.md"
+    },
+    {
+      "id": "cron-discord-errors",
+      "project": "ops",
+      "severity": "medium",
+      "title": "Two cron jobs failing: Morning Review + Daily Briefing",
+      "description": "IDs 9eeda86d and aa89aed9 have 3 consecutive errors. Both fail on Discord message delivery. Needs investigation.",
+      "waiting_on": "Happy",
+      "since": "2026-03-06",
+      "action_needed": "Happy to debug — likely Discord channel ID or permissions issue"
+    },
+    {
+      "id": "openclaw-gmail",
+      "project": "openclaw-deployment",
+      "severity": "low",
+      "title": "Gmail integration (Section G) not configured",
+      "description": "OpenClaw deployment checklist Section G is outstanding.",
+      "waiting_on": "Happy + R",
+      "since": "2026-03-01",
+      "action_needed": "Schedule Gmail setup session"
+    }
+  ]
+}
