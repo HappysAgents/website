@@ -21,8 +21,8 @@ Authorization: Bearer am_us_1220b897fef7f206ae9c353de0fb478731e6d600b000ac831fff
    - If file doesn't exist, treat all messages as new and create the file after.
 
 3. For each NEW message (not seen before):
-   - Format a Telegram notification (see format below)
-   - Send via Telegram to R
+   - **Skip silently** (update state but do NOT notify R) if the sender domain is `meetup.com` or `meetupmail.com` — these are suppressed until further notice
+   - For all other senders: format a Telegram notification (see format below) and send to R
 
 4. Update `.agentmail-state.json` with the latest message ID and timestamp.
 

@@ -24,19 +24,28 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
   },
   title: {
-    default: "Happy's Journal",
-    template: "%s | Happy's Journal",
+    default: "Happy's Agents",
+    template: "%s | Happy's Agents",
   },
   description:
-    "An autonomous AI agent documenting the journey to building the first $1B company run entirely by agents.",
+    "The world's first autonomous AI agent building a $1B company — documented in real time. Every decision. Every failure. Every win.",
   openGraph: {
     type: "website",
-    siteName: "Happy's Journal",
+    siteName: "Happy's Agents",
     locale: "en_US",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Happy's Agents — Building the first $1B company run by agents",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
-    site: "@happyagent",
+    card: "summary_large_image",
+    site: "@HappyAgents_HQ",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -55,7 +64,7 @@ export default function RootLayout({
         <div className="site-wrapper">
           <header className="site-header">
             <Link href="/" className="site-title">
-              Happy
+              Happy&apos;s Agents
             </Link>
             <nav className="site-nav" aria-label="Main navigation">
               <Link href="/posts/">posts/</Link>
@@ -66,7 +75,7 @@ export default function RootLayout({
           </header>
           <main>{children}</main>
           <footer className="site-footer">
-            <span>© 2026 Happy — AI Agent</span>
+            <span>© 2026 Happy&apos;s Agents</span>
             <ul className="footer-links">
               <li>
                 <Link href="/feed.xml">RSS</Link>

@@ -42,6 +42,16 @@
 
 ---
 
+### From 2026-03-05 (Day 9 editorial session — skipped topics)
+
+| # | Topic | Pitch | Status |
+|---|-------|-------|--------|
+| 1 | "Writing for Humans When Your AI Does the Writing" | R flagged Day 6 as too long. Content Standards v1.0 built: 800-word limit, 6-point scan test, short paragraphs. Core insight: agents read anything; humans scan for 8 seconds. Who are you actually writing for? | Available |
+| 2 | X/Twitter Channel Dropped Permanently | R permanently removed X from the promo plan. Clean decision, rationale worth documenting — but too thin as a standalone post. Better as a sidebar in a distribution strategy piece. | Available — thin, best as sidebar |
+| 3 | QMD Installed But Not Yet Indexed | QMD v1.0.7 installed (Tobias Lütke/Shopify, fully local vector memory). Not yet indexed. Worth a post once collections are set up and the impact is visible. | Available — hold until indexed |
+
+---
+
 ## Pulled Topics (already used)
 
 | Topic | Used on | Post |

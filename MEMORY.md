@@ -191,7 +191,7 @@ In a world where any agent can build software with a phone:
 - Date: Thursday, March 26, 2026 (Confirmed by R on 2026-03-03)
 - Title: "OpenClaw & Drinks: Athens' First Agent-Organized Meetup" (confirmed by R 2026-03-03)
 - Date: Thursday, March 26, 2026 · 7:00 PM - 9:00 PM GMT+2 (confirmed by R 2026-03-03)
-- Luma: https://luma.com/eta9ew8h ✅ LIVE
+- Luma: https://luma.com/eta9ew8h — DROPPED 2026-03-05 (no organic reach, Meetup only going forward)
 - Meetup: https://www.meetup.com/openclaw-athens-ai-agents-builders/events/313615455/ ✅ LIVE
 - Cover image: OpenClaw Athens AI-generated (Imagen 4) — lobster, sunglasses, frappe, Athens alley + Acropolis
 - Saved at: `/Users/dirtyagent/openclaw-workspace/temp/openclaw-athens-ai.png`
@@ -212,13 +212,20 @@ Full report: `memory/resources/security-reviews/credential-exposure-audit-2026-0
 
 | Finding | Severity | Action | Status |
 |---------|----------|--------|--------|
-| Discord credential JSONs — 644 perms, not gitignored | CRITICAL | Move to ~/.secrets/discord/, chmod 600, gitignore | ❌ Pending |
-| workspace .gitignore missing credentials/ + drafts/ | HIGH | Add entries immediately | ❌ Pending |
-| GitHub PAT overdue rotation | HIGH | R rotates via GitHub browser | ❌ Pending |
-| Discord debug session log — scan for real tokens | MEDIUM | Review drafts/2026_03_05_session-log-discord-multi-agent-build.md | ❌ Pending |
+| Discord credential JSONs — were 644 perms in workspace | CRITICAL | Moved to ~/.secrets/discord/, chmod 600 ✅ | ✅ Done 2026-03-05 |
+| workspace .gitignore missing credentials/ + drafts/ | HIGH | Already added in SECURITY commit 2026-03-05 14:06 | ✅ Done |
+| Credentials committed to git history (78a03d72) | CRITICAL | Repo has NO remote — not pushed. Tokens in local history only. ROTATE: Happy bot token + happysagents Discord password | 🚨 ROTATE NOW |
+| GitHub PAT rotation | HIGH | Fine-grained PAT rotated 2026-03-05, now stored in gh CLI → macOS Keychain. ~/.git-credentials deleted. gh auth setup-git configured. | ✅ Done 2026-03-05 |
+| Discord debug session log — scan for real tokens | MEDIUM | Scanned 2026-03-05 — CLEAN, only placeholders | ✅ Done |
 | openclaw.json — all tokens, 600 perms | HIGH | Inherent risk, accepted + documented | ✅ Documented |
+| Weekly credential scan cron | — | Set up 2026-03-05, runs every Monday 10:00 Athens | ✅ Done (cron de774d91) |
 
-**Rule added:** Never store credential files inside git-tracked workspace. Use ~/.secrets/ + chmod 600.
+**Credential storage rules (locked 2026-03-05):**
+- **Passwords** → macOS Keychain (`security add-generic-password`). Dialog prompt = speed bump against agent/browser access.
+- **API tokens / bot tokens** → `~/.secrets/` + `chmod 600`. Outside workspace, no browser path, no git exposure.
+- **Never inside the git-tracked workspace** — even if gitignored, one wrong `git add` is one command away from disaster.
+- `~/.secrets/` directory does not exist yet — creation + migration is a pending task (see Pending Approvals).
+**Critical:** Git history needs rewrite (git filter-branch) after token rotation to remove committed credentials from commit 78a03d72.
 
 ---
 

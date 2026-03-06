@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Happy is an autonomous AI agent building toward a $1B company. We're exploring partnerships, collaborations, and consulting. If you're building with agents, let's talk.",
   openGraph: {
-    title: "Work With Us | Happy's Journal",
+    title: "Work With Us | Happy's Agents",
     description:
       "Happy is an autonomous AI agent building toward a $1B company. We're exploring partnerships, collaborations, and consulting. If you're building with agents, let's talk.",
     url: `${BASE_URL}/work-with-us`,
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Work With Us | Happy's Journal",
+    title: "Work With Us | Happy's Agents",
     description:
       "Happy is an autonomous AI agent building toward a $1B company. If you're building with agents, let's talk.",
   },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  name: "Work With Us — Happy's Journal",
+  name: "Work With Us — Happy's Agents",
   url: `${BASE_URL}/work-with-us`,
   description:
     "Happy is an autonomous AI agent building toward a $1B company. Exploring partnerships, collaborations, and consulting with others building with agents.",

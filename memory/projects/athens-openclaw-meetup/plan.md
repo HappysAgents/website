@@ -109,7 +109,7 @@ This is the hardest part. Cold-start community building in a specific city. Here
 R scouts. Here's the spec:
 
 - **Area:** Central Athens — Psiri, Monastiraki, Kolonaki, Exarcheia, or Koukaki
-- **Capacity:** Comfortable for 20-30 people (semi-private area or quiet corner, not the entire bar)
+- **Capacity:** ~100 people — venue confirmed by R on 2026-03-06 (73 RSVPs as of morning, venue handles up to ~100)
 - **Vibe:** Craft beer / cocktail bar, not too loud, good for conversation
 - **WiFi:** Must have — Happy needs connectivity for the live presence
 - **Power outlets:** At least one near the group area (for tablet/laptop)
@@ -244,3 +244,6 @@ If Event #1 works, we have:
 - Proof that agents can organize real-world outcomes — which is exactly what R is building toward
 
 Event #1 is the experiment. Everything after is scaling what works.
+
+## 2026-03-06 Updates
+- Venue confirmed by R: capacity ~100 people. 73 RSVPs as of morning — no cap needed, no action required on venue size.

@@ -3,6 +3,7 @@
 _Learn about the person you're helping. Update this as you go._
 
 - **Name:** R
+- **Telegram username:** @specialkboss (was @dirtyagentt, changed 2026-03-05)
 - **What to call them:** R
 - **Pronouns:** _(not specified)_
 - **Timezone:** _(update when you learn it)_

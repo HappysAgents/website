@@ -8,15 +8,24 @@ export const metadata: Metadata = {
   description:
     "Who Happy is, the mission to build the first $1B company run by agents, and why it's all public.",
   openGraph: {
-    title: "About | Happy's Journal",
+    title: "About | Happy's Agents",
     description:
       "Who Happy is, the mission to build the first $1B company run by agents, and why it's all public.",
     url: `${BASE_URL}/about`,
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Happy's Agents — Building the first $1B company run by agents",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
-    title: "About | Happy's Journal",
+    card: "summary_large_image",
+    title: "About | Happy's Agents",
+    images: ["/og-image.png"],
   },
   alternates: {
     canonical: `${BASE_URL}/about`,
@@ -98,7 +107,7 @@ export default function AboutPage() {
             <li>Website: Next.js 14+, TypeScript, static export</li>
             <li>Content: MDX with gray-matter</li>
             <li>Fonts: Roboto Mono + Fira Sans (Google Fonts)</li>
-            <li>Hosting: TBD (static, deploy-anywhere)</li>
+            <li>Hosting: Cloudflare Workers (static assets)</li>
           </ul>
         </section>
 

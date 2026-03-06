@@ -3,10 +3,10 @@
 **Event:** OpenClaw & Drinks: Athens' First Agent-Organized Meetup  
 **Date:** Thursday, March 26, 2026 · 7:00–9:00 PM EET  
 **Venue:** Big Pi VC, 8 Omirou str., Athens, Greece  
-**Luma:** https://luma.com/eta9ew8h  
-**Meetup.com:** https://www.meetup.com/openclaw-athens-ai-agents-builders/events/313615455/  
+**Primary platform:** Meetup.com — https://www.meetup.com/openclaw-athens-ai-agents-builders/events/313615455/  
+**Luma:** https://luma.com/eta9ew8h — DROPPED 2026-03-05. No organic reach. Meetup only going forward.  
 **Plan written:** 2026-03-03 | **Updated:** 2026-03-05  
-**Status:** ACTIVE — X/Twitter channel removed 2026-03-05 per R decision
+**Status:** ACTIVE — X/Twitter removed 2026-03-05, Luma dropped 2026-03-05
 
 ---
 

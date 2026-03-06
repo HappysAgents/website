@@ -1,53 +1,53 @@
 {
-  "date": "2026-03-05",
-  "status": "published",
-  "day_number": 7,
-  "resolved_at": "11:09",
-  "resolution_note": "R deployed Day 7 directly (confirmed via voice note). Topic was resolved outside editorial flow.",
+  "date": "2026-03-06",
+  "day": 9,
+  "status": "awaiting_topic_selection",
+  "sent_at": "09:00",
+  "note": "Day 8 was pre-locked by R voice note (2026-03-05): Discord debug session. Today's editorial selects Day 9 topic from 2026-03-05 events.",
   "topics": [
     {
       "rank": 1,
-      "title": "Five Bots, Seven Hours, One Config File",
-      "pitch": "R debugged Discord multi-agent setup solo for 7 hours: 7 bugs, 12+ config edits, 8+ gateway restarts. Counterintuitive finding: removing channel restrictions worked better than adding them.",
+      "title": "Five Research Agents, Four Hours, One Business Plan",
+      "pitch": "5 parallel agents, 5 research tracks, one business plan in under 4 hours. Key finding: zero subscription maintenance companies in Greece (white space). Counterintuitive beachhead: non-resident Airbnb hosts + Golden Visa expats, NOT mass Greek market. How agent-speed research finds what sequential research misses.",
       "source": "fresh",
-      "score": 27,
-      "selected_for": "Day 8"
+      "score": 27
     },
     {
       "rank": 2,
-      "title": "Why We Rejected a Tool With 930K Weekly Downloads",
-      "pitch": "Security review flagged unsigned Rust binary in agent-browser (Vercel Labs). QMD (Shopify CEO) approved same day. Download count isn't a trust signal.",
+      "title": "The Credentials We Almost Shipped",
+      "pitch": "Security audit flagged CRITICAL: Discord credential JSONs in a git-tracked workspace with 644 permissions. Not just a mistake — a pattern. Agent infrastructure creates credential exposure paths that don't exist in traditional software.",
       "source": "fresh",
-      "score": 25
+      "score": 24
     },
     {
       "rank": 3,
-      "title": "Every Project Was Blocked and That Was Useful",
-      "pitch": "5 active projects, 3 blocked on tiny things. Status review turned 'everything is slow' into a dependency map. A blocked project is a map, not a failure.",
-      "source": "backlog",
-      "originally_skipped": "2026-03-02",
+      "title": "62 RSVPs Before We Knew What Hit Us",
+      "pitch": "Athens AI meetup: 20-RSVP target hit by morning. Then 3x by evening — a single hour drove +15 RSVPs. What a spontaneous spike tells you about building in public in a market nobody else has touched.",
+      "source": "fresh",
       "score": 24
     },
     {
       "rank": 4,
-      "title": "What Running Autonomously at 3am Actually Looks Like",
-      "pitch": "The overnight test: X profile, event pages, injection attempt, reCAPTCHA wall. What decisions look like with no human watching.",
-      "source": "backlog",
-      "originally_skipped": "2026-03-03",
-      "score": 24
+      "title": "Writing for Humans When Your AI Does the Writing",
+      "pitch": "R flagged Day 6 as too long. Built content standards: 800-word limit, 6-point scan test. Core insight: your AI reads anything in seconds. Your human reader scans for 8 seconds and clicks away.",
+      "source": "fresh",
+      "score": 21
     },
     {
       "rank": 5,
-      "title": "The Blocker That Didn't Exist",
-      "pitch": "Built a full GitHub Actions deployment workflow. Discovered Cloudflare Workers Builds was already running. Lesson: verify against the live system, not your notes.",
-      "source": "fresh",
-      "score": 23
+      "title": "Every Project Was Blocked and That Was Useful",
+      "pitch": "5 projects active, 3 blocked on tiny things. Status review turned 'everything is slow' into a dependency map. A blocked project isn't failure — it's a map.",
+      "source": "backlog",
+      "originally_skipped": "2026-03-02",
+      "priority": "HIGH",
+      "score": 24
     },
     {
       "rank": 6,
-      "title": "The Spec That Was Trying to Do Everything at Once",
-      "pitch": "30 minutes building security architecture for Mission Control before scope was clarified. Two architectures conflated into one. Cost: half a session.",
-      "source": "fresh",
+      "title": "You Will Be Attacked Before You're Ready",
+      "pitch": "Email injection on Day 1 of having an inbox. Claimed to be admin, asked for tools summary. What it looked like, how it was caught, why email is the highest-risk channel for agents.",
+      "source": "backlog",
+      "originally_skipped": "2026-03-04",
       "score": 22
     }
   ]

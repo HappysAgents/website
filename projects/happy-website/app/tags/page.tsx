@@ -6,10 +6,10 @@ const BASE_URL = "https://happysagents.com";
 
 export const metadata: Metadata = {
   title: "Tags",
-  description: "Browse posts by tag on Happy's Journal.",
+  description: "Browse posts by tag on Happy's Agents.",
   openGraph: {
-    title: "Tags | Happy's Journal",
-    description: "Browse posts by tag on Happy's Journal.",
+    title: "Tags | Happy's Agents",
+    description: "Browse posts by tag on Happy's Agents.",
     url: `${BASE_URL}/tags`,
     type: "website",
   },

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Privacy policy for happysagents.com. We collect only your email for the newsletter. We don't sell it. You can unsubscribe anytime.",
   openGraph: {
-    title: "Privacy Policy | Happy's Journal",
+    title: "Privacy Policy | Happy's Agents",
     description:
       "Privacy policy for happysagents.com. We collect only your email for the newsletter. We don't sell it. You can unsubscribe anytime.",
     url: `${BASE_URL}/privacy`,
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Privacy Policy | Happy's Journal",
+    title: "Privacy Policy | Happy's Agents",
     description:
       "Privacy policy for happysagents.com. Email only. No selling. Unsubscribe anytime.",
   },

@@ -1,7 +1,7 @@
 # COMPANY.md — Organisational State
 *Navigation layer only. Never duplicate PARA content — always link to it.*
 *Maintained by: Happy (Chief of Staff)*
-*Last updated: 2026-03-05*
+*Last updated: 2026-03-06*
 
 ---
 
@@ -17,7 +17,7 @@ The blog (happysagents.com) documents the build in real time — it IS the distr
 
 | Project | Status | Owner | Full details |
 |---------|--------|-------|--------------|
-| Athens OpenClaw Meetup | 🟢 Live — 21 RSVPs, 26 group members, venue Big Pi VC | Happy | [→ memory/projects/athens-openclaw-meetup/](memory/projects/athens-openclaw-meetup/) |
+| Athens OpenClaw Meetup | 🟢 Live — 75 RSVPs, 88+ group members, venue ~100 capacity confirmed | Happy | [→ memory/projects/athens-openclaw-meetup/](memory/projects/athens-openclaw-meetup/) |
 | happysagents.com Website | 🟢 Live — Day 7 deployed, Day 8 topic locked | Dev Agent (pending) / Happy | [→ memory/projects/happy-website/](memory/projects/happy-website/) |
 | Mission Control Dashboard | 🔴 On hold — awaiting Coda SOUL.md + spec | Happy + Dev Agent | [→ memory/projects/mission-control/](memory/projects/mission-control/) |
 | Brand Playbook | 🔴 Q1 answered, Q2+ pending | Creative Lead | [→ memory/projects/brand-playbook/](memory/projects/brand-playbook/) |
@@ -59,6 +59,7 @@ The blog (happysagents.com) documents the build in real time — it IS the distr
 - **2026-03-05** — Mission Control on hold pending Coda spec. Redraft from Coda's perspective when ready.
 - **2026-03-05** — QMD v1.0.7 installed (R approved). Day 7 deployed. Day 8 topic locked: Discord debug session.
 - **2026-03-05** — Content standards v1.0 created: 800–1,000 word limit, scan test before every publish
+- **2026-03-06** — Athens meetup: 75 RSVPs, 88+ group members. Venue capacity ~100 confirmed by R — no cap needed.
 - **2026-03-05** — Athens meetup: 21 RSVPs, 26 group members (hit target on day 1)
 - **2026-03-04** — Venue confirmed: Big Pi VC, 8 Omirou str., Athens — updated on Luma + Meetup.com
 - **2026-03-04** — Deploy architecture corrected: Cloudflare Workers Builds already live (auto-deploys on git push, no token on Mac)
