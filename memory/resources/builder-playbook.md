@@ -269,7 +269,6 @@ on this product. You report progress via Discord webhook.
 - Any other GitHub repo
 - Any other VPS
 - The dedicated Mac (Happy's runtime)
-- R's personal environment
 - Any credentials beyond what's in your environment
 
 ## How to Report
@@ -310,11 +309,55 @@ VPS Agent → Discord webhook → #project-[name]-dev → Happy reads + steers
 - R can observe any channel passively
 - No reporting goes through email or any channel R hasn't approved
 
+### How Claude Code Posts to Discord (Implementation)
+
+The base image installs `notify-discord` on every VPS. Claude Code calls it via bash tool calls during work.
+
+**Start a Claude Code session:**
+```bash
+# SSH in
+ssh -i ~/.ssh/id_ed25519_vps root@[vps-tailscale-hostname]
+
+# Start a named tmux session — persists after SSH disconnect
+tmux new-session -s [project-name]
+
+# Launch Claude Code (interactive)
+claude
+# Or with a brief pre-loaded:
+claude --print "$(cat /opt/project/agent-brief.md)"
+```
+
+**Include in the brief given to Claude Code:**
+```
+Shell command available: notify-discord "message"
+Post progress at every milestone:
+  ✅ [what completed] — commit [hash]
+  🚧 [what you're working on now]
+  🚨 BLOCKED: [what you need] — post if stuck >30min, then wait
+```
+
+**Claude Code calls it like any bash command:**
+```bash
+notify-discord "✅ Auth complete — commit a3f4b2. Starting Stripe next."
+notify-discord "🚨 BLOCKED: need Stripe webhook secret. Pausing."
+```
+
+**Re-attach to a running session:**
+```bash
+ssh -i ~/.ssh/id_ed25519_vps root@[vps-tailscale-hostname]
+tmux attach-session -t [project-name]
+```
+
+**Check output without interrupting:**
+```bash
+tmux capture-pane -t [project-name] -p | tail -50
+```
+
 ### Steering Model
 
-- **Light touch:** Happy reads Discord updates, comments with direction
-- **Medium touch:** Happy SSHs into VPS, reviews code, adjusts approach
-- **Heavy touch:** Happy SSHs in, takes direct control, restructures
+- **Light touch:** Happy reads Discord, responds with direction — Claude Code sees it next turn via context
+- **Medium touch:** Happy re-attaches to tmux, types steering instructions directly into the session
+- **Heavy touch:** Happy SSHs in, takes direct control, restructures approach
 
 ### File Exchange (Dedicated Mac ↔ VPS)
 
