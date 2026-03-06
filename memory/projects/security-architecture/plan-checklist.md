@@ -30,14 +30,14 @@ Everything needed before provisioning the first VPS.
 
 | # | Task | Who | R Blocker? | Status |
 |---|------|-----|------------|--------|
-| 1.1 | **Configure Tailscale ACL** — dedicated Mac → VPS allowed; VPS → dedicated Mac blocked; VPS → VPS blocked | R (Tailscale admin console) | 🔴 YES | ⬜ Pending |
-| 1.2 | Generate SSH key pair on dedicated Mac for VPS access | Happy | No | ⬜ Pending |
-| 1.3 | Write VPS base image setup script (Node.js, Python, Git, GitHub CLI, Claude Code, Tailscale, Discord webhook, fine-grained PAT per repo) | Happy | No | ⬜ Pending |
-| 1.4 | Write VPS agent briefing template (spec, repo PAT, Discord webhook URL, constraints doc) | Happy | No | ⬜ Pending |
-| 1.5 | Write VPS teardown checklist (backup to GitHub, revoke PAT, delete server) | Happy | No | ⬜ Pending |
-| 1.6 | Set up Discord channel structure for projects (#project-[name]-dev naming convention) | Happy | No | ⬜ Pending |
+| 1.1 | **Configure Tailscale ACL** — dedicated Mac → VPS allowed; VPS → dedicated Mac blocked; VPS → VPS blocked | R | 🔴 YES | ✅ Done 2026-03-06 |
+| 1.2 | Generate SSH key pair on dedicated Mac for VPS access (`~/.ssh/id_ed25519_vps`) | Happy | No | ✅ Done 2026-03-06 |
+| 1.3 | Write VPS base image setup script | Happy | No | ✅ Done — `memory/resources/vps-base-image-setup.sh` |
+| 1.4 | Write VPS agent briefing template | Happy | No | ✅ Done — `memory/resources/vps-agent-briefing-template.md` |
+| 1.5 | Write VPS teardown checklist | Happy | No | ✅ Done — `memory/resources/vps-teardown-checklist.md` |
+| 1.6 | Document Discord channel structure + naming convention | Happy | No | ✅ Done — `memory/resources/discord-channel-structure.md` |
 
-**R actions needed: only 1.1 (Tailscale ACL). Everything else is Happy.**
+**Phase 1 complete. System ready to build.**
 
 ---
 
