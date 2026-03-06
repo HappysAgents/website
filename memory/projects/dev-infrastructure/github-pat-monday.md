@@ -1,69 +1,88 @@
-# GitHub PAT Upgrade — Monday Plan
+# GitHub Org Security + PAT Upgrade — Monday Plan
 
-**Goal:** Happy can create repos + read/write all code in HappysAgents org autonomously. No org admin access.
+**Goal:** R is org owner. Happy is a member with repo create + read/write only. No admin access if Happy's account is compromised.
 **Date:** 2026-03-06 (execute Monday 2026-03-10)
-**R time required:** ~5 minutes
+**R time required:** ~15 minutes
 
 ---
 
-## The Plan
+## The Problem
 
-Replace the current fine-grained PAT (website-only) with a classic PAT scoped to `repo` only.
-
-**What this gives Happy:**
-- ✅ Create repos in HappysAgents org
-- ✅ Read/write code in any org repo
-- ✅ Clone, push, pull, open PRs
-
-**What this does NOT give Happy:**
-- ❌ Org settings or billing
-- ❌ Member management
-- ❌ Repo deletion (requires separate `delete_repo` scope — not added)
-- ❌ GitHub Actions secrets or environments
-- ❌ Anything outside code
-
-**Blast radius if compromised:** attacker reads/writes code. Cannot delete repos, cannot touch org settings, cannot add members.
+Currently `happy-agent-org` is the **owner** of HappysAgents org. If Happy's account or PAT is compromised, attacker gets full org admin: delete repos, change settings, add members. That's too much.
 
 ---
 
-## R's Steps (Monday, ~5 min)
+## Target Architecture
 
-1. Go to: <https://github.com/settings/tokens/new> (classic tokens page)
-2. **Token name:** `happy-agent-main`
-3. **Expiry:** 90 days (rotation reminder already in cron)
-4. **Scopes:** Check only ☑️ **`repo`** — do not check anything else
-5. Click "Generate token"
-6. Copy the token → paste it to Happy in Telegram or Discord (once only — GitHub won't show it again)
+| Account | Role | Can do |
+|---------|------|--------|
+| R's personal GitHub account | **Owner** | Everything — billing, settings, members, delete |
+| `happy-agent-org` | **Member** | Create repos, read/write all code |
+
+---
+
+## R's Steps (Monday, ~15 min)
+
+### Step 1 — R creates a personal GitHub account (if not already)
+- Go to github.com → Sign up
+- Use R's personal email (not happy-agent@agentmail.to)
+- This account will be the org owner forever
+
+### Step 2 — R joins HappysAgents org as owner
+- R sends Happy a message with their new GitHub username
+- Happy invites R to the org: `gh api /orgs/HappysAgents/invitations -f email="R's email" -f role="owner"`
+- R accepts the invite via email
+
+### Step 3 — R confirms they now show as Owner in the org
+- Go to: github.com/orgs/HappysAgents/people
+- Confirm R's account shows "Owner"
+
+### Step 4 — Demote happy-agent-org to Member
+- R goes to: github.com/orgs/HappysAgents/people
+- Click on `happy-agent-org` → Change role → **Member**
+- Confirm demotion
+
+### Step 5 — Set org member privileges to allow repo creation
+- R goes to: github.com/organizations/HappysAgents/settings/member_privileges
+- **Base permissions:** Write (members can read/write all repos)
+- **Repository creation:** Allow members to create ☑️ Private repositories (uncheck Public)
+- Save
+
+### Step 6 — Generate classic PAT for Happy (repo scope only)
+- Go to: github.com/settings/tokens/new (logged in as `happy-agent-org`)
+- **Token name:** `happy-agent-main`
+- **Expiry:** 90 days
+- **Scopes:** ☑️ `repo` only
+- Generate → copy token → paste to Happy in Discord/Telegram
 
 ---
 
 ## Happy's Steps (after receiving token)
 
 ```bash
-# Store token in gh CLI (macOS Keychain — not on disk)
+# Store in gh CLI / macOS Keychain
 echo "<TOKEN>" | gh auth login --with-token
 
-# Verify access
+# Verify member access
 gh repo list HappysAgents
-gh api /user --jq '.login'
 
-# Test repo creation (creates mission-control)
+# Test repo creation (should now work as member)
 gh repo create HappysAgents/mission-control --private --description "Mission Control — agent ops dashboard"
 ```
 
 ---
 
-## Also On Monday
+## Result
 
-Once PAT is working:
-1. Create `HappysAgents/mission-control` repo
-2. Push initial Mission Control structure (data files + Canvas PRD)
-3. Build `dashboard.html` MVP
+- R's account = org owner = only R can delete org, change billing, manage members
+- Happy = member with `repo` PAT = can create repos and push code
+- Compromised Happy PAT = attacker reads/writes code only. Cannot touch org settings.
 
 ---
 
-## Rotation
+## Also On Monday (after PAT works)
 
-- 90-day expiry → cron reminder already set (GitHub PAT rotation cron)
-- When rotating: R generates new token, pastes to Happy → Happy runs `gh auth login` again
-- No config files to update — stored in macOS Keychain only
+1. Create `HappysAgents/mission-control` repo
+2. Push initial Mission Control structure
+3. Build `dashboard.html` MVP
+4. Investigate + fix cron errors (Morning Review + Daily Briefing — 3 consecutive failures)
