@@ -1,117 +1,72 @@
 # Security Architecture — Actionable Checklist
 
-**Status:** v2 — updated with R's architecture corrections (2026-03-06)
+**Status:** v4 — Mission Control moved to separate project (2026-03-06)
 **Date:** 2026-03-06
 **Companion doc:** [plan-narrative.md](plan-narrative.md)
-**Changelog:** v2 removes Syncthing → R's Mac. Mission Control data via SCP over Tailscale. Syncthing scoped to Dedicated Mac ↔ VPS only.
 
 ---
 
 ## TL;DR
 
-Three phases: immediate foundations, internal tools track, external products track. 18 items total. R has 6 decisions/actions. Happy handles the rest (with approval gates where marked).
+Two phases: prerequisites (done) + infrastructure setup. Once Phase 1 is complete, the system is ready to build any product. Mission Control is a separate project — tracked in memory/projects/mission-control/.
 
 ---
 
-## Phase 0: Immediate Setup (Before Any Building)
+## Phase 0: Prerequisites ✅ Complete
 
-These are prerequisites. Do these first.
-
-| # | Task | Who | Approval Gate | Status |
-|---|------|-----|---------------|--------|
-| 0.1 | Resolve credential exposure audit findings (2 CRITICAL + 2 HIGH from 2026-03-05) | R approves remediations → Happy executes | R approves each remediation | ⬜ Pending |
-| 0.2 | ~~**DECISION:** Confirm Hetzner as cloud provider~~ | ✅ **Hetzner confirmed** | — | ✅ Done |
-| 0.3 | ~~**DECISION:** Pick VPS provisioning model~~ | ✅ **Hybrid (Option 3)** — manual first, API key later | — | ✅ Done |
-| 0.4 | ~~**DECISION:** Source code on dedicated Mac?~~ | ✅ **No repos** — dedicated Mac stays clean | — | ✅ Done |
-| 0.5 | ~~Create GitHub org~~ | ✅ **Already exists** — Happy's dedicated account + org in place | — | ✅ Done |
-| 0.6 | Set up dedicated Mac SSH key pair for VPS access (if not existing) | Happy generates, R reviews | R approves key placement | ⬜ Pending |
+| # | Task | Who | Status |
+|---|------|-----|--------|
+| 0.1 | Credential exposure audit (2 CRITICAL + 2 HIGH) | Happy + R | ✅ Done 2026-03-06 |
+| 0.2 | Cloud provider decision | R | ✅ Hetzner |
+| 0.3 | VPS provisioning model decision | R | ✅ Hybrid (manual first) |
+| 0.4 | Source code on dedicated Mac? | R | ✅ No repos |
+| 0.5 | GitHub org confirmed | R | ✅ Already exists |
 
 ---
 
-## Phase 1: Internal Tools Track
+## Phase 1: Infrastructure Setup (Execute Now)
 
-For Mission Control and future internal tools.
+Everything needed before provisioning the first VPS.
 
-| # | Task | Who | Approval Gate | Status |
-|---|------|-----|---------------|--------|
-| 1.1 | Test SCP over Tailscale: push a test file from dedicated Mac → R's Mac | Happy pushes, R confirms receipt | R confirms Tailscale route works | ⬜ Pending |
-| 1.2 | Create GitHub private repo for Mission Control | Happy creates (needs R approval per Rule 2) | R approves | ⬜ Pending |
-| 1.3 | Build Mission Control Phase 1 (local): Happy generates dashboard data → SCP to R's Mac → R reads locally | Happy builds | R approves spec before build | ⬜ Pending |
-| 1.4 | Document Mission Control VPS migration procedure (for when R travels) | Happy writes | None (documentation only) | ⬜ Pending |
-| 1.5 | **FUTURE:** When R needs remote access — provision Mission Control VPS (Hetzner CX22, ~€4/mo) + Tailscale | R provisions VPS → Happy deploys | R provisions + approves | ⬜ Future |
+| # | Task | Who | R Blocker? | Status |
+|---|------|-----|------------|--------|
+| 1.1 | **Configure Tailscale ACL** — dedicated Mac → VPS allowed; VPS → dedicated Mac blocked; VPS → VPS blocked | R (Tailscale admin console) | 🔴 YES | ⬜ Pending |
+| 1.2 | Generate SSH key pair on dedicated Mac for VPS access | Happy | No | ⬜ Pending |
+| 1.3 | Write VPS base image setup script (Node.js, Python, Git, GitHub CLI, Claude Code, Tailscale, Discord webhook, fine-grained PAT per repo) | Happy | No | ⬜ Pending |
+| 1.4 | Write VPS agent briefing template (spec, repo PAT, Discord webhook URL, constraints doc) | Happy | No | ⬜ Pending |
+| 1.5 | Write VPS teardown checklist (backup to GitHub, revoke PAT, delete server) | Happy | No | ⬜ Pending |
+| 1.6 | Set up Discord channel structure for projects (#project-[name]-dev naming convention) | Happy | No | ⬜ Pending |
 
----
-
-## Phase 2: External Products Track
-
-For when we're ready to build the first external product.
-
-| # | Task | Who | Approval Gate | Status |
-|---|------|-----|---------------|--------|
-| 2.1 | Create VPS base image setup script (Node.js, Python, Git, GitHub CLI, Tailscale, Discord webhook) — **must include fine-grained PAT setup scoped to single repo only** | Happy writes script | R reviews before first use | ⬜ Pending |
-| 2.2 | Create VPS agent briefing template (what gets handed to a VPS coding agent: spec, repo access, Discord webhook URL, constraints) | Happy writes | None (template only) | ⬜ Pending |
-| 2.3 | Set up Discord channel structure: one channel per project (e.g., #project-alpha-dev) | Happy creates channels | R approves channel structure | ⬜ Pending |
-| 2.4 | Create VPS teardown checklist (how to safely destroy a project VPS: backup code to GitHub, revoke API keys, delete server) | Happy writes | None (documentation only) | ⬜ Pending |
-| 2.5 | **PER PROJECT:** R + Happy agree on project → Happy writes spec → R provisions VPS → Happy sets up VPS agent → VPS agent builds → Happy steers → product ships | Both | R approves: project, VPS provisioning, final deploy | ⬜ Repeatable |
-| 2.6 | **FUTURE (if needed):** Set up Hetzner API key with spend limits for autonomous provisioning | R creates restricted API key → Happy stores on dedicated Mac | R creates + sets limits | ⬜ Future |
-| 2.7 | **FUTURE (if needed):** Configure Syncthing for high-volume Dedicated Mac ↔ VPS file sync (scoped per-VPS, never to R's Mac) | Happy configures, R approves | R approves config | ⬜ Future |
+**R actions needed: only 1.1 (Tailscale ACL). Everything else is Happy.**
 
 ---
 
-## Quick Reference: What Lives Where
+## Phase 2: First Product (Next Week)
 
-| Thing | Where it lives | NOT here |
-|-------|---------------|----------|
-| Happy's workspace (PARA, agents, configs) | Dedicated Mac | — |
-| Internal tool source code | GitHub private repos | ~~Dedicated Mac~~ |
-| Internal tool runtime | Dev VPS | ~~Dedicated Mac~~ |
-| External product source code | GitHub private repos | ~~Dedicated Mac~~ |
-| External product runtime | Project VPS (one per project) | ~~Dedicated Mac~~ |
-| Customer data | Project VPS only | ~~Dedicated Mac, GitHub~~ |
-| Cloud provider credentials | With R only (Phase 0) | ~~Dedicated Mac~~ |
-| VPS SSH keys | Dedicated Mac | — |
-| Dashboard/report outputs | Dedicated Mac → SCP → R's Mac | ~~Syncthing~~ |
+Once Phase 1 is complete, follow the builder-playbook.md to build the first external product.
+
+| # | Task | Who | Status |
+|---|------|-----|--------|
+| 2.1 | R + Happy agree on first product to build | Both | ⬜ Next week |
+| 2.2 | Happy writes spec → R approves | Both | ⬜ Next week |
+| 2.3 | R provisions Hetzner VPS (~€4-6/mo) | R | ⬜ Next week |
+| 2.4 | Happy runs base image script, sets up VPS agent | Happy | ⬜ Next week |
+| 2.5 | Build begins | VPS agent + Happy | ⬜ Next week |
 
 ---
 
-## Data Flow Summary
+## Decision Log (Final)
 
-```
-R's Mac  ←── SCP over Tailscale ──  Dedicated Mac (Happy)
-(air-gapped from build system)           │
-                                         │ SSH over Tailscale
-                                         ↓
-                                   [Project VPS] ←→ GitHub
-                                   [Project VPS] ←→ GitHub
-                                   [Dev VPS]     ←→ GitHub
-```
-
-- R's Mac ↔ Dedicated Mac: **SCP over Tailscale only** (explicit, on-demand)
-- Dedicated Mac ↔ VPS: **SSH/SCP over Tailscale** (routine)
-- Dedicated Mac ↔ VPS (future high-volume): **Syncthing** (scoped per-VPS)
-- VPS ↔ GitHub: **Git push/pull** (routine)
-- Syncthing is **never** configured to touch R's Mac
-
----
-
-## Decision Log
-
-| Decision | R's Answer | Date |
-|----------|-----------|------|
+| Decision | Answer | Date |
+|----------|--------|------|
 | Cloud provider | ✅ Hetzner (€4-8/mo per VPS) | 2026-03-06 |
 | Provisioning model | ✅ Hybrid — manual first, API key later | 2026-03-06 |
-| Source code on dedicated Mac | ✅ No repos — dedicated Mac stays clean | 2026-03-06 |
+| Source code on dedicated Mac | ✅ No repos | 2026-03-06 |
 | GitHub org | ✅ Already exists | 2026-03-06 |
-| R's Mac connectivity | ✅ Air-gapped. SCP over Tailscale only. No Syncthing. | 2026-03-06 |
+| GitHub push — internal tools | ✅ Rule 2 applies (R approval before push) | 2026-03-06 |
+| GitHub push — external products | ✅ VPS agents push freely, Happy reviews PRs | 2026-03-06 |
+| GitHub repo segregation | ✅ Fine-grained PAT scoped to single repo per VPS | 2026-03-06 |
+| VPS Anthropic API keys | ✅ Separate per-project key with spend limits | 2026-03-06 |
+| Tailscale ACL | ✅ Decided — R to configure (item 1.1) | 2026-03-06 |
 | Syncthing scope | ✅ Dedicated Mac ↔ VPS only (future, if needed) | 2026-03-06 |
-| Mission Control data flow | ✅ SCP over Tailscale (Happy → R's Mac) | 2026-03-06 |
-| GitHub push policy — internal tools | ✅ Rule 2 applies — R approval before push | 2026-03-06 |
-| GitHub push policy — external products | ✅ VPS agents push freely, Happy reviews PRs | 2026-03-06 |
-| GitHub repo segregation | ✅ Each VPS gets fine-grained PAT scoped to single repo only | 2026-03-06 |
-
-## Unresolved (Next Conversation)
-
-| Item | Notes |
-|------|-------|
-| Credential exposure audit (2 CRITICAL + 2 HIGH from 2026-03-05) | Phase 0 prerequisite — resolve before any new infra |
-| VPS agent Anthropic API keys | Separate per-project key (recommended) vs shared key — R hasn't confirmed |
+| Mission Control | ✅ Separate project — not part of architecture setup | 2026-03-06 |

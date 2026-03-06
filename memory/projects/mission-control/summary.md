@@ -1,6 +1,7 @@
 # Project: Mission Control Dashboard
 
-**Status:** Research Complete
+**Status:** Queued — build after dev infrastructure setup complete
+**Prerequisite:** Security architecture Phase 1 (plan-checklist.md) must be done first. Runs on its own VPS or locally — separate from architecture setup.
 **Goal:** Build a visual dashboard for R to track all active projects, running agents, blockers, and pending decisions in one place.
 **Started:** 2026-03-01
 
