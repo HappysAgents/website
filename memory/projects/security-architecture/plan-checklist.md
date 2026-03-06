@@ -1,14 +1,15 @@
 # Security Architecture — Actionable Checklist
 
-**Status:** v2 — decisions confirmed by R on 2026-03-06
+**Status:** v2 — updated with R's architecture corrections (2026-03-06)
 **Date:** 2026-03-06
 **Companion doc:** [plan-narrative.md](plan-narrative.md)
+**Changelog:** v2 removes Syncthing → R's Mac. Mission Control data via SCP over Tailscale. Syncthing scoped to Dedicated Mac ↔ VPS only.
 
 ---
 
 ## TL;DR
 
-Three phases: immediate foundations, internal tools track, external products track. 19 items total. R has 6 decisions/actions. Happy handles the rest (with approval gates where marked).
+Three phases: immediate foundations, internal tools track, external products track. 18 items total. R has 6 decisions/actions. Happy handles the rest (with approval gates where marked).
 
 ---
 
@@ -20,7 +21,7 @@ These are prerequisites. Do these first.
 |---|------|-----|---------------|--------|
 | 0.1 | Resolve credential exposure audit findings (2 CRITICAL + 2 HIGH from 2026-03-05) | R approves remediations → Happy executes | R approves each remediation | ⬜ Pending |
 | 0.2 | ~~**DECISION:** Confirm Hetzner as cloud provider~~ | ✅ **Hetzner confirmed** | — | ✅ Done |
-| 0.3 | ~~**DECISION:** Pick VPS provisioning model~~  | ✅ **Hybrid (Option 3)** — manual first, API key later | — | ✅ Done |
+| 0.3 | ~~**DECISION:** Pick VPS provisioning model~~ | ✅ **Hybrid (Option 3)** — manual first, API key later | — | ✅ Done |
 | 0.4 | ~~**DECISION:** Source code on dedicated Mac?~~ | ✅ **No repos** — dedicated Mac stays clean | — | ✅ Done |
 | 0.5 | ~~Create GitHub org~~ | ✅ **Already exists** — Happy's dedicated account + org in place | — | ✅ Done |
 | 0.6 | Set up dedicated Mac SSH key pair for VPS access (if not existing) | Happy generates, R reviews | R approves key placement | ⬜ Pending |
@@ -33,12 +34,11 @@ For Mission Control and future internal tools.
 
 | # | Task | Who | Approval Gate | Status |
 |---|------|-----|---------------|--------|
-| 1.1 | Configure Syncthing bridge-outbox on dedicated Mac (one-way push to R's Mac) | Happy configures, R approves Syncthing setup | R approves config | ⬜ Pending |
-| 1.2 | Create LuLu firewall rules for Syncthing (outbound only to R's Mac Tailscale IP) | Happy proposes rules → R applies | R approves + applies | ⬜ Pending |
-| 1.3 | Create GitHub private repo for Mission Control | Happy creates (needs R approval per Rule 2) | R approves | ⬜ Pending |
-| 1.4 | Build Mission Control Phase 1 (local): Happy generates dashboard data → bridge-outbox → R reads locally | Happy builds | R approves spec before build | ⬜ Pending |
-| 1.5 | Document Mission Control VPS migration procedure (for when R travels) | Happy writes | None (documentation only) | ⬜ Pending |
-| 1.6 | **FUTURE:** When R needs remote access — provision Mission Control VPS (Hetzner CX22, ~€4/mo) + Tailscale | R provisions VPS → Happy deploys | R provisions + approves | ⬜ Future |
+| 1.1 | Test SCP over Tailscale: push a test file from dedicated Mac → R's Mac | Happy pushes, R confirms receipt | R confirms Tailscale route works | ⬜ Pending |
+| 1.2 | Create GitHub private repo for Mission Control | Happy creates (needs R approval per Rule 2) | R approves | ⬜ Pending |
+| 1.3 | Build Mission Control Phase 1 (local): Happy generates dashboard data → SCP to R's Mac → R reads locally | Happy builds | R approves spec before build | ⬜ Pending |
+| 1.4 | Document Mission Control VPS migration procedure (for when R travels) | Happy writes | None (documentation only) | ⬜ Pending |
+| 1.5 | **FUTURE:** When R needs remote access — provision Mission Control VPS (Hetzner CX22, ~€4/mo) + Tailscale | R provisions VPS → Happy deploys | R provisions + approves | ⬜ Future |
 
 ---
 
@@ -54,6 +54,7 @@ For when we're ready to build the first external product.
 | 2.4 | Create VPS teardown checklist (how to safely destroy a project VPS: backup code to GitHub, revoke API keys, delete server) | Happy writes | None (documentation only) | ⬜ Pending |
 | 2.5 | **PER PROJECT:** R + Happy agree on project → Happy writes spec → R provisions VPS → Happy sets up VPS agent → VPS agent builds → Happy steers → product ships | Both | R approves: project, VPS provisioning, final deploy | ⬜ Repeatable |
 | 2.6 | **FUTURE (if needed):** Set up Hetzner API key with spend limits for autonomous provisioning | R creates restricted API key → Happy stores on dedicated Mac | R creates + sets limits | ⬜ Future |
+| 2.7 | **FUTURE (if needed):** Configure Syncthing for high-volume Dedicated Mac ↔ VPS file sync (scoped per-VPS, never to R's Mac) | Happy configures, R approves | R approves config | ⬜ Future |
 
 ---
 
@@ -69,7 +70,27 @@ For when we're ready to build the first external product.
 | Customer data | Project VPS only | ~~Dedicated Mac, GitHub~~ |
 | Cloud provider credentials | With R only (Phase 0) | ~~Dedicated Mac~~ |
 | VPS SSH keys | Dedicated Mac | — |
-| Dashboard outputs | bridge-outbox → R's Mac | — |
+| Dashboard/report outputs | Dedicated Mac → SCP → R's Mac | ~~Syncthing~~ |
+
+---
+
+## Data Flow Summary
+
+```
+R's Mac  ←── SCP over Tailscale ──  Dedicated Mac (Happy)
+(air-gapped from build system)           │
+                                         │ SSH over Tailscale
+                                         ↓
+                                   [Project VPS] ←→ GitHub
+                                   [Project VPS] ←→ GitHub
+                                   [Dev VPS]     ←→ GitHub
+```
+
+- R's Mac ↔ Dedicated Mac: **SCP over Tailscale only** (explicit, on-demand)
+- Dedicated Mac ↔ VPS: **SSH/SCP over Tailscale** (routine)
+- Dedicated Mac ↔ VPS (future high-volume): **Syncthing** (scoped per-VPS)
+- VPS ↔ GitHub: **Git push/pull** (routine)
+- Syncthing is **never** configured to touch R's Mac
 
 ---
 
@@ -81,7 +102,9 @@ For when we're ready to build the first external product.
 | Provisioning model | ✅ Hybrid — manual first, API key later | 2026-03-06 |
 | Source code on dedicated Mac | ✅ No repos — dedicated Mac stays clean | 2026-03-06 |
 | GitHub org | ✅ Already exists | 2026-03-06 |
-| Bridge-inbox | ✅ One-way only. VPS file exchange via SCP over Tailscale | 2026-03-06 |
+| R's Mac connectivity | ✅ Air-gapped. SCP over Tailscale only. No Syncthing. | 2026-03-06 |
+| Syncthing scope | ✅ Dedicated Mac ↔ VPS only (future, if needed) | 2026-03-06 |
+| Mission Control data flow | ✅ SCP over Tailscale (Happy → R's Mac) | 2026-03-06 |
 | GitHub push policy — internal tools | ✅ Rule 2 applies — R approval before push | 2026-03-06 |
 | GitHub push policy — external products | ✅ VPS agents push freely, Happy reviews PRs | 2026-03-06 |
 | GitHub repo segregation | ✅ Each VPS gets fine-grained PAT scoped to single repo only | 2026-03-06 |
