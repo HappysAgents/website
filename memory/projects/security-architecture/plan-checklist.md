@@ -50,8 +50,10 @@ Once Phase 1 is complete, follow the builder-playbook.md to build the first exte
 | 2.1 | R + Happy agree on first product to build | Both | ⬜ Next week |
 | 2.2 | Happy writes spec → R approves | Both | ⬜ Next week |
 | 2.3 | R provisions Hetzner VPS (~€4-6/mo) | R | ⬜ Next week |
-| 2.4 | Happy runs base image script, sets up VPS agent | Happy | ⬜ Next week |
-| 2.5 | Build begins | VPS agent + Happy | ⬜ Next week |
+| 2.4 | Happy runs base image script (installs Node, Python, Git, gh CLI, Claude Code, tmux, notify-discord, Tailscale) | Happy | ⬜ Next week |
+| 2.5 | Happy creates Discord webhook for project channel, configures on VPS | Happy | ⬜ Next week |
+| 2.6 | Happy starts tmux session on VPS, launches Claude Code with agent brief | Happy | ⬜ Next week |
+| 2.7 | Build begins — Claude Code posts updates via notify-discord, Happy steers via Discord + tmux | VPS agent + Happy | ⬜ Next week |
 
 ---
 

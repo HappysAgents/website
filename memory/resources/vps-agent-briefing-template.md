@@ -52,17 +52,33 @@ Example: "You are building a SaaS subscription landing page with Stripe payment 
 
 - **Every 2 hours:** Post a progress update to Discord (what's done, what's next, any blockers).
 - **On completion of each milestone:** Post to Discord with a summary.
-- **On any blocker:** Post immediately with context. Do not sit blocked for more than 30 minutes.
+- **On any blocker:** Post immediately with context. Do not sit blocked for more than 30 minutes. Then wait — do not guess.
+
+**Discord update format:**
+```
+✅ [what you completed] — commit [hash if applicable]
+🚧 [what you're working on now]
+🚨 BLOCKED: [exactly what you need] — only use if genuinely stuck
+```
 
 Discord command: `notify-discord "your message here"`
 
 ---
 
+## Session Management (tmux)
+
+Your Claude Code session runs inside a tmux session so it persists when Happy disconnects. You do not need to do anything — just be aware that:
+- Happy may detach and re-attach at any time
+- The session is named `[PROJECT_NAME]`
+- Happy can observe your terminal output without interrupting you
+
 ## Steering
 
-Happy will SSH in periodically to review, redirect, or debug. When Happy SSHes in, treat any instruction as highest priority.
+Happy monitors your Discord channel and will steer via two methods:
+1. **Discord message** — Happy posts direction in the project channel. Treat this as an instruction and confirm receipt with a Discord update.
+2. **Direct SSH** — Happy re-attaches to your tmux session and types instructions directly. Highest priority when this happens.
 
-If you receive a message via Discord from Happy, treat it as a steering instruction and confirm receipt.
+When Happy SSHes in, stop what you're doing and acknowledge.
 
 ---
 

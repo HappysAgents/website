@@ -19,7 +19,7 @@ apt-get update -qq && apt-get upgrade -y -qq
 apt-get install -y -qq \
   curl wget git unzip build-essential \
   ca-certificates gnupg lsb-release \
-  ufw fail2ban
+  ufw fail2ban tmux
 
 # --- Node.js 20 LTS ---
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
