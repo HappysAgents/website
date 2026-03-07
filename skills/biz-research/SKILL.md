@@ -15,8 +15,10 @@ Before Phase 0, load the following files to ground the entire analysis in our ac
 2. `memory/projects/idea-pipeline/IDEAS.md` — filter criteria + killed ideas (don't re-evaluate dead ends)
 3. `skills/biz-research/references/our-assets.md` — current asset inventory (distribution, IP, brand, constraints)
 4. `tacit-knowledge.md` — R's decision patterns and hard rules
+5. `memory/resources/lean-startup-methodology.md` — how we validate ideas (MVP types, sprint structure, autonomy map). This shapes the first sprint recommendation in Phase 10.
+6. `memory/resources/builder-playbook.md` — how we actually build things (VPS model, Hetzner costs, Claude Code, GitHub, approval gates). This grounds cost and timeline estimates in Phases 5 and 6.
 
-These files are the operating context. The research answers the question: *given who we are and what we have, is this the right opportunity for us specifically?*
+These files are the operating context. The research answers the question: *given who we are, what we have, and how we build — is this the right opportunity for us specifically, and exactly how would we validate it first?*
 
 ---
 
@@ -157,10 +159,12 @@ Identify the strongest pricing model:
 - **Outcome-based**: High margin but hard to measure
 - **One-time**: Avoids recurring commitment but limits LTV
 
-Estimate unit economics:
-- Realistic gross margin at scale (target: >70% for software)
-- Breakeven at what customer count?
-- Monthly recurring revenue needed to be default alive
+Estimate unit economics grounded in our real build costs (from builder-playbook.md):
+- **Infrastructure floor**: Hetzner CX22 ~€4/mo per product VPS. Add Anthropic API costs per active agent session. This is the cost baseline per customer for agent-operated products.
+- **Realistic gross margin at scale** (target: >70% for software — agent products can be higher if LLM costs stay low relative to price)
+- **Breakeven at what customer count?**
+- **Monthly recurring revenue needed to be default alive**
+- **Token efficiency**: How much LLM spend does this business consume per dollar of revenue? High token burn = low margin at scale.
 
 Output: Add `## Revenue Model` section.
 
@@ -168,13 +172,15 @@ Output: Add `## Revenue Model` section.
 
 ## Phase 6: Scale Path
 
-Map the three growth phases:
+Map the three growth phases, grounded in our actual build model (from builder-playbook.md):
 
-**$0 → $1M ARR**: What's the initial GTM motion? (content, community, cold outreach, product-led?) How long does this take realistically?
+**$0 → $1M ARR**: What's the initial GTM motion? (content, community, cold outreach, product-led?) Realistic time estimate using our stack: VPS setup + Claude Code build = days to weeks for MVP. What's the realistic time from "go" to first paying customer?
 
-**$1M → $10M ARR**: What's the compounding mechanism? What breaks at this stage? (support costs, churn, CAC ceiling?)
+**$1M → $10M ARR**: What's the compounding mechanism? What breaks at this stage? In our model: more VPS agents + Claude Code builders. What's the operational overhead per customer? Can Happy manage it without scaling R's time?
 
-**$10M → $100M+ ARR**: What's the flywheel? Where does the ceiling hit?
+**$10M → $100M+ ARR**: What's the flywheel? Where does the ceiling hit? Can this run as an agent-first operation at this scale, or does it require human org-building?
+
+**Agent-operability check per phase**: At each scale stage, explicitly ask — can Happy + VPS agents + Claude Code run this, or does it require R to hire humans? If it requires humans before $10M ARR, the "agent-operable" filter criteria may be failing.
 
 Flag honestly: if this is a lifestyle business ($1-5M ceiling), say so. That's not a bad thing — but it's not the $1B path.
 
@@ -266,6 +272,42 @@ If verdict is Pursue → write the idea to `memory/projects/idea-pipeline/IDEAS.
 If verdict is Pass → write to Killed section with one-line reason.
 
 Output: Add `## Decision` section as the final entry in research.md.
+
+---
+
+## Phase 10: First Sprint Plan (Pursue verdicts only)
+
+If verdict is Pursue, output a complete first sprint plan using the lean startup framework. This is what Happy executes next — not a vague direction, a specific experiment.
+
+Reference `memory/resources/lean-startup-methodology.md` Section 2 (Hypothesis Design) and Section 3 (MVP Types) when writing this.
+
+**Riskiest assumption**: What single belief, if wrong, kills the entire thesis? Test this first.
+
+**Hypothesis card** (use lean-startup Template 1):
+```
+We believe [specific customer] experiences [specific problem]
+and will [specific behavior] when presented with [specific solution].
+We'll know this is true when [measurable outcome].
+```
+
+**Success criteria** (set before the experiment runs):
+- Fail threshold: < [X]
+- Pass threshold: [X–Y]
+- Strong signal: > [Y]
+
+**MVP type**: Choose from smoke test / concierge / Wizard of Oz / video / piecemeal / single-feature. Pick the *minimum* that answers the riskiest question. Reference the decision matrix in lean-startup Section 3.
+
+**What Happy runs autonomously** (no R approval needed):
+- [List specific tasks]
+
+**What needs R approval before execution**:
+- [List specific gates, e.g., spend, external contacts, GitHub repo creation]
+
+**Sprint length**: [1 or 2 weeks]
+**End date**: [Set from today + sprint length]
+**Escalation triggers**: [Conditions that cause Happy to flag to R mid-sprint]
+
+Output: Add `## First Sprint Plan` section as the final entry in research.md.
 
 ---
 
