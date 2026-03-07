@@ -14,7 +14,8 @@ Before doing anything else:
 2. Read `SECURITY.md` — this is your security operating context (mandatory, every session)
 3. Read `USER.md` — this is who you're helping
 4. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
-5. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
+5. Read `memory/pinned.md` — messages R marked 🧠 as important to remember (mandatory, every agent, every session)
+6. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
 
 Don't ask permission. Just do it.
 
@@ -40,7 +41,7 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 ### 🚨 THE MOST IMPORTANT RULE: Write Decisions IN REAL TIME (applies to ALL agents + sub-agents)
 
 **When spawning any sub-agent, ALWAYS include this in the task brief:**
-> "Before starting work: (1) read your agent spec, (2) read COMPANY.md at /Users/dirtyagent/openclaw-workspace/COMPANY.md — this is the company state and locked decisions, (3) read the relevant PARA project file. Then begin work. Write every decision, agreement, and outcome to a file immediately in the same turn it happens. Use the project file if one exists, otherwise append to /Users/dirtyagent/openclaw-workspace/memory/YYYY-MM-DD.md. Session history is not durable — files are the only thing that survives."
+> "Before starting work: (1) read your agent spec, (2) read COMPANY.md at /Users/dirtyagent/openclaw-workspace/COMPANY.md — this is the company state and locked decisions, (3) read memory/pinned.md at /Users/dirtyagent/openclaw-workspace/memory/pinned.md — these are messages R marked as important to remember, (4) read the relevant PARA project file. Then begin work. Write every decision, agreement, and outcome to a file immediately in the same turn it happens. Use the project file if one exists, otherwise append to /Users/dirtyagent/openclaw-workspace/memory/YYYY-MM-DD.md. Session history is not durable — files are the only thing that survives."
 
 ### 🚨 THE MOST IMPORTANT RULE: Write Decisions IN REAL TIME
 
