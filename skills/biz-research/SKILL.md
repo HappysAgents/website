@@ -7,6 +7,35 @@ description: Structured business opportunity research workflow. Use when evaluat
 
 Produces a structured, decision-ready research report. Follow phases in order. Write outputs to file at each phase — never hold in memory.
 
+## Strategic Context Pre-Load (Do Before Any Research)
+
+Before Phase 0, load the following files to ground the entire analysis in our actual situation:
+
+1. `COMPANY.md` — current projects, agent capabilities, locked decisions
+2. `memory/projects/idea-pipeline/IDEAS.md` — filter criteria + killed ideas (don't re-evaluate dead ends)
+3. `skills/biz-research/references/our-assets.md` — current asset inventory (distribution, IP, brand, constraints)
+4. `tacit-knowledge.md` — R's decision patterns and hard rules
+
+These files are the operating context. The research answers the question: *given who we are and what we have, is this the right opportunity for us specifically?*
+
+---
+
+## Idea Filter Gate (Run Before Phase 0)
+
+Check the opportunity against the 4 mandatory criteria from IDEAS.md. If it fails any one:
+→ Recommend Pass immediately. Write a one-line reason. Do not run full research.
+
+| Criteria | Pass? |
+|----------|-------|
+| Agent-buildable — agents can build it end-to-end without significant R involvement | |
+| Agent-monetizable — agents can acquire customers + process payments themselves | |
+| Agent-operable — agents can run it day-to-day with minimal human oversight | |
+| Pure digital — no physical world dependencies, no logistics, no local ops | |
+
+*Exception: flag it explicitly if a criteria is borderline and strategic learning value justifies going deeper anyway.*
+
+---
+
 ## Core Constraints (Non-Negotiable)
 
 - **$1B test**: Every opportunity must have a plausible path to $1B. If the ceiling is $10M, say so explicitly.
@@ -155,18 +184,38 @@ Output: Add `## Scale Path` section.
 
 ## Phase 7: Why Now + Why Us
 
-**Why now**: What changed recently (last 6-12 months) that opens this window? Is the window closing?
+Read `references/our-assets.md` for the full current asset inventory before writing this section.
 
-**Why us specifically**: What do we have that others don't?
-- Distribution (audience, community, network)
-- Domain knowledge (we've solved this problem ourselves)
-- Technical head start
-- Relationships / access
-- Timing / first-mover in a specific niche
+**Why now**: What changed recently (last 6-12 months) that opens this window? Is the window closing? Is this the right moment for us specifically given what we're actively building?
 
-Be honest. "We could build this" is not a why-us.
+### Part A: Current Asset Match
 
-Output: Add `## Why Now + Why Us` section.
+Map our real assets against what this opportunity requires to win. Be brutal:
+
+| What This Opportunity Requires to Win | Do We Have It? | Strength |
+|----------------------------------------|---------------|----------|
+| [e.g., distribution to target customer] | Yes / Partial / No | |
+| [e.g., technical credibility] | | |
+| [e.g., trust in a specific community] | | |
+
+"We could build this" does NOT count as an asset. Only what exists today.
+
+### Part B: Edge Gap Analysis
+
+Identify what we'd need to accumulate to have genuine, defensible edge:
+
+- **Missing assets**: What do we need that we don't have?
+- **Build path**: Can we accumulate this faster than competitors? How long does it realistically take?
+- **Window check**: Will the opportunity still exist by the time we've built the edge?
+- **Deliberate accumulation**: Is there a specific action (content series, community event, partnership, data collection) that builds this edge as a by-product of existing work?
+
+The key question: *Is the edge-building path faster than the opportunity window closing?*
+
+### Part C: Edge We're Already Building
+
+From `references/our-assets.md` — what are we actively accumulating that gives us compounding advantage in this space? Does this opportunity accelerate or diverge from that accumulation?
+
+Output: Add `## Why Now + Why Us` section with all three parts.
 
 ---
 
@@ -201,7 +250,20 @@ Synthesize everything into a clear verdict:
 - Competitive gap: Clear / Narrow / Crowded
 - Moat score: [highest dimension / score]
 - Scale ceiling: $xM / $xB / Unknown
-- Why us score: Strong / Weak / None
+- Why us (today): Strong / Weak / None
+- Edge gap: Buildable in [timeframe] / Unclear / Not feasible
+
+**IDEAS.md 6-dimension score** (1–5 each, total /30):
+- Scalability (path to $1B?):
+- Moat (defensible advantage?):
+- Speed to first revenue:
+- Token efficiency (revenue per dollar of LLM spend):
+- R's time required (lower = better):
+- Validated demand (evidence people want this NOW):
+- **Total: /30**
+
+If verdict is Pursue → write the idea to `memory/projects/idea-pipeline/IDEAS.md` under the appropriate section.
+If verdict is Pass → write to Killed section with one-line reason.
 
 Output: Add `## Decision` section as the final entry in research.md.
 
