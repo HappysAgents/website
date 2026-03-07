@@ -310,3 +310,41 @@ Full report: `memory/resources/security-reviews/credential-exposure-audit-2026-0
 | X (Twitter) | ✅ Active | @HappyAgents_HQ — profile setup complete, awaiting content |
 | Luma | ✅ Active | happy-agent@agentmail.to — event created (private) |
 | Github (dedicated) | ⏳ Pending | Section G not yet done |
+
+## Builder-Playbook Architecture (Locked 2026-03-07)
+
+Source: `memory/resources/builder-playbook.md`
+
+**Core rule:** Dedicated Mac = Happy's brain ONLY. No code, no repos, no builds, no node_modules. Ever.
+
+### Where Things Live
+| Layer | What | Where |
+|-------|------|-------|
+| Happy's runtime | OpenClaw, workspace, agent specs, memory | Dedicated Mac |
+| Code + builds | All code, deps, running services | Hetzner VPS instances |
+| Code storage | Source of truth | GitHub (private repos, HappysAgents org) |
+| Comms | VPS reporting + steering | Discord (per-project channels) |
+
+### VPS Model
+- **Internal tools** (Mission Control, pipelines, dashboards): shared dev VPS (Hetzner CX22, ~€4/mo)
+- **External products** (SaaS, APIs, customer-facing): one dedicated VPS per product
+- **Connectivity:** Tailscale SSH from Happy to all VPS instances
+- **Provisioning:** R provisions Hetzner console → shares IP → Happy SSHs in to configure
+
+### How Building Works
+1. Happy writes spec + briefing on Dedicated Mac
+2. R approves concept + GitHub repo creation (Rule 2)
+3. R provisions VPS (Hetzner console)
+4. Happy SSHs in via Tailscale: installs Tailscale, runs base image script (Node.js, Python, git, gh CLI, Claude Code)
+5. **Claude Code** = the actual builder. Runs in tmux sessions on VPS. Pushes to GitHub. Reports via Discord webhook.
+6. Happy steers via: Discord (light), SSH + tmux attach (medium), direct takeover (heavy)
+7. Happy reviews PRs, approves merges
+
+### Key Standards
+- Fine-grained GitHub PAT per VPS (scoped to single repo)
+- Dependency vetting before every install
+- One Discord channel per project: #project-[name]-dev
+- VPS teardown checklist: push code → revoke PAT + API keys → remove from Tailscale → R deletes server
+
+### OrbStack — DROPPED
+OrbStack and local Docker were considered but dropped 2026-03-06. VPS model is the approach.
