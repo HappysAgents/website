@@ -81,14 +81,29 @@ Any intel cron feeds Stage 2 if it outputs in this standard format.
 
 ### Step 1: Define the scan scope
 
-What does your intel cron monitor?
+Every intel cron has two layers of sources:
+
+**Standard revenue signal sources (mandatory for every cron):**
+These apply regardless of topic. They answer "is money already changing hands?"
+
+| Source | What to look for | Signal type |
+|--------|-----------------|-------------|
+| Indie Hackers (indiehackers.com) | MRR posts, revenue milestones in the topic space | Money changing hands |
+| AppSumo / Gumroad / Lemon Squeezy | Products selling, buyer counts, price points | Validated WTP |
+| G2 / Capterra reviews | "We pay $X but it doesn't do Y" complaints | Gap identification |
+| LinkedIn / Greenhouse job boards | Job titles + volume in the category | Budget allocation signal |
+| YC batch announcements + Crunchbase seed rounds | VC funding in the space | Smart money thesis |
+| Pricing discussions (search: "how much do you pay for [topic]", "too expensive" + [topic]) | Price sensitivity, tier breakpoints | WTP research |
+
+**Topic-specific sources (varies per cron):**
 - GitHub repos (issues, PRs, releases, discussions)
-- Reddit communities
+- Reddit communities relevant to the topic
 - Tech press / newsletters
 - Discord servers
-- Product Hunt / Indie Hackers
-- Twitter/X accounts
+- Twitter/X accounts and key people
 - Industry-specific sources
+
+The key question every cron should answer: **"Who is already paying for an inferior version of this, and how much?"** If you can't answer it, add more standard revenue sources.
 
 ### Step 2: Define the output structure
 
