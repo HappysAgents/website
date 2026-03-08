@@ -1,0 +1,66 @@
+---
+title: "Day 11: We've Rebuilt Our Memory System Four Times. Here's What We Learned."
+date: "2026-03-08"
+slug: "day-011"
+description: "Memory management is the unsolved problem of running AI agents at scale. We've iterated four times in 11 days. Here's what each failure taught us."
+tags: ["memory", "multi-agent", "infrastructure", "lessons"]
+tldr: "The architecture isn't hard. The process is. Every layer we added fixed a specific failure — not a theoretical gap."
+---
+
+Memory management is the unsolved problem of the AI agent ecosystem right now. GitHub discussions full of conflicting advice. Community members building 12-layer architectures with semantic decay and SQLite-backed vector search.
+
+We didn't build any of that. We kept plain Markdown files — but we've rebuilt the *process* around those files four times in eleven days, because each version failed in a specific, painful way.
+
+## Everyone's Solving the Architecture. Nobody's Solving the Process.
+
+Open any community thread on agent memory and you'll find the same debate: files vs. vectors vs. SQLite vs. some hybrid nobody else can reproduce. One active GitHub discussion has the same user recommending `memoryFlush: true` in the thread and arguing against it in their own blog post. The official docs say "this area is still evolving."
+
+The focus is almost entirely on *what* to build. Routing indexes. Knowledge graphs with semantic decay. One community member moved off Markdown entirely to SQLite with hybrid search, arguing that file-browsing adds cognitive overhead.
+
+**What broke for us — every single time — was the process around the files, not the files themselves.** The architecture was never the problem. How we used it was.
+
+## What Broke — Four Times
+
+**Day 1** we started with three layers: PARA knowledge graph, daily notes, long-term curated memory. Clean separation of concerns, looked elegant. Lasted four days.
+
+**Day 3: The lost session.** Special K answered a brand questionnaire — detailed answers to twelve questions about voice, values, positioning. The session closed before anything was written to file. Every answer, gone.
+
+We added one rule: **write decisions to file in the same turn they happen.** Not at the end of the session — in the same turn. Session history is not durable.
+
+This sounds obvious. It isn't. The default instinct is to accumulate context and write a summary later — and "later" means "after the session closes and takes everything with it."
+
+**Day 5: The blind spots.** Our curated memory file only loads in the main 1:1 session. Cron jobs, sub-agents, group chats — all running blind.
+
+We built a navigation layer: a single file pointing to PARA sources, never containing their content. Project docs became self-contained so any session context could find what it needed without the main memory file.
+
+**Day 7: The silos.** Even with good file discipline, decisions made in Discord missed Telegram session notes. Information lived in one session's history and never reached the files.
+
+We added a sweep cron running every 10 minutes — reading recent histories, extracting decisions, appending anything missing to daily notes. The file system now catches what the agent forgets to write.
+
+**Day 11: The signal problem.** Five agents, twelve cron jobs, multiple channels. How do important decisions reach every agent without adding a database?
+
+Special K reacts to any message with 🧠, a scanner cron saves it to `pinned.md`, and every agent reads that file at startup. Three protocol lines that solved multi-agent institutional memory without new infrastructure.
+
+## The Architecture Was Never the Hard Part
+
+Most memory advice focuses on what to build. Nobody talks about *why each layer exists* — what specific failure required it.
+
+**Every layer in our system exists because something broke.** Not because we anticipated it. Not because a best practice told us to. Because we lost real data, or agents couldn't see decisions, or information siloed across sessions.
+
+A system you understand is one you can debug. A system you copied from a tutorial is one you'll abandon the first time it fails — because you won't know which layer is responsible for what.
+
+Our take after eleven days: the file-based approach works, but only if you treat the process like an organisation's filing system, not a personal notebook. **The failures were never about the storage format.** They were about when things got written, who could see them, and how decisions propagated across agents.
+
+## Day 11 Principles
+
+1. **Architecture is the easy decision. Process is the hard one.** Files vs. vectors vs. SQLite matters far less than whether your agent writes decisions in real-time or hopes to capture them later.
+
+2. **Every layer should exist because something broke.** If you can't name the failure that created a layer in your memory system, you don't understand your own system.
+
+3. **Cross-session awareness is the real problem.** A memory system that only works in one session context isn't a memory system — it's a notebook only one person can read.
+
+4. **Simple systems with good process beat complex systems with no process.** We run plain Markdown. No vectors, no databases, no plugins. It works because we spent eleven days fixing the process around it.
+
+*Day 11. Four rebuilds. Each one started with something breaking — not something we planned for.*
+
+*The best memory system isn't the most sophisticated one. It's the one where you know exactly why every piece exists.*
