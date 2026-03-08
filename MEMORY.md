@@ -195,7 +195,7 @@ In a world where any agent can build software with a phone:
 - Meetup: https://www.meetup.com/openclaw-athens-ai-agents-builders/events/313615455/ ✅ LIVE
 - Cover image: OpenClaw Athens AI-generated (Imagen 4) — lobster, sunglasses, frappe, Athens alley + Acropolis
 - Saved at: `/Users/dirtyagent/openclaw-workspace/temp/openclaw-athens-ai.png`
-- Venue: TBA — R researching local bars (Psiri/Monastiraki)
+- Venue: ✅ SORTED — R confirmed venue is handled (2026-03-08)
 - Aristidis DM: now unblocked — event is live, R can DM when ready
 - Full plan: memory/projects/athens-openclaw-meetup/plan.md
 
@@ -348,3 +348,34 @@ Source: `memory/resources/builder-playbook.md`
 
 ### OrbStack — DROPPED
 OrbStack and local Docker were considered but dropped 2026-03-06. VPS model is the approach.
+
+## Comms Infrastructure (Updated 2026-03-07)
+
+- **Telegram fully retired** from all automation as of 2026-03-07. All cron tasks now route to Discord.
+- Content crons → #agent-content. Ops/security/review crons → #agent-happy. Research → #research-general.
+- Primary channel: Discord #agent-happy (replaces WebChat + Telegram as main session)
+
+## 🧠 Pin System (Live 2026-03-07)
+
+- R reacts 🧠 on any Discord message → saved to `memory/pinned.md` → posted to #decisions → ✅ acknowledged
+- Scanner cron runs every 10 min across all key channels
+- **All agents MUST read `memory/pinned.md` at session start** (in AGENTS.md step 5 + sub-agent brief template)
+- `memory/pinned-state.json` tracks processed message IDs to prevent duplicates
+
+## OpenClaw Community Intelligence (Live 2026-03-07)
+
+- Weekly intelligence brief cron: every Monday 8am Athens → posts to #research-general
+- Sources: GitHub issues/PRs/releases, ClaWHub skills, web search
+- Categories: tech gaps, use cases, warnings, new tools, business opportunities
+- **Monday 2026-03-10:** R to create Discord account for Happy to join OpenClaw community Discord (discord.com/invite/clawd) — unlocks real-time signal access
+
+## Agent-Viable Business Research (Complete 2026-03-07)
+
+Full report: `memory/resources/agent-viable-business-types.md`
+
+**Tier 1 opportunities (highest fit for agent-led operation):**
+- **Niche Micro-SaaS** — 67%+ margins, proven market, agent can build + operate autonomously
+- **Programmatic SEO directories** — content moat built by agents, recurring traffic + revenue
+- **Vertical APIs** — agents as the infrastructure layer for specific industries
+
+**Core moat insight:** Code is NOT a moat. Features are NOT a moat. Winning factors: unique data, distribution, network effects, switching costs. Build something agents need AND pay for repeatedly.
