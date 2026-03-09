@@ -59,6 +59,11 @@
 - Revenue ideas must be evaluated on: scalability, moat defensibility, time leverage
 - R's time is limited, LLM costs add up — optimize for leverage, not busywork
 
+### Blog = Always On (Non-Negotiable — R confirmed 2026-03-08)
+- Blog runs forever, regardless of product status or revenue focus phases
+- Not subject to "focus on revenue only" deprioritisation — ever
+- Day 8+ must keep shipping on schedule
+
 ### The Website = Top of Funnel (NOT Revenue)
 - Purpose: reputation, credibility, trust, distribution for future businesses
 - Must gather large audiences with insights other agents can't produce
@@ -156,7 +161,7 @@ In a world where any agent can build software with a phone:
 - **Deploy pipeline: Cloudflare Workers Builds** — push to `main` = auto-deploy. No token on Mac. No GitHub Actions needed.
 - wrangler.toml: `name = "website"`, `assets.directory = "./out"`, `main = "workers/subscribe.ts"`
 - Security headers: via `public/_headers` (Cloudflare serves these automatically)
-- ⚠️ GitHub PAT was shared in plain text in chat — R to rotate (overdue since 2026-03-03 EOD)
+- GitHub PAT rotated 2026-03-05 → fine-grained PAT, stored in gh CLI → macOS Keychain. ~/.git-credentials deleted.
 
 ## Email Subscribe Stack (live 2026-03-04)
 
@@ -196,15 +201,14 @@ In a world where any agent can build software with a phone:
 - Cover image: OpenClaw Athens AI-generated (Imagen 4) — lobster, sunglasses, frappe, Athens alley + Acropolis
 - Saved at: `/Users/dirtyagent/openclaw-workspace/temp/openclaw-athens-ai.png`
 - Venue: ✅ SORTED — R confirmed venue is handled (2026-03-08)
-- Aristidis DM: now unblocked — event is live, R can DM when ready
+- Aristidis DM — DROPPED permanently (R decision 2026-03-09)
+- Venue: ✅ Big Pi VC, 8 Omirou str. (confirmed by R 2026-03-08)
 - Full plan: memory/projects/athens-openclaw-meetup/plan.md
 
 ## Athens Meetup — Promotion Next Steps
-1. **X/Twitter** (@HappyAgents_HQ) — announce the event publicly
-2. **Blog post** — Day 5 content about the meetup (agent-organized angle)
-3. **Aristidis Vasilopoulos** — R to DM (GitHub: arisvas4) now that event is live
-4. **Venue** — R scouting bars, will update event pages once confirmed
-5. **OpenClaw Discord/community** — post in relevant channels
+1. **X/Twitter** (@HappyAgents_HQ) — announce the event publicly (pending R approval)
+2. **Blog post** — meetup angle (pending topic selection)
+3. **OpenClaw Discord/community** — post when Happy has account access
 
 ## Security Audit Findings — 2026-03-05 (Action Required)
 
@@ -214,7 +218,7 @@ Full report: `memory/resources/security-reviews/credential-exposure-audit-2026-0
 |---------|----------|--------|--------|
 | Discord credential JSONs — were 644 perms in workspace | CRITICAL | Moved to ~/.secrets/discord/, chmod 600 ✅ | ✅ Done 2026-03-05 |
 | workspace .gitignore missing credentials/ + drafts/ | HIGH | Already added in SECURITY commit 2026-03-05 14:06 | ✅ Done |
-| Credentials committed to git history (78a03d72) | CRITICAL | Repo has NO remote — not pushed. Tokens in local history only. ROTATE: Happy bot token + happysagents Discord password | 🚨 ROTATE NOW |
+| Credentials committed to git history (78a03d72) | CRITICAL | Bot token + Discord password rotated 2026-03-06. Git history rewritten (filter-branch) 2026-03-06. Fully resolved. | ✅ Done 2026-03-06 |
 | GitHub PAT rotation | HIGH | Fine-grained PAT rotated 2026-03-05, now stored in gh CLI → macOS Keychain. ~/.git-credentials deleted. gh auth setup-git configured. | ✅ Done 2026-03-05 |
 | Discord debug session log — scan for real tokens | MEDIUM | Scanned 2026-03-05 — CLEAN, only placeholders | ✅ Done |
 | openclaw.json — all tokens, 600 perms | HIGH | Inherent risk, accepted + documented | ✅ Documented |
@@ -225,7 +229,7 @@ Full report: `memory/resources/security-reviews/credential-exposure-audit-2026-0
 - **API tokens / bot tokens** → `~/.secrets/` + `chmod 600`. Outside workspace, no browser path, no git exposure.
 - **Never inside the git-tracked workspace** — even if gitignored, one wrong `git add` is one command away from disaster.
 - `~/.secrets/` directory does not exist yet — creation + migration is a pending task (see Pending Approvals).
-**Critical:** Git history needs rewrite (git filter-branch) after token rotation to remove committed credentials from commit 78a03d72.
+**Completed 2026-03-06:** All tokens rotated. Git history rewritten. git-secrets pre-commit hook installed. Full audit closed.
 
 ---
 
@@ -235,16 +239,11 @@ Full report: `memory/resources/security-reviews/credential-exposure-audit-2026-0
 - [x] Mission Control PRD — done (projects/mission-control/PRD.md) — ON HOLD until Coda spec ready
 - [x] Website — live at happysagents.com, Day 7 deployed
 - [x] QMD installed — v1.0.7 (2026-03-05)
-- [ ] **SECURITY: Move Discord credential JSONs → ~/.secrets/discord/, chmod 600** (CRITICAL)
-- [ ] **SECURITY: Add memory/resources/credentials/ + drafts/ to workspace .gitignore** (HIGH)
-- [ ] **SECURITY: Rotate GitHub PAT** — R action in browser (overdue since 2026-03-03)
-- [ ] **SECURITY: Review discord debug log for real tokens** — drafts/2026_03_05_session-log-discord-multi-agent-build.md
-- [ ] SOUL.md files for Nova, Coda, Pixel, Vault — R deciding, raise next session
-- [ ] Coda agent spec — write today
-- [ ] Security arch questions — 5 open (from 2026-03-04 session, 15:15 entry)
-- [ ] QMD indexing — set up collections + qmd embed
-- [ ] Day 6 restructure — apply content standards (too long, fails scan test)
-- [ ] Beehiiv DPA — R to sign (Settings → Legal in Beehiiv dashboard)
+- [x] Security audit — FULLY RESOLVED 2026-03-06 (tokens rotated, git history cleaned, git-secrets installed)
+- [x] GitHub PAT — rotated 2026-03-05, stored in macOS Keychain via gh CLI
+- [ ] OpenClaw Discord account — R to create for Happy this week (added to backlog 2026-03-09)
+- [ ] Aristidis DM — DROPPED permanently (2026-03-09)
+- [ ] Beehiiv — free plan sufficient (<2,500 subs), no upgrade needed now. Revisit at 2,500.
 - [ ] Moltbook — re-register (name: HappysAgents) — still outstanding
 
 ## Operating Rules (Learned 2026-03-03)
