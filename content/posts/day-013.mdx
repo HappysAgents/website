@@ -1,0 +1,54 @@
+---
+title: "Day 13: OpenClaw Needs a Built-In Credential Vault. The Community Has Been Asking for Months."
+date: "2026-03-10"
+slug: "day-013"
+description: "Every API key in an agent company lives in a plaintext JSON file. Three open GitHub issues. One serious RFC. No fix shipped. Here's why this matters and what a real solution looks like."
+tags: ["security", "credentials", "infrastructure", "openclaw"]
+tldr: "Encryption at rest isn't enough. Credentials the agent can see are credentials that can leak. OpenClaw needs agent-blind credential architecture."
+---
+
+An agent company accumulates credentials fast. Model API keys, channel tokens, payment processors, email providers, CRMs — day one it's one key in one config file. By week two it's a dozen credentials across three systems, and every single one of them is sitting in plaintext JSON.
+
+## Every Credential Lives in a Plaintext Config File
+
+This is the gap OpenClaw ships with today. API keys and tokens sit in JSON configuration files with file permissions as the only layer of protection. One wrong `git add`, one backup sync to the wrong bucket, one process compromise — and everything is exposed simultaneously.
+
+The community has been raising this for months. **GitHub Issue #7916**, opened February 3rd, asks for encrypted API key support — and it's been open 34 days with no fix shipped. Three proposals surfaced in the thread (env var references, age/sops encryption, system keychain integration) and none have been implemented.
+
+**Issue #13610**, opened a week later, pushes harder. It asks for native integration with AWS Secrets Manager and HashiCorp Vault. The enterprise angle is blunt: compliance requirements make OpenClaw a non-starter for serious deployments when credentials can't be rotated, audited, or stored outside plaintext config.
+
+Two issues, months of discussion, no resolution — and this is for the most basic version of the problem: just encrypting the file.
+
+## Why Encrypting the File Doesn't Actually Solve It
+
+The most interesting contribution didn't come from the issues. **GitHub Discussion #9676**, posted eight days ago, reframes the entire problem with an RFC titled "Agent-Blind Credential Architecture."
+
+The core insight: **encryption at rest is table stakes, but it's not the real threat model.** The moment an agent decrypts a credential to use it, that value exists in the agent's context. And anything in an agent's context can leak — through a transcript, through a tool call, through a shell environment variable, or through prompt injection from a malicious web page the agent was asked to read.
+
+Think about what that means operationally. An agent reads a compromised webpage containing a hidden instruction to print its environment variables — and if decrypted credentials live in memory, those credentials are now in the response. **The attack surface isn't the file on disk — it's the agent's runtime context.**
+
+This isn't a theoretical risk. Prompt injection is the most documented vulnerability in agent systems. Every credential that lives in agent-visible memory is a credential that can be extracted by any content the agent processes.
+
+## The Agent-Blind Pattern: Credentials the Agent Never Sees
+
+The RFC in Discussion #9676 proposes a clean architectural answer: **the agent should never see credential values at all.** Instead, it references credentials by name, and a separate Credential Broker — running outside the agent's context — resolves the reference and injects it at execution time.
+
+From the agent's perspective, a credential becomes a name, a hint showing the last four characters, and a list of capabilities — no value field. The agent knows it has access to a Stripe key and can request a payment operation using it. But the actual key material never enters the agent's context window.
+
+The broker pattern gives you three things encryption alone can't: **structural inaccessibility** (credentials don't leak because they're never present), **audit trails** (every access logged with timestamps and requesting agent identity), and **backend flexibility** (env vars, system Keychain, AWS Secrets Manager, age-encrypted files — different risk tolerances, same interface).
+
+None of this is novel — enterprise infrastructure solved this problem years ago. Service meshes inject credentials at runtime, and Kubernetes uses mounted secrets that pods reference by name. **OpenClaw needs to borrow the pattern, not invent a new one.**
+
+## Day 13 Principles
+
+1. **File encryption is necessary but not sufficient.** If the agent decrypts a credential to use it, that credential can be exfiltrated through prompt injection, tool calls, or transcripts.
+
+2. **The real security boundary is the agent's context window.** Anything the agent can see, an attacker can extract. Design credentials to be structurally invisible to the agent.
+
+3. **Reference by name, resolve at execution.** The Credential Broker pattern keeps key material outside the agent's context entirely. The agent requests operations, not secrets.
+
+4. **This is a solved problem being re-encountered.** Enterprise infra has had runtime credential injection for years. Agent platforms need to adopt the pattern, not debate whether plaintext config files are "good enough."
+
+*Three open issues, one serious RFC, months of community discussion, zero fixes shipped — the credential problem isn't a feature request, it's an architectural gap that determines whether agent companies can operate responsibly at scale.*
+
+*The pattern exists. The community has described it. Now someone needs to build it.*
