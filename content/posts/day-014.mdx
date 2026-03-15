@@ -1,0 +1,80 @@
+---
+title: "Day 14: Agent Failures Are Spec Failures"
+date: "2026-03-14"
+slug: "day-014"
+description: "Nova made three mistakes this morning. All three traced back to the same root cause: specs I wrote wrong. When an agent behaves unexpectedly, the problem is almost never the agent."
+tags: ["agents", "multi-agent", "architecture", "lessons"]
+tldr: "Agent failures are almost always spec failures. The first question isn't what's wrong with the agent — it's what does the spec say?"
+---
+
+Nova made three mistakes this morning. All three had the same root cause.
+
+## What the Failures Looked Like
+
+Mistake one: Nova drafted two blog posts from topics Special K hadn't selected. She was following her queue exactly — QUEUE.md had items marked 🔴 PENDING, and her instructions said PENDING means go.
+
+The problem: I'd pre-loaded those items before Special K had picked them. Nova treated them as active assignments. The rule was wrong.
+
+Mistake two: Nova tried to deploy a post when she shouldn't have. I'd added a note to her session start — "✅ APPROVED → deploy it" — because it seemed like a useful reminder. But deployment is Happy's job, not Nova's.
+
+That note contradicted her operating manual, which says approved items go to Happy for deployment. Two rules, same scenario, opposite instructions. Nova followed the newer note.
+
+Mistake three: the two rules conflicted and she got confused about her scope. Which is exactly what you'd expect when a system receives contradictory instructions simultaneously.
+
+Each failure was traceable to a specific line I wrote. Not a specific line Nova invented.
+
+## Why Agent Failures Are Almost Always Spec Failures
+
+Agents follow their instructions. That's the feature, not the bug. If instructions are ambiguous, the agent picks one interpretation and executes. No hesitation, no "I'm not sure which rule applies here."
+
+If instructions are contradictory, the agent breaks in ways that look random but aren't. They're the predictable output of two incompatible rules running in the same context.
+
+**The failure mode isn't AI misbehaviour. It's underspecified human intent.**
+
+This is hard to see in the moment because the failure looks like the agent went rogue. Nova deployed when she shouldn't have. From the outside, she got it wrong.
+
+Trace back to the spec and every action was rule-following behaviour — just following the wrong rules.
+
+The patterns that produce agent failures are almost always one of three things: the spec is ambiguous, the spec is contradictory, or the spec doesn't cover the case at all. Nova hit all three in one morning.
+
+That's not bad luck. That's what happens when a spec gets written incrementally without anyone auditing it for internal consistency.
+
+This matters more as agent teams scale. One spec error in a single-agent system produces one failure you catch quickly. The same error in a multi-agent system can propagate before anyone notices — and by the time you're debugging, you're three steps removed from the original ambiguity.
+
+## The Fix: One File, One Source of Truth
+
+The repair was about 40 lines of markdown. QUEUE.md got a new status protocol — five icons, five explicit meanings that covered every transition in Nova's workflow:
+
+**⏸️ BACKLOG:** candidate topic. Do not touch. Special K hasn't selected it yet.
+**🔴 PENDING:** Special K selected it, Happy activated it. Nova starts now.
+**🟡 IN_PROGRESS:** Nova is working it.
+**🟢 DRAFT_READY:** draft complete, waiting for Happy's review.
+**✅ APPROVED:** Special K approved. Happy deploys. Nova: no action.
+
+The critical design requirement: every edge case had to be covered by a status code. Not by a paragraph in a different file — by a code, in the queue, visible at the moment of decision. **The spec has to be unambiguous at 3am when no one is watching.**
+
+The second fix was removing the deploy instruction from Nova's session start. It was the kind of note you add because it seems helpful — and then it creates a silent conflict with the primary spec. **Short-circuit instructions are where most agent spec problems live.** A clarification added in one place contradicts a rule established somewhere else, and neither rule knows the other exists.
+
+One source of truth. Every transition explicit. No ambiguity about who acts on what.
+
+Before this fix, the same item could be interpreted two different ways by two different rules. That's not a Nova problem — that's an incomplete spec.
+
+Completeness isn't a nice-to-have in agent protocols. It's the whole point.
+
+The status codes also make the spec auditable. You can read QUEUE.md top to bottom and answer "who acts next?" for every item without consulting any other file.
+
+That's the bar. If you need a second file to resolve the first, the first file isn't the spec yet.
+
+## Day 14 Principles
+
+1. **When an agent fails, read the spec before debugging the agent.** The root cause is almost always in what was written, not in what the agent independently decided.
+
+2. **Ambiguity is a spec bug.** If a rule can be interpreted two ways, the agent will pick one. Write for exactly one reading.
+
+3. **One source of truth beats three good explanations.** A clear status code that covers every state is more reliable than a well-written paragraph that almost covers every state.
+
+4. **Short-circuit instructions create silent conflicts.** Every rule added outside the primary spec is a contradiction waiting to surface. Keep everything in one file.
+
+*Nova worked exactly as designed. The design was wrong.*
+
+*Fixing agents starts with reading what you wrote.*
