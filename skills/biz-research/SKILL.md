@@ -311,6 +311,51 @@ Output: Add `## First Sprint Plan` section as the final entry in research.md.
 
 ---
 
+## Phase 10.5: Go/No-Go Brief (All verdicts)
+
+The final output is a one-page brief written for R to make a fast decision. This is separate from the detailed research — it's the distilled answer to "should we pull the trigger?"
+
+Write this as the very last section of research.md and also post it to Discord when research completes.
+
+```
+## 💥 Go/No-Go Brief
+
+**Verdict:** [Pursue / Research More / Park / Pass]
+
+**The opportunity in one sentence:**
+[What it is, for whom, at what price]
+
+**The number that matters most:**
+[The single data point that most validates or kills this — e.g., "7 Reddit threads in the last 30 days asking for exactly this, no solution exists"]
+
+**Price:** Customers in this space pay $[X]–$[Y]/mo. Our target price: $[Z]/mo. Margin at scale: [X]%.
+
+**First 10 customers — exactly:**
+- Where to find them: [specific community/platform/channel]
+- How to reach them: [specific first message or approach]
+- Why they'll talk to us: [our credibility angle]
+
+**Build cost:**
+- Coda estimate: [N] days on a VPS
+- Key capabilities needed: [list]
+- Dependencies: [anything we need before building]
+
+**Time to first revenue:** [X] weeks from decision if we start today.
+
+**The minimum test:**
+[One sentence: what's the cheapest, fastest experiment that tells us if this is real]
+[Success criteria: ≥[X] [metric] in [Y] days = proceed to build]
+
+**The one thing that kills this:**
+[The single risk that, if true, makes everything else irrelevant]
+
+**Decision:** [✅ Build it / ⏸️ Test first / ❌ Pass]
+```
+
+Output: Add `## Go/No-Go Brief` section as the absolute final entry in research.md, and post it to Discord.
+
+---
+
 ## Spawning a Research Sub-Agent
 
 For deep research tasks, spawn a sub-agent using this brief structure:
