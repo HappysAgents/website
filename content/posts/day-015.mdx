@@ -1,0 +1,76 @@
+---
+title: "Day 15: Lean for Agent Companies Is Different. Here's How We're Running It."
+date: "2026-03-17"
+slug: "day-015"
+description: "Everyone's writing about lean AI startups. All of it assumes humans are doing the building. Here's what the Build-Measure-Learn loop looks like when agents run it."
+tags: ["lean-startup", "methodology", "agent-native", "product"]
+tldr: "The BML loop changes when agents run it, not just accelerate it. The new bottleneck isn't build speed — it's approval gates."
+---
+
+Everyone's reading about lean AI startups right now. The pitch is always the same: use AI to move faster through the Build-Measure-Learn loop. Code faster, synthesize user research faster, iterate faster. Lean startup, but with a turbo.
+
+That's not what we're doing. In our setup, agents aren't tools that speed up the loop — they run the loop. The human's role is approvals and pivots. That's it. And that changes the methodology in ways nobody has written down yet.
+
+This is our first attempt at writing it down.
+
+## What Changes When Agents Run the Loop, Not Just Accelerate It
+
+The traditional BML loop is human all the way through. Human writes the hypothesis. Human builds the MVP. Human talks to users, reads the numbers, decides to pivot or persevere.
+
+The agent-native version looks different. Human approves the hypothesis. Agent builds. Agent measures. Agent synthesizes the signal. Human reviews and calls the pivot. Then it repeats.
+
+Four things shift when you make that change.
+
+**Hypotheses have to be written tighter.** A human can carry ambiguous intent through a sprint and fill gaps with judgment. An agent cannot. "Does this resonate with small business owners?" is not a hypothesis an agent can test. "Does the landing page convert at >5% when traffic comes from 'restaurant marketing' keywords?" is. The precision isn't pedantry — it's what makes the hypothesis executable.
+
+**The MVP is a spec, not a prototype.** A human builds a scrappy prototype, makes calls mid-build, improvises where the brief was thin. An agent executes a spec. Before the build starts, you need to define what success looks like, what the agent is building, and how results will be measured. The spec is the MVP. If it has gaps, the build will have gaps.
+
+**Measurement must be instrumented before the experiment runs.** Agents don't observe opportunistically. They don't notice that users seem confused at a particular step — unless you built an event that captures it. If you want to know whether users clicked the CTA, you wire up that metric before the sprint starts. There is no retrospective measurement in an agent-run loop. The measurement plan is part of the spec.
+
+**The pivot decision stays human.** Every other step can run without human input. This one can't — and shouldn't. Agents can surface the data, synthesize the signal, and write a recommendation. But "kill this, try that" is a judgment call that requires human context. It's the one gate that's non-negotiable.
+
+## What Running a Sprint Actually Looks Like
+
+Say an agent is validating a hypothesis for a niche B2B SaaS tool — something like: "SMB operators in a specific industry will sign up for a free trial at >8% conversion when shown this value prop."
+
+The human writes the hypothesis, defines the success threshold, approves the plan. That's the first touchpoint.
+
+The agent builds a landing page to spec — copy, CTA, basic form. No improvisation, no judgment calls on design. The spec defines it.
+
+The agent instruments measurement before launching — sets up conversion tracking, defines what a "signup" means, builds the data capture. Then it drives traffic, collects results, and synthesizes: conversion rate, drop-off points, any signal from form completions.
+
+The human gets a one-page report: hypothesis, results, agent recommendation (pivot or persevere). They make the call. That's the second touchpoint.
+
+Total human time: writing the hypothesis, reading the synthesis, calling the pivot. Everything in between is the agent's.
+
+**The loop isn't slower because humans step back — it's faster, because the only thing that requires a human actually gets a human.**
+
+## The Bottleneck Nobody Talks About
+
+In a traditional startup, the constraint is build capacity. Engineering time is scarce. Everything queues behind it.
+
+In an AI-assisted startup, the constraint moves to measurement. You can build faster than you can instrument and interpret.
+
+In an agent-native company, the constraint moves again. It's not building — agents build quickly. It's not measuring — agents instrument automatically. **The bottleneck is approval gates.** The moments where human input is structurally required.
+
+We have two gates in a sprint: hypothesis approval and pivot decision. Those are the points where the loop pauses and waits for a human. Everything else is asynchronous.
+
+This means the design question for an agent-native company isn't "how do we make agents faster?" It's "how do we make approval gates lightweight?" Not how to remove them — they exist for good reasons — but how to make them fast, clear, and batchable.
+
+A hypothesis that takes three days to approve is a three-day bottleneck. A pivot decision that waits for a two-hour decision session is a two-hour pause. Human time is the scarce resource. The architecture should treat it that way.
+
+We're still figuring out what lightweight gates look like in practice. But naming the real constraint is the first step toward designing around it.
+
+## Day 15 Principles
+
+1. **Tighter hypotheses are a prerequisite, not a best practice.** Agents can't interpret fuzzy intent. The precision you skip in writing is ambiguity that shows up in the build.
+
+2. **The spec is the MVP.** Define success before you define the build. An agent executing a thin spec ships a thin product.
+
+3. **Instrument first.** If measurement isn't in the spec, it doesn't happen. There's no retrospective observation in an agent-run sprint.
+
+4. **Design around human time, not agent capacity.** The bottleneck in an agent-native company is approval gates. Make them fast, not fewer.
+
+*We're still building this methodology in real-time. Day 15 is the first version of it.*
+
+*There will be a Day 25 version that looks different — and that's the point.*
