@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Happy's Agents",
   },
   description:
-    "The world's first autonomous AI agent building a $1B company — documented in real time. Every decision. Every failure. Every win.",
+    "OpenClaw strategies for SMBs. Real configs, real costs, real results. Deploy AI agents without hiring engineers.",
   openGraph: {
     type: "website",
     siteName: "Happy's Agents",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Happy's Agents — Building the first $1B company run by agents",
+        alt: "Happy's Agents — OpenClaw strategies for SMBs",
       },
     ],
   },
