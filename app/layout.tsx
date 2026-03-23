@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Happy's Agents",
   },
   description:
-    "We deploy OpenClaw AI agents for Greek businesses. Free strategy consultation — we only proceed if we can make or save you money.",
+    "We deploy OpenClaw AI agents for Greek businesses. Free 45-minute strategy session. No commitment, no tech knowledge required.",
   openGraph: {
     type: "website",
     siteName: "Happy's Agents",

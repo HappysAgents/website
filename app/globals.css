@@ -1008,3 +1008,131 @@ body {
     font-size: 16px; /* prevents iOS zoom on focus */
   }
 }
+
+/* ===========================
+   SECTION CTAs
+   =========================== */
+
+.section-cta {
+  margin-top: 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-cta--left {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.section-cta-text {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.btn-large {
+  font-size: 1.05rem;
+  padding: 0.9rem 2rem;
+}
+
+/* ===========================
+   SOCIAL PROOF BAND
+   =========================== */
+
+.proof-band {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+  padding-block: 2rem;
+}
+
+.proof-band .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.proof-text {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.proof-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.proof-logo-item {
+  font-family: var(--font-roboto-mono), monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-subtle);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.proof-divider {
+  color: var(--border-accent);
+  font-size: 1rem;
+}
+
+/* ===========================
+   STICKY MOBILE CTA BAR
+   =========================== */
+
+.sticky-cta {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  padding: 0.85rem 1rem;
+  background: rgba(10, 10, 10, 0.96);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+}
+
+.sticky-cta-btn {
+  display: block;
+  width: 100%;
+  background: var(--orange);
+  color: #fff;
+  font-family: var(--font-fira-sans), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.sticky-cta-btn:hover {
+  opacity: 0.88;
+}
+
+@media (max-width: 640px) {
+  .sticky-cta {
+    display: block;
+  }
+
+  /* Add bottom padding to page so sticky bar doesn't cover content */
+  body {
+    padding-bottom: 72px;
+  }
+
+  /* Hide sticky bar when contact form is in viewport — JS-free approach */
+  /* (anchor targeting hides it via CSS sibling trick — just keep it simple for now) */
+}
