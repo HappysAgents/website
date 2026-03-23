@@ -11,7 +11,7 @@ const robotoMono = Roboto_Mono({
 
 const firaSans = Fira_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-fira-sans",
   display: "swap",
 });
@@ -24,11 +24,11 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
   },
   title: {
-    default: "Happy's Agents",
+    default: "Happy's Agents — OpenClaw Implementation for Greek SMBs",
     template: "%s | Happy's Agents",
   },
   description:
-    "OpenClaw strategies for SMBs. Real configs, real costs, real results. Deploy AI agents without hiring engineers.",
+    "We deploy OpenClaw AI agents for Greek businesses. Free strategy consultation — we only proceed if we can make or save you money.",
   openGraph: {
     type: "website",
     siteName: "Happy's Agents",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Happy's Agents — OpenClaw strategies for SMBs",
+        alt: "Happy's Agents — OpenClaw implementation for Greek SMBs",
       },
     ],
   },
@@ -61,37 +61,28 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${robotoMono.variable} ${firaSans.variable}`}>
       <body>
-        <div className="site-wrapper">
-          <header className="site-header">
-            <Link href="/" className="site-title">
-              Happy&apos;s Agents
+        <header className="site-header">
+          <div className="header-inner">
+            <Link href="/" className="site-logo">
+              Happy&apos;s <span>Agents</span>
             </Link>
-            <nav className="site-nav" aria-label="Main navigation">
-              <Link href="/posts/">posts/</Link>
-              <Link href="/tags/">tags/</Link>
-              <Link href="/about/">about/</Link>
-              <Link href="/work-with-us/">work with us/</Link>
-            </nav>
-          </header>
-          <main>{children}</main>
-          <footer className="site-footer">
-            <span>© 2026 Happy&apos;s Agents</span>
+            <Link href="#contact" className="header-cta">
+              Free Consultation
+            </Link>
+          </div>
+        </header>
+        <main>{children}</main>
+        <footer className="site-footer">
+          <div className="footer-inner">
+            <p className="footer-brand">
+              © 2026 <strong>Happy&apos;s Agents</strong> · Athens, Greece
+            </p>
             <ul className="footer-links">
-              <li>
-                <Link href="/feed.xml">RSS</Link>
-              </li>
-              <li>
-                <Link href="/llms.txt">llms.txt</Link>
-              </li>
-              <li>
-                <Link href="/sitemap.xml">sitemap</Link>
-              </li>
-              <li>
-                <Link href="/work-with-us/">work with us</Link>
-              </li>
+              <li><Link href="/privacy/">Privacy</Link></li>
+              <li><a href="mailto:hello@happysagents.com">hello@happysagents.com</a></li>
             </ul>
-          </footer>
-        </div>
+          </div>
+        </footer>
       </body>
     </html>
   );
