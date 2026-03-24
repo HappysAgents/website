@@ -1,0 +1,18 @@
+# Cloudflare Pages Headers Configuration
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+# Ensure UTF-8 encoding for text files
+/*.txt
+  Content-Type: text/plain; charset=utf-8
+
+/*.html
+  Content-Type: text/html; charset=utf-8
+
+/*.xml
+  Content-Type: application/xml; charset=utf-8
+
+/*.css
+  Content-Type: text/css; charset=utf-8
+
+/*.js
+  Content-Type: application/javascript; charset=utf-8

@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@HappyAgents_HQ" />
   <!-- Agent-native discovery -->
-  <link rel="alternate" type="application/rss+xml" title="Happy's Agents" href="/feed.xml" />
+  <!-- RSS feed temporarily disabled -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1153,6 +1153,59 @@
       .form-wrapper { gap: 36px; }
     }
 
+    /* ─── CUSTOM CHECKBOXES ───────────────────────────────────── */
+    .check-option {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text2);
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .check-option:hover { border-color: var(--border2); background: var(--surface); }
+    .check-option input[type="checkbox"] { display: none; }
+    .check-box {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      border: 2px solid var(--border2);
+      border-radius: 6px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s, background 0.15s;
+      background: var(--bg);
+    }
+    .check-box::after {
+      content: '';
+      width: 5px;
+      height: 10px;
+      border: 2.5px solid transparent;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg) translateY(-1px);
+      transition: border-color 0.1s;
+    }
+    .check-option input[type="checkbox"]:checked ~ .check-box {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+    .check-option input[type="checkbox"]:checked ~ .check-box::after { border-color: #000; }
+    .check-option:has(input:checked) {
+      border-color: rgba(232,101,10,0.4);
+      background: rgba(232,101,10,0.06);
+      color: var(--text);
+    }
+
     /* ─── FOCUS RING IMPROVE ──────────────────────────────────── */
     .form-group input:focus,
     .form-group select:focus,
@@ -1172,7 +1225,7 @@
       <span class="nav-logo-dot"></span>
       HAPPY'S AGENTS
     </a>
-    <a href="#apply" class="nav-cta">See If There's a Fit</a>
+    <a href="#apply" class="nav-cta">Request a Conversation</a>
   </nav>
 
   <!-- HERO -->
@@ -1188,12 +1241,12 @@
       <p class="hero-sub">We bring the engineering team and capital. You bring the industry moat. We only win when you win.</p>
       <div class="hero-actions">
         <a href="#apply" class="btn-primary">
-          See If There's a Fit
+          Request a Conversation
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <span class="hero-micro">2-minute application. No pitch deck.</span>
+        <span class="hero-micro">We review every introduction personally.</span>
       </div>
     </div>
 
@@ -1230,8 +1283,8 @@
                 </svg>
               </div>
               <div>
-                <div class="hv-item-name">Energy Trading Co.</div>
-                <div class="hv-item-sub">TRADING SIGNAL AGENTS</div>
+                <div class="hv-item-name">Construction Wholesale</div>
+                <div class="hv-item-sub">PROCUREMENT AUTOMATION</div>
               </div>
             </div>
             <div class="hv-item-badge">BUILDING</div>
@@ -1507,14 +1560,14 @@
     <div class="container">
       <div class="form-wrapper">
         <div class="form-left reveal">
-          <div class="label">Let's Partner</div>
-          <h2>See if there's a fit.</h2>
-          <p class="form-left-sub">We select 4–6 partners per year. Two minutes to apply. We respond personally within 48 hours.</p>
+          <div class="label">Partnerships</div>
+          <h2>Introduce Your Business.</h2>
+          <p class="form-left-sub">Fewer than 6 partnerships per year. We review every introduction personally — if there's a fit, you'll hear from us directly within 48 hours.</p>
           <div class="form-promise">
-            <div class="promise-item">Every application read by a founder</div>
-            <div class="promise-item">Fit = direct conversation, not a sales deck</div>
-            <div class="promise-item">No fit = quick, honest no</div>
-            <div class="promise-item">Zero commitment to apply</div>
+            <div class="promise-item">Every introduction reviewed personally</div>
+            <div class="promise-item">A fit means a direct conversation — no sales deck</div>
+            <div class="promise-item">No fit = a quick, honest response</div>
+            <div class="promise-item">No commitment to start a conversation</div>
           </div>
         </div>
 
@@ -1622,26 +1675,26 @@
                 <div class="step-label">Step 03 — The opportunity</div>
                 <div class="form-group">
                   <label>Where could AI move the needle for you? <span class="opt">(select all that apply)</span></label>
-                  <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px;" id="challenge-checks">
-                    <label style="display:flex;align-items:center;gap:10px;font-weight:400;cursor:pointer;font-size:15px;color:var(--text2)">
-                      <input type="checkbox" name="challenge" value="reducing-costs" style="width:16px;height:16px;accent-color:var(--orange);flex-shrink:0;" />
-                      Reducing operational costs or headcount
+                  <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;" id="challenge-checks">
+                    <label style="display:flex;flex-direction:row;align-items:center;gap:12px;cursor:pointer;font-size:15px;font-weight:400;color:var(--text2);padding:12px 16px;border:1px solid var(--border);border-radius:8px;">
+                      <input type="checkbox" name="challenge[]" value="reducing-costs" style="width:20px;height:20px;min-width:20px;accent-color:var(--orange);cursor:pointer;flex-shrink:0;margin:0;" />
+                      <span>Reducing operational costs or headcount</span>
                     </label>
-                    <label style="display:flex;align-items:center;gap:10px;font-weight:400;cursor:pointer;font-size:15px;color:var(--text2)">
-                      <input type="checkbox" name="challenge" value="new-revenue" style="width:16px;height:16px;accent-color:var(--orange);flex-shrink:0;" />
-                      Opening new revenue lines or markets
+                    <label style="display:flex;flex-direction:row;align-items:center;gap:12px;cursor:pointer;font-size:15px;font-weight:400;color:var(--text2);padding:12px 16px;border:1px solid var(--border);border-radius:8px;">
+                      <input type="checkbox" name="challenge[]" value="new-revenue" style="width:20px;height:20px;min-width:20px;accent-color:var(--orange);cursor:pointer;flex-shrink:0;margin:0;" />
+                      <span>Opening new revenue lines or markets</span>
                     </label>
-                    <label style="display:flex;align-items:center;gap:10px;font-weight:400;cursor:pointer;font-size:15px;color:var(--text2)">
-                      <input type="checkbox" name="challenge" value="speed-quality" style="width:16px;height:16px;accent-color:var(--orange);flex-shrink:0;" />
-                      Improving speed or quality of service delivery
+                    <label style="display:flex;flex-direction:row;align-items:center;gap:12px;cursor:pointer;font-size:15px;font-weight:400;color:var(--text2);padding:12px 16px;border:1px solid var(--border);border-radius:8px;">
+                      <input type="checkbox" name="challenge[]" value="speed-quality" style="width:20px;height:20px;min-width:20px;accent-color:var(--orange);cursor:pointer;flex-shrink:0;margin:0;" />
+                      <span>Improving speed or quality of service delivery</span>
                     </label>
-                    <label style="display:flex;align-items:center;gap:10px;font-weight:400;cursor:pointer;font-size:15px;color:var(--text2)">
-                      <input type="checkbox" name="challenge" value="data-decisions" style="width:16px;height:16px;accent-color:var(--orange);flex-shrink:0;" />
-                      Better decision-making from our data
+                    <label style="display:flex;flex-direction:row;align-items:center;gap:12px;cursor:pointer;font-size:15px;font-weight:400;color:var(--text2);padding:12px 16px;border:1px solid var(--border);border-radius:8px;">
+                      <input type="checkbox" name="challenge[]" value="data-decisions" style="width:20px;height:20px;min-width:20px;accent-color:var(--orange);cursor:pointer;flex-shrink:0;margin:0;" />
+                      <span>Better decision-making from our data</span>
                     </label>
-                    <label style="display:flex;align-items:center;gap:10px;font-weight:400;cursor:pointer;font-size:15px;color:var(--text2)">
-                      <input type="checkbox" name="challenge" value="other" style="width:16px;height:16px;accent-color:var(--orange);flex-shrink:0;" />
-                      Something else
+                    <label style="display:flex;flex-direction:row;align-items:center;gap:12px;cursor:pointer;font-size:15px;font-weight:400;color:var(--text2);padding:12px 16px;border:1px solid var(--border);border-radius:8px;">
+                      <input type="checkbox" name="challenge[]" value="other" style="width:20px;height:20px;min-width:20px;accent-color:var(--orange);cursor:pointer;flex-shrink:0;margin:0;" />
+                      <span>Something else</span>
                     </label>
                   </div>
                   <div class="form-error" id="err-challenge">Select at least one</div>
@@ -1664,7 +1717,7 @@
                 <div class="form-actions">
                   <button type="button" class="btn-back" onclick="prevStep(3)">Back</button>
                   <button type="submit" class="btn-next" id="submitBtn">
-                    Submit Application
+                    Request a Conversation
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </button>
                 </div>
@@ -1678,8 +1731,8 @@
                   <path d="M4 10l4.5 4.5L16 6" stroke="#e8650a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <h3>Application received.</h3>
-              <p>We read every application ourselves. If there's a fit, you'll hear from us within 48 hours — no sales pitch.</p>
+              <h3>Introduction received.</h3>
+              <p>We review every introduction personally. If there's a fit, you'll hear from us directly within 48 hours.</p>
             </div>
           </div>
         </div>
@@ -1693,7 +1746,7 @@
     <ul class="footer-links">
       <li><a href="/llms.txt">llms.txt</a></li>
       <li><a href="/sitemap.xml">sitemap.xml</a></li>
-      <li><a href="/feed.xml">feed.xml</a></li>
+      <!-- <li><a href="/feed.xml">feed.xml</a></li> -->
     </ul>
   </footer>
 
@@ -1780,7 +1833,7 @@
       if (!validateStep(3)) return;
 
       // Validate at least one challenge checkbox checked
-      const checked = [...document.querySelectorAll('input[name="challenge"]:checked')].map(c => c.value);
+      const checked = [...document.querySelectorAll('input[name="challenge[]"]:checked')].map(c => c.value);
       if (checked.length === 0) {
         document.getElementById('err-challenge').style.display = 'block';
         return;

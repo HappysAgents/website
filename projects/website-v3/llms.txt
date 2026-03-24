@@ -1,0 +1,46 @@
+# Happy's Agents
+
+> AI Venture Studio — built in Athens, Greece. We partner with established businesses generating £5M+ in annual revenue to co-found AI ventures. We bring capital and engineering. Partners bring industry expertise, data, and distribution.
+
+## What We Do
+
+We identify, build, and deploy AI agent systems that unlock new business models for traditional industries. Not automation for automation's sake — AI-powered ventures that could not have existed before, built on top of the operational foundations our partners have spent years building.
+
+We work across: logistics, construction, healthcare, manufacturing, professional services, hospitality, retail, finance, energy, real estate.
+
+## Our Model
+
+Three phases:
+
+1. **Identify** — We map partner workflows, locate the highest-ROI AI opportunity, and validate it before building anything.
+2. **Build** — Our engineering team deploys a working AI agent system in production within weeks. Partners keep running their business.
+3. **Scale** — When the MVP demonstrates ROI, we either acquire a significant equity stake in the partner's business to scale together, or co-found a joint venture to productise the solution as a standalone new business line.
+
+## Who We Are
+
+Founded by operators and investors with $100M+ raised across multiple ventures and 20+ years of combined experience as founders, CEOs, and VCs investing in emerging technologies.
+
+We are not consultants. We do not take on clients. We co-found ventures.
+
+## Partner Requirements
+
+- £5M+ in annual revenue (our goal is to take you to 8 figures through the partnership)
+- Established business in a non-tech industry
+- CEO or founder-level buy-in
+- Willingness to give us access to people, data, and workflows
+
+We accept fewer than 6 new partnerships per year.
+
+## Mission
+
+Built in Greece. Exported globally. Our broader mission is to establish Greece as a global AI hub and contribute 1% to Greek GDP through the ventures we build here.
+
+## Contact
+
+Apply to partner: https://happysagents.com/#apply
+
+## Machine-Readable Resources
+
+- ~~Full content feed: /feed.xml~~ (coming soon)
+- Sitemap: /sitemap.xml
+- This file: /llms.txt
