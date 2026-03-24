@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy's Agents — AI Venture Studio</title>
+  <meta name="description" content="We build new AI revenue lines inside established businesses — at our cost, for a share of the upside. We bring engineering and capital. You bring the industry moat." />
+  <meta property="og:title" content="Happy's Agents — AI Venture Studio" />
+  <meta property="og:description" content="We build new AI revenue lines inside established businesses. We bring engineering and capital. You bring the industry moat. We share the outcome." />
+  <meta property="og:type" content="website" />
+  <!-- SEO / AEO -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>😄</text></svg>" />
+  <link rel="canonical" href="https://happysagents.com/" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:url" content="https://happysagents.com/" />
+  <meta property="og:site_name" content="Happy's Agents" />
+  <meta property="og:locale" content="en_GB" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@HappyAgents_HQ" />
+  <!-- Agent-native discovery -->
+  <link rel="alternate" type="application/rss+xml" title="Happy's Agents" href="/feed.xml" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Happy's Agents",
+    "url": "https://happysagents.com",
+    "description": "AI Venture Studio. We build new AI revenue lines inside established businesses — at our cost, for a share of the upside.",
+    "foundingDate": "2026",
+    "areaServed": "Global",
+    "knowsAbout": ["AI agents", "venture studio", "AI ventures", "business model innovation", "OpenClaw"],
+    "sameAs": ["https://twitter.com/HappyAgents_HQ"]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0a0a;
+      --surface:   #141414;
+      --surface2:  #1a1a1a;
+      --border:    #282828;
+      --border2:   #333;
+      --orange:    #e8650a;
+      --orange-dim: rgba(232,101,10,0.14);
+      --orange-glow: rgba(232,101,10,0.06);
+      --text:      #f0f0f0;
+      --text2:     #c8c8c8;
+      --muted:     #909090;
+      --muted2:    #555;
+      --max:       1120px;
+      --ease:      cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ─── UTILITIES ────────────────────────────────────────────── */
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    @media (max-width: 768px) { .container { padding: 0 20px; } }
+
+    .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── NAV ──────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10,10,10,0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    @media (max-width: 768px) { nav { padding: 16px 20px; } }
+
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-logo-dot {
+      width: 7px; height: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .nav-logo-img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      color: #000;
+      background: var(--orange);
+      padding: 9px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s var(--ease), transform 0.1s;
+      letter-spacing: 0.01em;
+    }
+    .nav-cta:hover { background: #d45800; }
+    .nav-cta:active { transform: scale(0.98); }
+
+    /* ─── HERO ─────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100dvh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+      padding: 120px 40px 80px;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 100px 20px 48px;
+        gap: 40px;
+        min-height: auto;
+      }
+    }
+
+    .hero-left {}
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border2);
+      border-radius: 100px;
+      padding: 7px 16px 7px 10px;
+      margin-bottom: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text2);
+    }
+    .hero-tag-dot {
+      width: 6px; height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: #fff;
+      margin-bottom: 28px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--text2);
+      line-height: 1.75;
+      max-width: 44ch;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #000;
+      background: var(--orange);
+      padding: 14px 28px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s var(--ease), transform 0.1s;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary:hover { background: #d45800; }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-primary svg { transition: transform 0.2s var(--ease); }
+    .btn-primary:hover svg { transform: translateX(3px); }
+
+    .hero-micro {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* HERO RIGHT — abstract grid */
+    .hero-right {
+      position: relative;
+    }
+    /* Mobile: visual stays BELOW text — no order override */
+
+    .hero-visual {
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+      overflow: hidden;
+      padding: 36px;
+    }
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(232,101,10,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hv-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .hv-stat {
+      font-size: 3.5rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .hv-stat-label {
+      font-size: 13px;
+      color: var(--text2);
+      margin-bottom: 32px;
+    }
+
+    .hv-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .hv-items { display: flex; flex-direction: column; gap: 16px; }
+    .hv-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .hv-item-left { display: flex; align-items: center; gap: 10px; }
+    .hv-item-icon {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .hv-item-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .hv-item-sub { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; }
+    .hv-item-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: 100px;
+      background: var(--orange-dim);
+      color: var(--orange);
+      border: 1px solid rgba(232,101,10,0.2);
+      white-space: nowrap;
+    }
+    .hv-item-badge.neutral {
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      border-color: var(--border);
+    }
+
+    .hv-bottom {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hv-bottom-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 6px rgba(34,197,94,0.5);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    /* ─── MARQUEE ──────────────────────────────────────────────── */
+    .marquee-section {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+    .marquee-section::before,
+    .marquee-section::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .marquee-section::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+    .marquee-section::after { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marquee 30s linear infinite;
+      width: max-content;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 32px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .marquee-item::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    /* ─── SECTIONS ─────────────────────────────────────────────── */
+    section { padding: 100px 0; }
+    @media (max-width: 768px) { section { padding: 48px 0; } }
+
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── PROBLEM ──────────────────────────────────────────────── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .problem-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    .problem-left h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 28px;
+      margin-top: 16px;
+    }
+    .problem-left p {
+      font-size: 1.05rem;
+      color: var(--text2);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+    .problem-left p strong { color: var(--text); font-weight: 600; }
+    .problem-left p:last-child { margin-bottom: 0; }
+
+    .problem-right {
+      padding-top: 40px;
+    }
+    .stat-block {
+      border-left: 2px solid var(--orange);
+      padding-left: 28px;
+      margin-bottom: 40px;
+    }
+    .stat-number {
+      font-size: 3.8rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: #fff;
+      line-height: 1;
+    }
+    .stat-desc {
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-top: 10px;
+      max-width: 30ch;
+    }
+
+    /* ─── HOW IT WORKS ─────────────────────────────────────────── */
+    .steps-header { margin-bottom: 56px; }
+    .steps-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fff;
+      line-height: 1.15;
+      margin-top: 16px;
+    }
+
+    .steps-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .steps-meta-item {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 5px 14px;
+      letter-spacing: 0.04em;
+    }
+
+    .steps-list { display: flex; flex-direction: column; gap: 2px; }
+
+    .step-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.3s var(--ease);
+      position: relative;
+      --mouse-x: 50%;
+      --mouse-y: 50%;
+    }
+    .step-row:not(:last-child) { margin-bottom: 12px; }
+    .step-row::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 13px;
+      background: radial-gradient(
+        300px circle at var(--mouse-x) var(--mouse-y),
+        rgba(232,101,10,0.12),
+        transparent 60%
+      );
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .step-row:hover { border-color: var(--border2); }
+    .step-row:hover::before { opacity: 1; }
+
+    .step-num-col {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 0;
+      position: relative;
+      z-index: 1;
+    }
+    .step-num-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+    }
+
+    .step-content {
+      padding: 32px 36px;
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 600px) { .step-content { padding: 24px 20px; } }
+
+    .step-content h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .step-content p {
+      font-size: 1rem;
+      color: var(--text2);
+      line-height: 1.8;
+      max-width: 62ch;
+    }
+
+    /* ─── WHO IT'S FOR ─────────────────────────────────────────── */
+    .icp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .icp-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .icp-left h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fff;
+      line-height: 1.15;
+      margin-top: 16px;
+      margin-bottom: 36px;
+    }
+
+    .icp-list { display: flex; flex-direction: column; gap: 0; }
+    .icp-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .icp-item:first-child { border-top: 1px solid var(--border); }
+
+    .icp-icon {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--orange-dim);
+      border: 1px solid rgba(232,101,10,0.2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .icp-icon svg { width: 10px; height: 10px; }
+    .icp-text { font-size: 1rem; color: var(--text2); line-height: 1.7; }
+    .icp-text strong { color: var(--text); font-weight: 600; }
+
+    .icp-right { padding-top: 60px; }
+
+    .not-for-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 28px;
+      margin-bottom: 24px;
+    }
+    .not-for-block .label { margin-bottom: 12px; display: block; }
+    .not-for-block p {
+      font-size: 1rem;
+      color: var(--text2);
+      line-height: 1.75;
+    }
+
+    .selection-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ─── PARTNERSHIP ──────────────────────────────────────────── */
+    .partnership-header { margin-bottom: 48px; }
+    .partnership-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fff;
+      line-height: 1.15;
+      margin-top: 16px;
+    }
+
+    .partnership-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .partnership-cols { grid-template-columns: 1fr; } }
+
+    .partnership-col {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .partnership-col.highlight {
+      border-color: rgba(232,101,10,0.3);
+      background: linear-gradient(160deg, rgba(232,101,10,0.05) 0%, transparent 60%);
+    }
+
+    .pcol-header {
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .partnership-col.highlight .pcol-header { border-color: rgba(232,101,10,0.15); }
+    .pcol-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text2);
+      font-weight: 600;
+    }
+    .partnership-col.highlight .pcol-tag { color: var(--orange); }
+
+    .pcol-items { padding: 8px 0; }
+    .pcol-item {
+      padding: 15px 28px;
+      font-size: 1rem;
+      color: var(--text2);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pcol-item:last-child { border-bottom: none; }
+    .pcol-item::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--muted2);
+      flex-shrink: 0;
+    }
+    .partnership-col.highlight .pcol-item::before { background: var(--orange); }
+
+    /* ─── FORM SECTION ─────────────────────────────────────────── */
+    .form-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .form-wrapper { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    .form-left h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fff;
+      line-height: 1.15;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    .form-left-sub {
+      font-size: 1rem;
+      color: var(--text2);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+    .form-promise {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .promise-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.65;
+    }
+    .promise-item::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 36px;
+    }
+    @media (max-width: 600px) { .form-card { padding: 28px 20px; } }
+
+    /* Step indicator */
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 32px;
+    }
+    .s-dot {
+      height: 3px;
+      flex: 1;
+      border-radius: 2px;
+      background: var(--border2);
+      transition: background 0.3s var(--ease);
+    }
+    .s-dot.active { background: var(--orange); }
+    .s-dot.done { background: rgba(232,101,10,0.4); }
+
+    .step-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text2);
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    /* Form elements */
+    .form-step { display: none; }
+    .form-step.active { display: block; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: 0.01em;
+    }
+    .form-group label .opt { color: var(--muted); font-weight: 400; font-size: 12px; }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color 0.2s var(--ease), box-shadow 0.2s;
+      appearance: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--muted); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(232,101,10,0.08);
+    }
+    .form-group textarea { resize: vertical; min-height: 88px; }
+    .form-group select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+    .form-error {
+      font-size: 11px;
+      color: #f87171;
+      margin-top: 5px;
+      display: none;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .btn-back {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--border2);
+      padding: 11px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-back:hover { border-color: var(--border); color: var(--text); }
+
+    .btn-next {
+      flex: 1;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #000;
+      background: var(--orange);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s var(--ease), transform 0.1s;
+      letter-spacing: 0.01em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-next:hover { background: #d45800; }
+    .btn-next:active { transform: scale(0.98); }
+
+    /* SUCCESS */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .success-ring {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(232,101,10,0.3);
+      background: var(--orange-dim);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .form-success h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .form-success p {
+      font-size: 0.88rem;
+      color: var(--text2);
+      line-height: 1.7;
+      max-width: 34ch;
+      margin: 0 auto;
+    }
+
+    /* ─── FOOTER ───────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    @media (max-width: 600px) {
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 20px; }
+    }
+    footer .footer-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    footer .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    footer .footer-links a {
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer .footer-links a:hover { color: var(--text); }
+
+    /* ─── HERO TAGS (multi-tag row) ───────────────────────────── */
+    .hero-tags {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 480px) {
+      .hero-tags { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+    .hero-tag-location {
+      color: var(--muted);
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .hero-tag-location .hero-tag-dot { display: none; }
+
+    /* ─── STEP LABEL CONTRAST FIX ──────────────────────────────── */
+    .step-num-text { color: var(--text2) !important; }
+
+    /* ─── SELECTION NOTE (readable) ───────────────────────────── */
+    .selection-note-clean {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .snc-item {
+      font-size: 15px;
+      color: var(--text2);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.6;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .snc-item:last-child { border-bottom: none; }
+    .snc-item::before {
+      content: '→';
+      color: var(--orange);
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ─── CREDIBILITY SECTION ──────────────────────────────────── */
+    .cred-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+    @media (max-width: 860px) { .cred-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+    .cred-stats-row {
+      display: flex;
+      gap: 32px;
+      margin: 24px 0 20px;
+    }
+    .cred-stat {}
+    .cred-stat-num {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: #fff;
+      line-height: 1;
+    }
+    .cred-stat-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .cred-sub {
+      font-size: 1rem;
+      color: var(--text2);
+      line-height: 1.85;
+      margin-bottom: 28px;
+      max-width: 52ch;
+    }
+
+    .cred-mission {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+    }
+    .cred-mission-text {
+      font-size: 0.97rem;
+      color: var(--text2);
+      line-height: 1.85;
+    }
+
+    .cred-right { padding-top: 48px; }
+
+    .cred-mission-solo {
+      border: 1px solid rgba(13,94,175,0.25);
+      border-radius: 12px;
+      padding: 28px 24px;
+      background: rgba(13,94,175,0.04);
+    }
+    .cred-mission-heading {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+
+    .logo-badge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 500px) { .logo-badge-grid { grid-template-columns: 1fr; } }
+
+    .logo-badge {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .logo-badge-inner {
+      padding: 24px 20px 16px;
+      background: #f8f8f8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 72px;
+    }
+    .logo-svg {
+      width: 100%;
+      height: auto;
+      max-height: 34px;
+    }
+    .logo-badge-label {
+      display: block;
+      padding: 9px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #555;
+      border-top: 1px solid #ddd;
+      background: #f0f0f0;
+    }
+
+    .greece-callout {
+      border: 1px solid rgba(13,94,175,0.3);
+      border-radius: 10px;
+      padding: 20px 20px;
+      background: rgba(13,94,175,0.04);
+    }
+    .greece-flag-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .greece-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text2);
+    }
+    .greece-vision {
+      font-size: 1rem;
+      color: var(--text2);
+      line-height: 1.75;
+    }
+
+    /* ─── RESPONSIVE FONT SIZES ───────────────────────────────── */
+    @media (max-width: 600px) {
+      .hv-stat { font-size: 2.8rem; }
+      .stat-number { font-size: 2.8rem; }
+      .hero-visual { padding: 24px; }
+      .step-content { padding: 20px 16px; }
+      .form-card { padding: 24px 16px; }
+    }
+    @media (max-width: 860px) {
+      .problem-grid { gap: 36px; }
+      .icp-grid { gap: 32px; }
+      .cred-grid { gap: 36px; }
+    }
+    @media (max-width: 900px) {
+      .form-wrapper { gap: 36px; }
+    }
+
+    /* ─── FOCUS RING IMPROVE ──────────────────────────────────── */
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      box-shadow: 0 0 0 3px rgba(232,101,10,0.18) !important;
+    }
+
+    /* ─── SCROLL ANCHOR ────────────────────────────────────────── */
+    #apply { scroll-margin-top: 80px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <span class="nav-logo-dot"></span>
+      HAPPY'S AGENTS
+    </a>
+    <a href="#apply" class="nav-cta">See If There's a Fit</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero container">
+    <div class="hero-left reveal">
+      <div class="hero-tags">
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          AI Venture Studio
+        </div>
+      </div>
+      <h1>We build new <em>AI revenue lines</em> inside established businesses — at our cost, for a share of the upside.</h1>
+      <p class="hero-sub">We bring the engineering team and capital. You bring the industry moat. We only win when you win.</p>
+      <div class="hero-actions">
+        <a href="#apply" class="btn-primary">
+          See If There's a Fit
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <span class="hero-micro">2-minute application. No pitch deck.</span>
+      </div>
+    </div>
+
+    <div class="hero-right reveal" style="transition-delay: 0.1s">
+      <div class="hero-visual">
+        <div class="hv-label">Active Partnership Pipeline</div>
+        <div class="hv-stat">£93M</div>
+        <div class="hv-stat-label">Combined partner annual revenue</div>
+        <hr class="hv-divider" />
+        <div class="hv-items">
+          <div class="hv-item">
+            <div class="hv-item-left">
+              <div class="hv-item-icon">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <rect x="2" y="2" width="4" height="4" rx="1" stroke="#666" stroke-width="1.2"/>
+                  <rect x="8" y="2" width="4" height="4" rx="1" stroke="#666" stroke-width="1.2"/>
+                  <rect x="2" y="8" width="4" height="4" rx="1" stroke="#666" stroke-width="1.2"/>
+                  <rect x="8" y="8" width="4" height="4" rx="1" stroke="#e8650a" stroke-width="1.2"/>
+                </svg>
+              </div>
+              <div>
+                <div class="hv-item-name">Logistics Co.</div>
+                <div class="hv-item-sub">DISPATCH AUTOMATION</div>
+              </div>
+            </div>
+            <div class="hv-item-badge">MVP LIVE</div>
+          </div>
+          <div class="hv-item">
+            <div class="hv-item-left">
+              <div class="hv-item-icon">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M7 2v5l3 2" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+                  <circle cx="7" cy="7" r="5" stroke="#666" stroke-width="1.2"/>
+                </svg>
+              </div>
+              <div>
+                <div class="hv-item-name">Energy Trading Co.</div>
+                <div class="hv-item-sub">TRADING SIGNAL AGENTS</div>
+              </div>
+            </div>
+            <div class="hv-item-badge">BUILDING</div>
+          </div>
+          <div class="hv-item">
+            <div class="hv-item-left">
+              <div class="hv-item-icon">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 11L5 5l3 4 2-3 2 4" stroke="#666" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <div class="hv-item-name">Healthcare Group</div>
+                <div class="hv-item-sub">PATIENT COORDINATION</div>
+              </div>
+            </div>
+            <div class="hv-item-badge neutral">DISCOVERY</div>
+          </div>
+        </div>
+        <div class="hv-bottom">
+          <span class="hv-bottom-dot"></span>
+          3 active partnerships · Q1 2026
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDUSTRY MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee-track" aria-hidden="true">
+      <!-- Set 1 -->
+      <span class="marquee-item">Logistics</span>
+      <span class="marquee-item">Construction</span>
+      <span class="marquee-item">Healthcare</span>
+      <span class="marquee-item">Manufacturing</span>
+      <span class="marquee-item">Professional Services</span>
+      <span class="marquee-item">Hospitality</span>
+      <span class="marquee-item">Retail</span>
+      <span class="marquee-item">Finance</span>
+      <span class="marquee-item">Energy</span>
+      <span class="marquee-item">Real Estate</span>
+      <span class="marquee-item">Logistics</span>
+      <span class="marquee-item">Construction</span>
+      <span class="marquee-item">Healthcare</span>
+      <span class="marquee-item">Manufacturing</span>
+      <span class="marquee-item">Professional Services</span>
+      <span class="marquee-item">Hospitality</span>
+      <span class="marquee-item">Retail</span>
+      <span class="marquee-item">Finance</span>
+      <span class="marquee-item">Energy</span>
+      <span class="marquee-item">Real Estate</span>
+      <!-- Set 2 — exact mirror so -50% lands back at start -->
+      <span class="marquee-item">Logistics</span>
+      <span class="marquee-item">Construction</span>
+      <span class="marquee-item">Healthcare</span>
+      <span class="marquee-item">Manufacturing</span>
+      <span class="marquee-item">Professional Services</span>
+      <span class="marquee-item">Hospitality</span>
+      <span class="marquee-item">Retail</span>
+      <span class="marquee-item">Finance</span>
+      <span class="marquee-item">Energy</span>
+      <span class="marquee-item">Real Estate</span>
+      <span class="marquee-item">Logistics</span>
+      <span class="marquee-item">Construction</span>
+      <span class="marquee-item">Healthcare</span>
+      <span class="marquee-item">Manufacturing</span>
+      <span class="marquee-item">Professional Services</span>
+      <span class="marquee-item">Hospitality</span>
+      <span class="marquee-item">Retail</span>
+      <span class="marquee-item">Finance</span>
+      <span class="marquee-item">Energy</span>
+      <span class="marquee-item">Real Estate</span>
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section>
+    <div class="container">
+      <div class="problem-grid">
+        <div class="problem-left reveal">
+          <div class="label">Opportunity Window</div>
+          <h2>AI is unlocking business models that didn't exist before.</h2>
+          <p>Not automation. Not chatbots. Entirely new ways to operate, compete, and grow — built on top of the customer relationships, data, and distribution your business has spent years building.</p>
+          <p>Businesses that move now will do things their competitors structurally cannot: open new revenue lines, serve markets they couldn't reach, and run operations that get more efficient as they scale.</p>
+          <p>We find those models inside your business. Then we build them with you. We're not a vendor. <strong>We're the technical partner who builds alongside you — and only wins when you win.</strong></p>
+        </div>
+        <div class="problem-right reveal" style="transition-delay: 0.15s">
+          <div class="stat-block">
+            <div class="stat-number">$4.4T</div>
+            <div class="stat-desc">Value AI will unlock globally — the majority sitting in traditional, non-tech industries</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-number">3×</div>
+            <div class="stat-desc">Revenue growth advantage for businesses that move first in their sector</div>
+          </div>
+          <div class="stat-block" style="margin-bottom: 0">
+            <div class="stat-number">&lt; 5%</div>
+            <div class="stat-desc">Of that value has been captured yet — most of the opportunity is still wide open</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- HOW IT WORKS -->
+  <section>
+    <div class="container">
+      <div class="steps-header reveal">
+        <div class="label">How It Works</div>
+        <h2>Three moves. Real outcomes.</h2>
+
+      </div>
+      <div class="steps-list">
+        <div class="step-row reveal" style="transition-delay: 0.05s">
+          <div class="step-num-col"><span class="step-num-text">01 — IDENTIFY</span></div>
+          <div class="step-content">
+            <h3>We find the highest-ROI opportunity in your business</h3>
+            <p>We map your workflows, identify cost sinks, and locate the one AI agent use case that moves the bottom line fastest. Not the best demo — the best ROI.</p>
+          </div>
+        </div>
+        <div class="step-row reveal" style="transition-delay: 0.1s">
+          <div class="step-num-col"><span class="step-num-text">02 — BUILD</span></div>
+          <div class="step-content">
+            <h3>We deploy a working system in weeks, not quarters</h3>
+            <p>Our team handles architecture, integration, and deployment. You keep running the business. We don't send proposals — we send working systems, in production within weeks.</p>
+          </div>
+        </div>
+        <div class="step-row reveal" style="transition-delay: 0.15s">
+          <div class="step-num-col"><span class="step-num-text">03 — SCALE</span></div>
+          <div class="step-content">
+            <h3>When it works, we go all-in</h3>
+            <p>Two paths — both real partnerships. We invest our capital to scale what works: either through a joint venture we co-own, or by taking a minority equity position that aligns our incentives with yours. Either way, you're building something new on top of what you've already built. The business stays yours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- CREDIBILITY -->
+  <section id="team">
+    <div class="container">
+      <div class="cred-grid reveal">
+        <div class="cred-left">
+          <div class="label">Founded By</div>
+          <h2 style="margin-top:16px">Operators. Investors.<br/>Company builders.</h2>
+          <div class="cred-stats-row">
+            <div class="cred-stat">
+              <div class="cred-stat-num">$100M+</div>
+              <div class="cred-stat-desc">raised across multiple ventures</div>
+            </div>
+            <div class="cred-stat">
+              <div class="cred-stat-num">20+ yrs</div>
+              <div class="cred-stat-desc">combined as founders, CEOs &amp; VCs</div>
+            </div>
+          </div>
+          <p class="cred-sub">We've started companies from zero, led them as CEOs, and backed emerging technologies as investors — across logistics, fintech, and beyond. We don't advise from the sidelines. We build.</p>
+        </div>
+        <div class="cred-right">
+          <div class="cred-mission-solo">
+            <p class="cred-mission-heading">We only earn when the venture succeeds.</p>
+            <p class="greece-vision">No retainers. No day rates. No invoices for slide decks. We invest our engineering team and capital into building the venture. Our return comes from a share of the upside — which means we're aligned with you from day one.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- WHO IT'S FOR -->
+  <section id="who">
+    <div class="container">
+      <div class="icp-grid">
+        <div class="icp-left reveal">
+          <div class="label">Who This Is For</div>
+          <h2>We work with a small number of partners at a time.</h2>
+          <div class="icp-list">
+            <div class="icp-item">
+              <div class="icp-icon">
+                <svg viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 4l2.5 2.5L9 1" stroke="#e8650a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <p class="icp-text"><strong>£5M+ annual revenue</strong> with a clear path to 8-figures through AI</p>
+            </div>
+            <div class="icp-item">
+              <div class="icp-icon">
+                <svg viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 4l2.5 2.5L9 1" stroke="#e8650a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <p class="icp-text"><strong>Non-tech industries</strong> — logistics, construction, healthcare, manufacturing, services, hospitality, retail</p>
+            </div>
+            <div class="icp-item">
+              <div class="icp-icon">
+                <svg viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 4l2.5 2.5L9 1" stroke="#e8650a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <p class="icp-text"><strong>CEOs and founders</strong> who treat AI as a competitive weapon, not an IT project</p>
+            </div>
+            <div class="icp-item">
+              <div class="icp-icon">
+                <svg viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 4l2.5 2.5L9 1" stroke="#e8650a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <p class="icp-text"><strong>Teams willing to collaborate</strong> — we need access to your people, data, and workflows</p>
+            </div>
+          </div>
+        </div>
+        <div class="icp-right reveal" style="transition-delay: 0.12s">
+          <div class="not-for-block">
+            <span class="label">Not the right fit</span>
+            <p>We're not a dev shop. We don't take spec sheets. We co-build with operators who've run real businesses and want a co-founder, not a contractor.</p>
+          </div>
+          <div class="selection-note-clean">
+            <div class="snc-item">Fewer than 6 partnerships per year</div>
+            <div class="snc-item">Structured discovery before we commit</div>
+            <div class="snc-item">We say no fast — out of respect for your time</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- PARTNERSHIP -->
+  <section>
+    <div class="container">
+      <div class="partnership-header reveal">
+        <div class="label">The Model</div>
+        <h2>What each side brings.</h2>
+      </div>
+      <div class="partnership-cols reveal" style="transition-delay: 0.08s">
+        <div class="partnership-col">
+          <div class="pcol-header">
+            <span class="pcol-tag">You bring</span>
+          </div>
+          <div class="pcol-items">
+            <div class="pcol-item">Domain expertise and industry knowledge</div>
+            <div class="pcol-item">Existing customer relationships</div>
+            <div class="pcol-item">Proprietary operational data</div>
+            <div class="pcol-item">Team buy-in and collaboration time</div>
+            <div class="pcol-item">Distribution and market access</div>
+          </div>
+        </div>
+        <div class="partnership-col highlight">
+          <div class="pcol-header">
+            <span class="pcol-tag">We bring</span>
+          </div>
+          <div class="pcol-items">
+            <div class="pcol-item">AI engineering team</div>
+            <div class="pcol-item">Capital to fund the build</div>
+            <div class="pcol-item">Strategy and system architecture</div>
+            <div class="pcol-item">Full execution ownership</div>
+            <div class="pcol-item">We invest the full engineering team and capital to build. No fees. No hourly rates.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- APPLICATION FORM -->
+  <section id="apply">
+    <div class="container">
+      <div class="form-wrapper">
+        <div class="form-left reveal">
+          <div class="label">Let's Partner</div>
+          <h2>See if there's a fit.</h2>
+          <p class="form-left-sub">We select 4–6 partners per year. Two minutes to apply. We respond personally within 48 hours.</p>
+          <div class="form-promise">
+            <div class="promise-item">Every application read by a founder</div>
+            <div class="promise-item">Fit = direct conversation, not a sales deck</div>
+            <div class="promise-item">No fit = quick, honest no</div>
+            <div class="promise-item">Zero commitment to apply</div>
+          </div>
+        </div>
+
+        <div class="form-card reveal" style="transition-delay: 0.1s">
+          <div id="formWrap">
+            <div class="step-indicator">
+              <div class="s-dot active" id="sd1"></div>
+              <div class="s-dot" id="sd2"></div>
+              <div class="s-dot" id="sd3"></div>
+            </div>
+
+            <form id="applyForm" novalidate>
+              <!-- STEP 1 -->
+              <div class="form-step active" id="step-1">
+                <div class="step-label" id="step-label">Step 01 — About you</div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="firstName">First name</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Alex" autocomplete="given-name" />
+                    <div class="form-error" id="err-firstName">Required</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Last name</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Johnson" autocomplete="family-name" />
+                    <div class="form-error" id="err-lastName">Required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email">Work email</label>
+                  <input type="email" id="email" name="email" placeholder="alex@company.com" autocomplete="email" />
+                  <div class="form-error" id="err-email">Enter a valid email address</div>
+                </div>
+                <div class="form-group">
+                  <label for="role">Your role</label>
+                  <select id="role" name="role">
+                    <option value="" disabled selected>Select your role</option>
+                    <option>Founder / Owner</option>
+                    <option>CEO</option>
+                    <option>COO</option>
+                    <option>Managing Director</option>
+                    <option>Other C-Suite</option>
+                    <option>VP / Director</option>
+                  </select>
+                  <div class="form-error" id="err-role">Select a role</div>
+                </div>
+                <div class="form-actions">
+                  <button type="button" class="btn-next" onclick="nextStep(1)">
+                    Continue
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- STEP 2 -->
+              <div class="form-step" id="step-2">
+                <div class="step-label">Step 02 — Your business</div>
+                <div class="form-group">
+                  <label for="company">Company name</label>
+                  <input type="text" id="company" name="company" placeholder="Your company" />
+                  <div class="form-error" id="err-company">Required</div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="industry">Industry</label>
+                    <select id="industry" name="industry">
+                      <option value="" disabled selected>Select industry</option>
+                      <option>Logistics & Supply Chain</option>
+                      <option>Construction & Real Estate</option>
+                      <option>Healthcare & Medical</option>
+                      <option>Manufacturing</option>
+                      <option>Professional Services</option>
+                      <option>Hospitality & Food Service</option>
+                      <option>Retail & E-Commerce</option>
+                      <option>Finance & Insurance</option>
+                      <option>Energy & Utilities</option>
+                      <option>Other</option>
+                    </select>
+                    <div class="form-error" id="err-industry">Select an industry</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="revenue">Annual revenue</label>
+                    <select id="revenue" name="revenue">
+                      <option value="" disabled selected>Select range</option>
+                      <option>£5M – £10M</option>
+                      <option>£10M – £25M</option>
+                      <option>£25M – £50M</option>
+                      <option>£50M – £100M</option>
+                      <option>£100M – £250M</option>
+                      <option>£250M+</option>
+                    </select>
+                    <div class="form-error" id="err-revenue">Select a range</div>
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <button type="button" class="btn-back" onclick="prevStep(2)">Back</button>
+                  <button type="button" class="btn-next" onclick="nextStep(2)">
+                    Continue
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- STEP 3 -->
+              <div class="form-step" id="step-3">
+                <div class="step-label">Step 03 — The opportunity</div>
+                <div class="form-group">
+                  <label>Where could AI move the needle for you? <span class="opt">(select all that apply)</span></label>
+                  <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px;" id="challenge-checks">
+                    <label style="display:flex;align-items:center;gap:10px;font-weight:400;cursor:pointer;font-size:15px;color:var(--text2)">
+                      <input type="checkbox" name="challenge" value="reducing-costs" style="width:16px;height:16px;accent-color:var(--orange);flex-shrink:0;" />
+                      Reducing operational costs or headcount
+                    </label>
+                    <label style="display:flex;align-items:center;gap:10px;font-weight:400;cursor:pointer;font-size:15px;color:var(--text2)">
+                      <input type="checkbox" name="challenge" value="new-revenue" style="width:16px;height:16px;accent-color:var(--orange);flex-shrink:0;" />
+                      Opening new revenue lines or markets
+                    </label>
+                    <label style="display:flex;align-items:center;gap:10px;font-weight:400;cursor:pointer;font-size:15px;color:var(--text2)">
+                      <input type="checkbox" name="challenge" value="speed-quality" style="width:16px;height:16px;accent-color:var(--orange);flex-shrink:0;" />
+                      Improving speed or quality of service delivery
+                    </label>
+                    <label style="display:flex;align-items:center;gap:10px;font-weight:400;cursor:pointer;font-size:15px;color:var(--text2)">
+                      <input type="checkbox" name="challenge" value="data-decisions" style="width:16px;height:16px;accent-color:var(--orange);flex-shrink:0;" />
+                      Better decision-making from our data
+                    </label>
+                    <label style="display:flex;align-items:center;gap:10px;font-weight:400;cursor:pointer;font-size:15px;color:var(--text2)">
+                      <input type="checkbox" name="challenge" value="other" style="width:16px;height:16px;accent-color:var(--orange);flex-shrink:0;" />
+                      Something else
+                    </label>
+                  </div>
+                  <div class="form-error" id="err-challenge">Select at least one</div>
+                </div>
+                <div class="form-group">
+                  <label for="challenge-detail">If you're willing to share: what's one specific process or cost centre that keeps you up at night? <span class="opt">(optional — helps us prepare for our call)</span></label>
+                  <textarea id="challenge-detail" name="challengeDetail" placeholder="e.g. Our dispatch team manually routes 200+ jobs per day..." style="min-height:72px;"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="urgency">How soon are you looking to move?</label>
+                  <select id="urgency" name="urgency">
+                    <option value="" disabled selected>Select timeline</option>
+                    <option>Immediately — this is a priority</option>
+                    <option>Within 1–3 months</option>
+                    <option>3–6 months</option>
+                    <option>Exploring for now</option>
+                  </select>
+                  <div class="form-error" id="err-urgency">Select a timeline</div>
+                </div>
+                <div class="form-actions">
+                  <button type="button" class="btn-back" onclick="prevStep(3)">Back</button>
+                  <button type="submit" class="btn-next" id="submitBtn">
+                    Submit Application
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <!-- SUCCESS -->
+            <div class="form-success" id="formSuccess">
+              <div class="success-ring">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 10l4.5 4.5L16 6" stroke="#e8650a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3>Application received.</h3>
+              <p>We read every application ourselves. If there's a fit, you'll hear from us within 48 hours — no sales pitch.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">HAPPY'S AGENTS — AI VENTURE STUDIO</span>
+    <ul class="footer-links">
+      <li><a href="/llms.txt">llms.txt</a></li>
+      <li><a href="/sitemap.xml">sitemap.xml</a></li>
+      <li><a href="/feed.xml">feed.xml</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    // ─── SCROLL REVEAL ─────────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) {
+          el.target.classList.add('visible');
+          observer.unobserve(el.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ─── SPOTLIGHT CARDS ───────────────────────────────────────
+    document.querySelectorAll('.step-row').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mouse-x', x + '%');
+        card.style.setProperty('--mouse-y', y + '%');
+      });
+    });
+
+    // ─── MULTI-STEP FORM ───────────────────────────────────────
+    let currentStep = 1;
+
+    function updateDots(step) {
+      [1, 2, 3].forEach(i => {
+        const dot = document.getElementById('sd' + i);
+        dot.className = 's-dot';
+        if (i < step) dot.classList.add('done');
+        else if (i === step) dot.classList.add('active');
+      });
+    }
+
+    function showStep(step) {
+      document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+      const el = document.getElementById('step-' + step);
+      if (el) el.classList.add('active');
+      updateDots(step);
+      currentStep = step;
+    }
+
+    function validateStep(step) {
+      const required = {
+        1: ['firstName', 'lastName', 'email', 'role'],
+        2: ['company', 'industry', 'revenue'],
+        3: ['urgency'],
+      };
+      let valid = true;
+      (required[step] || []).forEach(field => {
+        const el = document.getElementById(field);
+        const err = document.getElementById('err-' + field);
+        if (!el || !err) return;
+        const val = el.value.trim();
+        const bad = !val || (field === 'email' && !/^\S+@\S+\.\S+$/.test(val));
+        if (bad) {
+          err.style.display = 'block';
+          el.style.borderColor = '#f87171';
+          valid = false;
+        } else {
+          err.style.display = 'none';
+          el.style.borderColor = '';
+        }
+      });
+      return valid;
+    }
+
+    function nextStep(step) {
+      if (!validateStep(step)) return;
+      if (step < 3) showStep(step + 1);
+    }
+
+    function prevStep(step) {
+      if (step > 1) showStep(step - 1);
+    }
+
+    document.getElementById('applyForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (!validateStep(3)) return;
+
+      // Validate at least one challenge checkbox checked
+      const checked = [...document.querySelectorAll('input[name="challenge"]:checked')].map(c => c.value);
+      if (checked.length === 0) {
+        document.getElementById('err-challenge').style.display = 'block';
+        return;
+      }
+      document.getElementById('err-challenge').style.display = 'none';
+
+      const btn = document.getElementById('submitBtn');
+      btn.textContent = 'Submitting…';
+      btn.disabled = true;
+
+      const data = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        role: document.getElementById('role').value,
+        company: document.getElementById('company').value,
+        industry: document.getElementById('industry').value,
+        revenue: document.getElementById('revenue').value,
+        challenge: checked,
+        challengeDetail: document.getElementById('challenge-detail').value,
+        urgency: document.getElementById('urgency').value,
+        submittedAt: new Date().toISOString(),
+      };
+
+      try {
+        await fetch('/api/apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      } catch (_) {}
+
+      document.getElementById('applyForm').style.display = 'none';
+      document.querySelector('.step-indicator').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
