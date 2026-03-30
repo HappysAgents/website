@@ -1,7 +1,12 @@
 name = "website"
 compatibility_date = "2026-03-03"
-main = "workers/subscribe.ts"
+main = "workers/submit-form.ts"
 
 [assets]
 directory = "./out"
 binding = "ASSETS"
+
+[[d1_databases]]
+binding = "happysagents_forms"
+database_name = "happysagents-forms"
+database_id = "f02aea7a-70fc-41e9-bc2f-24506a19d6b2"
