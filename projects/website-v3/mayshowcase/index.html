@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenClaw Athens — May Show & Tell</title>
+  <meta name="description" content="Submit your demo for the OpenClaw Athens May Show & Tell event. Share what you're building with the AI agents community." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100dvh;
+      font-family: 'Nunito Sans', sans-serif;
+      background: #1a0533;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ── Gradient background ─────────────────────────────────────────── */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(135deg, #6b21a8 0%, #3b82f6 40%, #ec4899 80%, #f59e0b 100%);
+      opacity: 0.92;
+    }
+
+    /* ── Blobs ───────────────────────────────────────────────────────── */
+    .blobs {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.55;
+    }
+
+    .blob-1 { width: 380px; height: 380px; background: #a855f7; top: -100px; left: -80px; animation: blobFloat 8s ease-in-out infinite; }
+    .blob-2 { width: 320px; height: 320px; background: #3b82f6; bottom: -80px; right: -60px; animation: blobFloat 10s ease-in-out infinite reverse; }
+    .blob-3 { width: 250px; height: 250px; background: #ec4899; top: 40%; left: -40px; animation: blobFloat 12s ease-in-out infinite 2s; }
+    .blob-4 { width: 200px; height: 200px; background: #f59e0b; top: 20%; right: -30px; animation: blobFloat 9s ease-in-out infinite 1s; }
+
+    @keyframes blobFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(20px, -30px) scale(1.05); }
+      66%       { transform: translate(-15px, 20px) scale(0.96); }
+    }
+
+    /* ── Confetti shapes ─────────────────────────────────────────────── */
+    .confetti {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      opacity: 0.7;
+      animation: shapeDrift linear infinite;
+    }
+
+    .shape-tri  { width: 0; height: 0; border-left: 9px solid transparent; border-right: 9px solid transparent; }
+    .shape-rect { border-radius: 2px; }
+    .shape-zz   { font-size: 18px; font-weight: 900; letter-spacing: -2px; }
+    .shape-star { font-size: 14px; }
+    .shape-circ { border-radius: 50%; }
+
+    @keyframes shapeDrift {
+      0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.5; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ── Page layout ─────────────────────────────────────────────────── */
+    .page {
+      position: relative;
+      z-index: 10;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 48px 20px 80px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    /* ── Header ──────────────────────────────────────────────────────── */
+    .event-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .live-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulseDot 1.8s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.35; transform: scale(0.65); }
+    }
+
+    .mascot-wrap {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .mascot {
+      font-size: clamp(3rem, 10vw, 4rem);
+      line-height: 1;
+      display: inline-block;
+      animation: mascotWiggle 2.2s ease-in-out infinite;
+      transform-origin: center center;
+      user-select: none;
+    }
+
+    .hosted-by {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .hosted-by strong {
+      color: rgba(255,255,255,0.9);
+      font-weight: 800;
+    }
+
+    @keyframes mascotWiggle {
+      0%   { transform: translateX(-18px) rotate(-8deg) scale(1); }
+      20%  { transform: translateX(0px)   rotate(4deg)  scale(1.08); }
+      40%  { transform: translateX(18px)  rotate(-6deg) scale(1); }
+      60%  { transform: translateX(8px)   rotate(5deg)  scale(1.05); }
+      80%  { transform: translateX(-8px)  rotate(-4deg) scale(1); }
+      100% { transform: translateX(-18px) rotate(-8deg) scale(1); }
+    }
+
+    h1 {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(2.4rem, 7vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: #fff;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+      margin-bottom: 16px;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+    }
+
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, #fde047, #fb923c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      -webkit-text-stroke: 0;
+    }
+
+    /* ── Card ────────────────────────────────────────────────────────── */
+    .card {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+    }
+
+    /* ── Value props ─────────────────────────────────────────────────── */
+    .section-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fde047;
+      margin-bottom: 14px;
+    }
+
+    .value-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 28px;
+    }
+
+    .value-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .value-list li.visible { opacity: 1; transform: translateX(0); }
+
+    .vi-dot {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      margin-top: 1px;
+    }
+
+    .vi-dot-1 { background: rgba(251,146,60,0.3); }
+    .vi-dot-2 { background: rgba(96,165,250,0.3); }
+    .vi-dot-3 { background: rgba(167,139,250,0.3); }
+    .vi-dot-4 { background: rgba(74,222,128,0.3); }
+
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+      margin-bottom: 24px;
+    }
+
+    /* ── Form ────────────────────────────────────────────────────────── */
+    .form-lbl {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .form-lbl .opt {
+      color: rgba(255,255,255,0.35);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .form-group { margin-bottom: 16px; }
+
+    input, textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.1);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35); font-weight: 400; }
+
+    input:focus, textarea:focus {
+      border-color: #fde047;
+      background: rgba(255,255,255,0.15);
+      box-shadow: 0 0 0 3px rgba(253,224,71,0.2);
+    }
+
+    .honeypot { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
+
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #fde047, #fb923c);
+      color: #1a0533;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 16px;
+      border: none;
+      border-radius: 14px;
+      padding: 16px 28px;
+      cursor: pointer;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 24px rgba(251,146,60,0.45);
+      transition: transform 0.15s, box-shadow 0.15s;
+      animation: btnPulse 2.5s ease-in-out infinite 2s;
+    }
+
+    @keyframes btnPulse {
+      0%, 100% { box-shadow: 0 4px 24px rgba(251,146,60,0.45); }
+      50%       { box-shadow: 0 4px 36px rgba(251,146,60,0.7); }
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(251,146,60,0.6);
+      animation: none;
+    }
+
+    .submit-btn:active { transform: scale(0.97); }
+
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; animation: none; }
+
+    .btn-arrow { transition: transform 0.2s cubic-bezier(0.16,1,0.3,1); }
+    .submit-btn:hover .btn-arrow { transform: translateX(4px); }
+
+    .microcopy {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      margin-top: 14px;
+      letter-spacing: 0.02em;
+    }
+
+    .global-error {
+      color: #fca5a5;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    /* ── Success ─────────────────────────────────────────────────────── */
+    .success-card {
+      text-align: center;
+      padding: 16px 0;
+      display: none;
+    }
+
+    .success-card.show {
+      display: block;
+      animation: successPop 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+
+    @keyframes successPop {
+      0%   { transform: scale(0.8); opacity: 0; }
+      60%  { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    .success-mascot {
+      font-size: 3.5rem;
+      display: block;
+      margin-bottom: 12px;
+      animation: mascotWiggle 1s ease-in-out 3;
+    }
+
+    .success-card h2 {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .success-card p {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ── Mobile ──────────────────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .page { padding: 36px 16px 60px; }
+      .card { padding: 24px 20px; border-radius: 18px; }
+      h1 { margin-bottom: 12px; }
+      .hosted-by { font-size: 0.82rem; margin-bottom: 20px; }
+      .submit-btn { font-size: 15px; padding: 15px 20px; }
+      input, textarea { font-size: 16px; padding: 12px 14px; }
+    }
+
+    /* ── Entrance animation ──────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .container > * { animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both; }
+    .container > *:nth-child(1) { animation-delay: 0s; }
+    .container > *:nth-child(2) { animation-delay: 0.06s; }
+    .container > *:nth-child(3) { animation-delay: 0.1s; }
+    .container > *:nth-child(4) { animation-delay: 0.14s; }
+    .container > *:nth-child(5) { animation-delay: 0.18s; }
+  </style>
+</head>
+<body>
+
+  <div class="bg"></div>
+
+  <div class="blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+  </div>
+
+  <div class="confetti" id="confetti"></div>
+
+  <div class="page">
+    <div class="container">
+
+      <div class="event-badge">
+        <span class="live-dot"></span>
+        OpenClaw Athens · May Show & Tell
+      </div>
+
+      <div class="mascot-wrap">
+        <span class="mascot">🦞</span>
+        <span class="mascot" style="animation-delay: 0.4s; animation-duration: 2.6s;">🦞</span>
+        <span class="mascot" style="animation-delay: 0.8s; animation-duration: 1.9s;">🦞</span>
+      </div>
+
+      <h1>Submit Your<br><em>Demo</em></h1>
+
+      <p class="hosted-by">Hosted by <strong>Happy's Agents</strong></p>
+
+      <div class="card">
+
+        <!-- Value props -->
+        <div class="section-label">Why present?</div>
+        <ul class="value-list" id="valueList">
+          <li><span class="vi-dot vi-dot-1">🎤</span><span>Showcase your AI agent to the Athens community</span></li>
+          <li><span class="vi-dot vi-dot-2">💡</span><span>Get feedback from fellow builders and founders</span></li>
+          <li><span class="vi-dot vi-dot-3">🤝</span><span>Connect with potential collaborators and users</span></li>
+          <li><span class="vi-dot vi-dot-4">🚀</span><span>Gain visibility for your project</span></li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <!-- Success -->
+        <div class="success-card" id="successCard">
+          <span class="success-mascot">🦞</span>
+          <h2>Submission received! 🎉</h2>
+          <p>We'll review your application and get back to you soon with next steps.</p>
+        </div>
+
+        <!-- Form -->
+        <form id="presenterForm" novalidate>
+          <input type="text" name="website" class="honeypot" autocomplete="off" tabindex="-1" />
+
+          <div class="form-group">
+            <label class="form-lbl" for="name">Name *</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" required minlength="2" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-lbl" for="email">Email *</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-lbl" for="company">Company *</label>
+            <input type="text" id="company" name="company" placeholder="Where you work" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-lbl" for="phone">Phone *</label>
+            <input type="tel" id="phone" name="phone" placeholder="+30 69x xxx xxxx" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-lbl" for="demoTitle">Demo Title *</label>
+            <input type="text" id="demoTitle" name="demoTitle" placeholder="What are you demoing?" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-lbl" for="demoDescription">Demo Description *</label>
+            <textarea id="demoDescription" name="demoDescription" placeholder="Tell us about your demo. What problem does it solve? What should the audience see?" required minlength="20"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-lbl" for="techStack">Tech Stack <span class="opt">(optional)</span></label>
+            <input type="text" id="techStack" name="techStack" placeholder="e.g., OpenClaw, Python, React, etc." />
+          </div>
+
+          <div class="form-group">
+            <label class="form-lbl" for="linkedin">LinkedIn <span class="opt">(optional)</span></label>
+            <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile" />
+          </div>
+
+          <p class="global-error" id="globalError"></p>
+
+          <button type="submit" class="submit-btn" id="submitBtn">
+            Submit Demo
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <p class="microcopy">All submissions are reviewed by our team.</p>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── Confetti shapes ──────────────────────────────────────────────────
+    const confettiEl = document.getElementById('confetti');
+    const shapes = [
+      { cls: 'shape-tri', style: 'border-bottom: 14px solid #fde047;', w: 0 },
+      { cls: 'shape-tri', style: 'border-bottom: 12px solid #fb923c;', w: 0 },
+      { cls: 'shape-tri', style: 'border-bottom: 10px solid #c084fc;', w: 0 },
+      { cls: 'shape-rect', style: 'width:10px;height:10px;background:#4ade80;', w: 10 },
+      { cls: 'shape-rect', style: 'width:8px;height:8px;background:#60a5fa;', w: 8 },
+      { cls: 'shape-rect', style: 'width:14px;height:6px;background:#f472b6;', w: 14 },
+      { cls: 'shape-circ', style: 'width:8px;height:8px;background:#fde047;', w: 8 },
+      { cls: 'shape-circ', style: 'width:10px;height:10px;background:#c084fc;', w: 10 },
+      { cls: 'shape-zz', style: 'color:#fb923c;', content: '〜' },
+      { cls: 'shape-zz', style: 'color:#60a5fa;', content: '〜' },
+      { cls: 'shape-star', style: 'color:#fde047;', content: '★' },
+      { cls: 'shape-star', style: 'color:#f472b6;', content: '★' },
+    ];
+
+    for (let i = 0; i < 22; i++) {
+      const s = shapes[Math.floor(Math.random() * shapes.length)];
+      const el = document.createElement('div');
+      el.className = 'shape ' + s.cls;
+      el.style.cssText = s.style;
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.top = '-30px';
+      el.style.animationDuration = (6 + Math.random() * 10) + 's';
+      el.style.animationDelay = (Math.random() * 8) + 's';
+      if (s.content) el.textContent = s.content;
+      confettiEl.appendChild(el);
+    }
+
+    // ── Stagger value list ───────────────────────────────────────────────
+    const items = document.querySelectorAll('#valueList li');
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        items.forEach((li, i) => setTimeout(() => li.classList.add('visible'), i * 100));
+        obs.disconnect();
+      }
+    }, { threshold: 0.1 });
+    obs.observe(document.getElementById('valueList'));
+
+    // ── Form ─────────────────────────────────────────────────────────────
+    const form = document.getElementById('presenterForm');
+    const btn  = document.getElementById('submitBtn');
+    const succ = document.getElementById('successCard');
+    const err  = document.getElementById('globalError');
+    const ARROW_SVG = '<svg class="btn-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      err.style.display = 'none';
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+
+      try {
+        const res  = await fetch('/api/mayshowcase', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name:            form.name.value.trim(),
+            email:           form.email.value.trim(),
+            company:         form.company.value.trim(),
+            phone:           form.phone.value.trim(),
+            demoTitle:       form.demoTitle.value.trim(),
+            demoDescription: form.demoDescription.value.trim(),
+            techStack:       form.techStack.value.trim(),
+            linkedin:        form.linkedin.value.trim(),
+            website:         form.website.value,
+          }),
+        });
+        const data = await res.json();
+        if (res.ok) {
+          form.style.display = 'none';
+          succ.classList.add('show');
+        } else {
+          err.textContent  = data.error || 'Something went wrong. Please try again.';
+          err.style.display = 'block';
+          btn.disabled = false;
+          btn.innerHTML = 'Submit Demo ' + ARROW_SVG;
+        }
+      } catch {
+        err.textContent  = 'Something went wrong. Please try again.';
+        err.style.display = 'block';
+        btn.disabled = false;
+        btn.innerHTML = 'Submit Demo ' + ARROW_SVG;
+      }
+    });
+  </script>
+</body>
+</html>
